@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: PlanSki;
-    src: url(/planski/libraries/fonts/menu.ttf), url(/planski/libraries/fonts/menu.eot);
+    src: url(/planski/libraries/fonts/planski.ttf), url(/planski/libraries/fonts/planski.ttf);
 }
 
 img {
@@ -23,9 +23,8 @@ body {
     color:rgb(84, 65, 70);
     font-family: Calibri;
     background-repeat:no-repeat;
-    background-image:url('/planski/images/structure/emp_background.jpg');
+    background-image:url('/planski/images/structure/body.jpg');
     background-attachment: fixed;
-    background-position: top center;
     background-color:rgb(26, 26, 26);
     margin: 0; /* pour éviter les marges */
     margin-right:auto;
@@ -43,6 +42,25 @@ body {
 
 form {
     margin: 0;
+}
+
+.pancarte {
+    padding-top: 12px;
+    margin: 0 auto;
+    width: 800px;
+    height: 110px;
+    text-align: center;
+}
+
+.logo {
+    color:white;
+    font-family: PlanSki;
+    font-size: 53px;
+}
+
+.intitule {
+    font-style: italic;
+    color:black;
 }
 
 .noresults {
@@ -168,6 +186,7 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .menu {
+    border: 1px black solid;
     color: #CECECE;
     background-color:rgb(38, 47, 42);
     margin-left: -17px;
@@ -225,8 +244,9 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .site {
-    border-left: 1px black solid;
-    border-right: 1px black solid;
+    background-image:url(/planski/images/structure/texture.png);
+    border-left: 1px #808080 solid;
+    border-right: 1px #808080 solid;
     background-color:rgb(247, 247, 248);
     width:800px;
     min-height: 500px;

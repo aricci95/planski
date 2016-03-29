@@ -19,24 +19,20 @@
                         <a href="auth/disconnect" class="greyLink" style="text-align: left;">Deconnexion</a>
                     </div>
                     <span style="float: right;font-size: 25px;">
-                        <a class="menuIcone" href="mailbox"><img src="planski/images/icone/message.png" />
+                        <a class="menuIcone" href="mailbox"><img src="planski/images/icones/message.png" />
                             <b><?php echo $this->context->get('new_messages'); ?></b>
                         </a>
                         <a class="menuIcone" href="">
-                            <img src="planski/images/icone/link.png" />
+                            <img src="planski/images/icones/team.png" />
                             <b><?php echo $this->context->get('links_count_received'); ?></b>
                         </a>
                         <a class="menuIcone" href="">
-                            <img src="planski/images/icone/linked.png" />
+                            <img src="planski/images/icones/linked.png" />
                             <b><?php echo $this->context->get('links_count_accepted'); ?></b>
                         </a>
                         <a class="menuIcone" href="views">
-                            <img src="planski/images/icone/views.png" />
+                            <img src="planski/images/icones/views.gif" />
                             <b><?php echo $this->context->get('views'); ?></b>
-                        </a>
-                        <a class="menuIcone" href="">
-                            <img src="planski/images/icone/blacklist.png" />
-                            <b><?php echo $this->context->get('links_count_blacklist'); ?></b>
                         </a>
                     </span>
                 <?php else : ?>
@@ -54,18 +50,16 @@
                 <?php endif; ?>
             </div>
         </div>
-        <div style="text-align: center;margin:20px;">
-            <a href="user">
-                <img src="planski/images/structure/newheader.png" />
+        <div class="pancarte">
+            <a href="home">
+                <img src="planski/images/structure/planski.png" />
             </a>
         </div>
         <div class="site">
             <div class="menu">
                 <a class="menuLien" <?php echo ($this->page == 'member') ? 'style="color:white;"' : ''; ?> href="user">Membres</a>
-                <a class="menuLien" <?php echo ($this->page == 'concert') ? 'style="color:white;"' : ''; ?> href="concert">Concerts</a>
-                <a class="menuLien" <?php echo ($this->page == 'forum') ? 'style="color:white;"' : ''; ?> href="forum">Chat</a>
-                <a class="menuLien" <?php echo ($this->page == 'annonces') ? 'style="color:white;"' : ''; ?> href="annonce">Annonces</a>
-                <a class="menuLien" href="http://www.emp-online.fr/musique-cinema/les-essentiels/offres-speciales/?wt_mc=pt.pp.musiksale.283#Q1179C.G3Lkj" target="_blank">Shop</a>
+                <a class="menuLien" <?php echo ($this->page == 'crew') ? 'style="color:white;"' : ''; ?> href="crews">Crews</a>
+                <a class="menuLien" <?php echo ($this->page == 'appart') ? 'style="color:white;"' : ''; ?> href="appart">Apparts</a>
                 <?php if($this->context->get('role_id') == AUTH_LEVEL_SUPERADMIN) : ?>
                     <a class="menuLien" <?php echo ($this->page == 'admin') ? 'style="color:white;"' : ''; ?> href="admin">Admin</a></td>
                 <?php endif; ?>
