@@ -38,7 +38,7 @@ class AuthService extends Service
                     if (!empty($localization->postal_code)) {
                         $ville = $this->model->city->findOne(array('ville_longitude_deg', 'ville_latitude_deg', 'ville_id'), array('%ville_code_postal' => $localization->postal_code));
 
-                        $this->model->user->updateById($user['user_id'], array('ville_id' => $ville['ville_id']));
+                        $this->model->user->updateById(array('ville_id' => $ville['ville_id']), $user['user_id']);
                     }
                 } else {
                     $ville = $this->model->city->findOne(array('ville_longitude_deg', 'ville_latitude_deg'), array('ville_id' => $user['ville_id']));

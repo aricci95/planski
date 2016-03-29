@@ -43,7 +43,7 @@
                             <input type="submit" value="Connexion" />
                             <input type="button" onclick="window.location.href = 'planski/libraries/socialauth/station.php';" class="facebookButton" value="Via Facebook" />
                             <label style="margin-left:5px;" for="savepwd">Enregistrer</label><input id="savepwd" name="savepwd" type="checkbox" />
-                            <a class="menuLien" style="margin-left:5px;"  href="lostpwd">Mot de passe oublie</a>
+                            <a class="menuLien" style="margin-left:5px;" href="lostpwd">Mot de passe oublie</a>
                             <a class="menuLien" style="margin:0;" href="subscribe">S'inscrire !</a>
                         </form>
                     </div>
@@ -58,7 +58,7 @@
         <div class="site">
             <div class="menu">
                 <a class="menuLien" <?php echo ($this->page == 'member') ? 'style="color:white;"' : ''; ?> href="user">Membres</a>
-                <a class="menuLien" <?php echo ($this->page == 'crew') ? 'style="color:white;"' : ''; ?> href="crews">Crews</a>
+                <a class="menuLien" <?php echo ($this->page == 'crew') ? 'style="color:white;"' : ''; ?> href="crew">Crews</a>
                 <a class="menuLien" <?php echo ($this->page == 'appart') ? 'style="color:white;"' : ''; ?> href="appart">Apparts</a>
                 <?php if($this->context->get('role_id') == AUTH_LEVEL_SUPERADMIN) : ?>
                     <a class="menuLien" <?php echo ($this->page == 'admin') ? 'style="color:white;"' : ''; ?> href="admin">Admin</a></td>

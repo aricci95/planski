@@ -72,18 +72,6 @@ $(function() {
                 ?>
                     </td>
                 </tr>
-                <?php if (!empty($this->details['tattoo'])) : ?>
-                    <tr>
-                        <th>Tatouages</th>
-                    <td><?php echo $this->details['tattoo']; ?></td>
-                </tr>
-                <?php endif; ?>
-                <?php if (!empty($this->details['piercing'])) : ?>
-                    <tr>
-                        <th>Piercings</th>
-                        <td><?php echo $this->details['piercing']; ?></td>
-                    </tr>
-                <?php endif; ?>
             </table>
         </div>
     </div>

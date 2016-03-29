@@ -9,10 +9,6 @@ img {
     border: none;
 }
 
-a {
-    cursor: url(http://cdn.acfrg.com/o/emp.fr/hand3.cur), url(http://cdn.acfrg.com/o/emp.fr/hand3.png), auto;
-}
-
 textarea {
     border:1px grey solid;
     background-color:#D8D8D8;
@@ -23,7 +19,6 @@ body {
     color:rgb(84, 65, 70);
     font-family: Calibri;
     background-repeat:no-repeat;
-    background-image:url('/planski/images/structure/body.jpg');
     background-attachment: fixed;
     background-color:rgb(26, 26, 26);
     margin: 0; /* pour éviter les marges */
@@ -37,7 +32,6 @@ body {
     background-color:rgb(228, 229, 231);
     margin:0 auto;
     height:120%;
-    width: 950px;
 }
 
 form {
@@ -45,17 +39,11 @@ form {
 }
 
 .pancarte {
+    background-image:url('/planski/images/structure/back.jpg');
     padding-top: 12px;
     margin: 0 auto;
-    width: 950px;
     height: 110px;
     text-align: center;
-}
-
-.logo {
-    color:white;
-    font-family: PlanSki;
-    font-size: 53px;
 }
 
 .intitule {
@@ -138,7 +126,6 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .shadow {
-    width:950px;
     height: 18px;
     -webkit-box-shadow: inset 2px 22px 20px -20px rgb(26, 26, 26);
     -moz-box-shadow: inset 2px 22px 20px -20px rgb(26, 26, 26);
@@ -170,13 +157,12 @@ a:link {color: #808080;text-decoration: none ;}
 .userMenu {
     font-size:17px;
     color: white;
-    background-color:rgb(29, 39, 35);
-    height:25px;
+    background-color: rgb(29, 39, 35);
+    height:30px;
     padding:20px;
 }
 
 .footer {
-    width:925px;
     font-size: 13px;
     color: #CECECE;
     background-color: rgb(29, 39, 35);
@@ -200,7 +186,6 @@ a:link {color: #808080;text-decoration: none ;}
     text-align: center;
     font-size: 28px;
     height: 26px;
-    width: 940px;
 }
 
 .menuLien {
@@ -224,12 +209,36 @@ a:link {color: #808080;text-decoration: none ;}
 
 
 .profilePortrait {
+    margin:20px;
+    border-radius:50%;
     background-size: cover;
     min-width:294px;
     min-height:294px;
     background-repeat: no-repeat;
     background-position: top center;
     margin-right:9px;
+    border:2px outset;
+}
+
+.shade {
+    position: relative;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.gold {
+    background-image:linear-gradient(30deg, white, #908A8A);
+}
+
+.profileLogin {
+    color:black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 246px;
+    text-align: center;
+    font-family: Calibri;
+    font-size: 35px;
+    letter-spacing:-2px;
+    font-weight: bold
 }
 
 .editPhoto {
@@ -253,7 +262,6 @@ a:link {color: #808080;text-decoration: none ;}
     border-left: 1px #808080 solid;
     border-right: 1px #808080 solid;
     background-color:rgb(247, 247, 248);
-    width:950px;
     min-height: 90%;
     text-align:center;
     margin-left: auto;
@@ -358,7 +366,7 @@ a:link {color: #808080;text-decoration: none ;}
 .editPhoto .removePhoto {
     width:50px;
     height:50px;
-    background:url('/planski/images/boutons/remove.png') no-repeat;
+    background:url('/planski/images/div/remove.png') no-repeat;
     opacity:0;
 }
 
@@ -400,7 +408,7 @@ li {
 }
 
 .maxWidth {
-    width: 950px;
+    width: 100%;
 }
 
 div.autocomplete {
@@ -417,7 +425,6 @@ div.autocomplete {
 }
 
 div.debug {
-    width:100%;
     position:absolute;
     border:1px white solid;
     background-color:white;

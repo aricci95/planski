@@ -60,7 +60,7 @@ abstract class AppModel extends Model
         return empty($results[0]) ? array() : $results[0];
     }
 
-    public function updateById($id, $attributes, $newValue = null)
+    public function updateById($attributes, $id)
     {
         if (is_array($attributes)) {
             $sql = 'UPDATE ' . $this->getTable() . ' SET ';

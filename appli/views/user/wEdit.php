@@ -1,7 +1,7 @@
 <form action="profile/save" method="post" enctype="multipart/form-data">
     <div class="title topShadow">GENERAL</div>
     <div class="shadow"></div>
-    <table style="text-align: left;margin:10px;width:950px;">
+    <table style="text-align: left;margin:10px;width:100%;">
         <tr>
             <th>Email :</th>
             <td><?php echo $this->user['user_mail']; ?>
@@ -42,35 +42,26 @@
             </td>
         </tr>
         <tr>
-            <th>Style de métal favori :</th>
-            <td>
-            </td>
-        </tr>
-        <tr>
             <th>Ville :</th>
             <td>
                 <input type="text" class="autocomplete" data-type="city" value="<?php if (!empty($this->user['ville_nom_reel'])) : echo $this->user['ville_nom_reel'] . ' ('. $this->user['ville_code_postal'] . ')'; endif; ?>" />
                 <input type="hidden" name="ville_id" class="autocompleteValue" />
             </td>
         </tr>
-        <tr>
             <th>Profession :</th>
-            <td><input name="user_profession" size="40" value="<?php $this->user['user_profession']; ?>" /></td>
-        </tr>
+            <td><input name="user_profession" size="40" value="<?php echo !empty($this->user['user_profession']) ? $this->user['user_profession'] : ''; ?>" /></td>
         <tr>
             <th>Description longue :</th>
             <td><textarea name="user_description" cols="70" rows="10"><?php echo $this->user['user_description']; ?></textarea></td>
         </tr>
-    </table>
-
-    <div class="title topShadow">PHYSIQUE</div>
-    <div class="shadow"></div>
-    <table style="text-align: left;margin:10px;">
         <tr>
             <th>Poids :</th>
             <td>
                 <select name="user_poids">
-                    <?php for($i=8; $i<=20;$i++) : ?>
+                    <?php if (empty($this->user['user_poids'])) :
+                        $this->user['user_poids'] = 0;
+                    endif;
+                    for($i=8; $i<=20; $i++) : ?>
                         <option <?php if((integer) $this->user['user_poids'] == ($i*5)) : ?>selected="selected"<?php endif; ?> value="<?php echo ($i*5); ?>"><?php echo ($i*5); ?></option>
                     <?php endfor; ?>
                 </select> kg
@@ -80,45 +71,13 @@
             <th>Taille :</th>
             <td>
                 <select name="user_taille">
-                    <?php for($i=25; $i<=42;$i++) : ?>
+                    <?php if (empty($this->user['user_taille'])) :
+                        $this->user['user_taille'] = 0;
+                    endif;
+                    for($i=25; $i<=42; $i++) : ?>
                         <option <?php if((integer) $this->user['user_taille'] == ($i*5)) : ?>selected="selected"<?php endif; ?> value="<?php echo ($i*5); ?>"><?php echo ($i*5); ?></option>
                     <?php endfor; ?>
                 </select> cm
-            </td>
-        </tr>
-        <tr>
-            <th>Alcool :</th>
-            <td>
-                <select name="user_alcohol">
-
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>Tatouages :</th>
-            <td>
-                <select name="user_tattoo">
-                    <option value="">séléctionnez</option>
-                    <option value="2" <?php if($this->user['user_tattoo'] == 2) echo 'selected="selected" '; ?>>non</option>
-                    <option value="1" <?php if($this->user['user_tattoo'] == 1) echo 'selected="selected" '; ?>>oui</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>Piercings :</th>
-            <td>
-                <select name="user_piercing">
-                    <option value="">séléctionnez</option>
-                    <option value="2" <?php if($this->user['user_piercing'] == 2) echo 'selected="selected" '; ?>>non</option>
-                    <option value="1" <?php if($this->user['user_piercing'] == 1) echo 'selected="selected" '; ?>>oui</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>Look :</th>
-            <td>
-                <select name="look_id">
-                </select>
             </td>
         </tr>
     </table>

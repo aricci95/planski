@@ -22,9 +22,6 @@ class ProfileController extends AppController
             $this->model->views->addView($this->context->params['value']);
         }
 
-        $this->view->details = $this->model->User->convertBinaries($user);
-        $this->view->addictions = $this->model->User->convertQuantities($user);
-
         $user['user_description'] = Tools::toSmiles($user['user_description']);
 
         if (empty($user['user_photo_url'])) {
@@ -33,7 +30,6 @@ class ProfileController extends AppController
 
         $this->view->user = $user;
 
-        // Récupération des photos
         $photos = $this->model->Photo->getPhotosByKey($this->context->params['value'], PHOTO_TYPE_USER);
 
         if (empty($photos)) {
@@ -78,7 +74,13 @@ class ProfileController extends AppController
                     $this->context->params['user_birth'] = $dt->format("Y-m-d");
                 }
 
-                if ($this->model->User->updateUserById($this->context->params)) {
+                $user_data = $this->context->params;
+
+                unset($user_data['user_id']);
+                unset($user_data['verif_pwd']);
+                unset($user_data['user_profession']);
+
+                if ($this->model->user->updateById($user_data, $this->context->getParam('user_id'))) {
                     $ville = $this->model->city->findOne(array('ville_longitude_deg', 'ville_latitude_deg'), array('ville_id' => $this->context->getParam('ville_id')));
 
                     $this->context->set('ville_longitude_deg', $ville['ville_longitude_deg']);

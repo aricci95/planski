@@ -2,6 +2,25 @@
 
 class User extends AppModel
 {
+    const RIDE_SKI       = 1;
+    const RIDE_SNOWBOARD = 2;
+
+    const MEDAL_BRONZE = 1;
+    const MEDAL_SILVER = 2;
+    const MEDAL_GOLD   = 3;
+    const MEDAL_EXPERT = 4;
+
+    public static $rides = array(
+        self::RIDE_SKI       => 'ski',
+        self::RIDE_SNOWBOARD => 'snowboard',
+    );
+
+    public static $medals = array(
+        self::MEDAL_BRONZE => 'bronze',
+        self::MEDAL_SILVER => 'silver',
+        self::MEDAL_GOLD   => 'gold',
+        self::MEDAL_EXPERT => 'expert',
+    );
 
     public function updateLastConnexion($userId = null)
     {
@@ -22,18 +41,33 @@ class User extends AppModel
 
     public function getSearch($criterias, $offset = 0)
     {
-        $sql = 'SELECT user_id,
+        $sql = 'SELECT
+                    user.user_id as user_id,
                     user_login,
-                    ville_nom_reel,
+                    user_pwd,
                     user_mail,
-                    user_gender,
-                    user_photo_url,
+                    FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
-                    FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age
-                FROM user
-                LEFT JOIN city ON user.ville_id = city.ville_id
-                WHERE  user_valid = 1
-                AND user_id != :context_user_id
+                    user_birth,
+                    user_photo_url,
+                    user_gender,
+                    user_description,
+                    ville_nom_reel,
+                    user_ride,
+                    user_level,
+                    user_profession,
+                    user_cuisine,
+                    user_vehicule,
+                    user_hygiene,
+                    user_fun,
+                    user.ville_id as ville_id,
+                    LEFT(ville_code_postal, 2) as ville_code_postal,
+                    (SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.user_id = user.user_id) AS rate
+                FROM
+                    user
+                LEFT JOIN user_data ON (user.user_id = user_data.user_id)
+                LEFT JOIN city ON (user.ville_id = city.ville_id)
+                WHERE TRUE
             ';
 
         if (!empty($criterias['search_login'])) {
@@ -64,8 +98,6 @@ class User extends AppModel
 
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindValue('context_user_id', $this->context->get('user_id'), PDO::PARAM_INT);
-
         if (!empty($criterias['search_login'])) {
             $stmt->bindValue('search_login', '%'. $criterias['search_login'] .'%', PDO::PARAM_STR);
         }
@@ -94,34 +126,6 @@ class User extends AppModel
         return $this->db->executeStmt($stmt)->fetchAll();
     }
 
-    public function convertBinaries($user)
-    {
-        $liste = array('tattoo', 'piercing');
-        foreach ($liste as $key => $value) {
-            if ($user['user_'.$value] == 1) {
-                $resultat[$value] = 'oui';
-            } else {
-                $resultat[$value] = 'non';
-            }
-        }
-        return $resultat;
-    }
-
-    public function convertQuantities($user)
-    {
-        $liste = array('drugs', 'alcohol', 'smoke');
-        $quantities = array('', 'jamais', 'pas beaucoup', 'modérément', 'souvent', 'très souvent');
-        foreach ($liste as $key => $value) {
-            if (isset($quantities[$user['user_'.$value]])) {
-                $resultat[$value] = $quantities[$user['user_'.$value]];
-            }
-        }
-        if (isset($resultat)) {
-            return $resultat;
-        }
-    }
-
-    // Récupére un utilisateur
     public function getUserByIdDetails($userId)
     {
         $sql = "SELECT
@@ -135,15 +139,16 @@ class User extends AppModel
                     user_photo_url,
                     user_gender,
                     user_description,
-                    user_data,
                     ville_nom_reel,
+                    user_ride,
+                    user_profession,
                     user.ville_id as ville_id,
                     LEFT(ville_code_postal, 2) as ville_code_postal
                 FROM
                     user
                 LEFT JOIN user_data ON (user.user_id = user_data.user_id)
                 LEFT JOIN city ON (user.ville_id = city.ville_id)
-                WHERE user_id = :user_id
+                WHERE user.user_id = :user_id
             ;";
 
         $stmt = $this->db->prepare($sql);
@@ -243,27 +248,6 @@ class User extends AppModel
         $stmt->bindValue('user_gender', $items['user_gender']);
         $stmt->bindValue('role_id', AUTH_LEVEL_USER);
         $stmt->bindValue('user_valid', $userValidationId);
-
-        $this->db->executeStmt($stmt);
-
-        $sql = '
-            REPLACE INTO link (
-                expediteur_id,
-                destinataire_id,
-                status,
-                modification_date
-            ) VALUES (
-                :expediteur_id,
-                :destinataire_id,
-                :status,
-                NOW()
-            );
-        ';
-
-        $stmt = $this->db->prepare($sql);
-
-        $stmt->bindValue('expediteur_id', 1, PDO::PARAM_INT);
-        $stmt->bindValue('destinataire_id', $this->db->lastInsertId(), PDO::PARAM_INT);
 
         $this->db->executeStmt($stmt);
 
