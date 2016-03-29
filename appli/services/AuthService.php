@@ -11,11 +11,11 @@ class AuthService extends Service
 
         if ($logResult) {
             if ($this->context->getParam('savepwd') == 'on') {
-                setcookie('MlinkLogin', $this->context->getParam('user_login'), time() + 365*24*3600, '/', null, false, true);
-                setcookie('MlinkPwd', md5($this->context->getParam('user_pwd')), time() + 365*24*3600, '/', null, false, true);
+                setcookie('planskiLogin', $this->context->getParam('user_login'), time() + 365*24*3600, '/', null, false, true);
+                setcookie('planskiPwd', md5($this->context->getParam('user_pwd')), time() + 365*24*3600, '/', null, false, true);
             } else {
-                setcookie('MlinkLogin', 0, time(), '/', false, true);
-                setcookie('MlinkPwd', 0, time(), '/', false, true);
+                setcookie('planskiLogin', 0, time(), '/', false, true);
+                setcookie('planskiPwd', 0, time(), '/', false, true);
             }
 
             return true;
@@ -102,9 +102,9 @@ class AuthService extends Service
         if (!empty($user['user_login'])) {
             $pwd_valid = $this->model->auth->resetPwd($user['user_id']);
 
-            $message = 'Pour modifier ton mot de passe clique sur le lien suivant : <a href="http://www.metallink.fr/lostpwd/new/' . $pwd_valid . '">modifier mon mot de passe</a>';
+            $message = 'Pour modifier ton mot de passe clique sur le lien suivant : <a href="http://www.planski.fr/lostpwd/new/' . $pwd_valid . '">modifier mon mot de passe</a>';
 
-            return $this->get('mailer')->send($user['user_mail'], 'Modifcation du mot de passe MetalLink', $message);
+            return $this->get('mailer')->send($user['user_mail'], 'Modifcation du mot de passe PlanSKi', $message);
         } else {
             return false;
         }
@@ -112,8 +112,8 @@ class AuthService extends Service
 
     public function disconnect()
     {
-        setcookie('MlinkLogin', 0, time(), '/', false, true);
-        setcookie('MlinkPwd', 0, time(), '/', false, true);
+        setcookie('planskiLogin', 0, time(), '/', false, true);
+        setcookie('planskiPwd', 0, time(), '/', false, true);
 
         $this->context->destroy();
 

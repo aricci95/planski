@@ -1,5 +1,5 @@
 <?php
-session_name("metallink");
+session_name('planski');
 session_start();
 
 // Récupération du chemin absolu
@@ -18,18 +18,18 @@ require ROOT_DIR . '/appli/constants.php';
 
 // APPLICATION BOOTSTRAP
 // CONTROLLER
-if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'User') {
+if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Home') {
     $page = ucfirst($_GET['page']).'Controller';
     if(!file_exists(ROOT_DIR.'/appli/controllers/'.$page.'.php')) {
-        $page = 'UserController';
+        $page = 'HomeController';
     }
 } else {
-    $page = 'UserController';
+    $page = 'HomeController';
 }
 
 // ACTION
 $action = 'render';
-if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'User') {
+if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'Home') {
     $action .= ucfirst($_GET['action']);
 }
 
@@ -63,7 +63,6 @@ require ROOT_DIR . '/appli/engine/controller/AppController.php';
 
 // Classes propres au site
 require ROOT_DIR . '/appli/models/User.php';
-require ROOT_DIR . '/appli/models/Link.php';
 require ROOT_DIR . '/appli/views/ViewHelper.php';
 
 // gestionnaire d'erreurs
@@ -71,19 +70,19 @@ include ROOT_DIR . '/appli/engine/ErrorHandler.php';
 set_error_handler("ErrorHandler");
 
 try {
-    require_once ROOT_DIR . '/appli/controllers/'.$page.'.php';
+    require_once ROOT_DIR . '/appli/controllers/' . $page . '.php';
 
     $controller = new $page();
     $controller->$action();
 } catch (Exception $e) {
     Service_Container::getInstance()->get('Mailer')->sendError($e);
 
-    if ($page == 'UserController') {
+    if ($page == 'HomeController') {
         include ROOT_DIR . '/appli/views/maintenance.htm';
         die;
     } else {
-        require_once ROOT_DIR . '/appli/controllers/UserController.php';
-        $controller = new UserController();
+        require_once ROOT_DIR . '/appli/controllers/HomeController.php';
+        $controller = new HomeController();
 
         $controller->view->growlerError();
         $controller->render();

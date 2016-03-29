@@ -1,10 +1,10 @@
 <?php
-    $imageUrl = ((!empty($this->user['user_photo_url']) && file_exists($_SERVER["DOCUMENT_ROOT"]."/MLink/photos/small/".$this->user['user_photo_url']))) ? $this->user['user_photo_url'] : 'unknowUser.jpg';
+    $imageUrl = ((!empty($this->user['user_photo_url']) && file_exists($_SERVER["DOCUMENT_ROOT"]."/planski/photos/small/".$this->user['user_photo_url']))) ? $this->user['user_photo_url'] : 'unknowUser.jpg';
 ?>
 <div class="divElement">
     <a href="profile/<?php echo $this->user['user_id']; ?>" >
-    <div class="divPhoto" style="background:url('/MLink/photos/small/<?php echo $imageUrl; ?>');background-position: top center;">
-        <img class="pictoStatus" src="MLink/images/icone/<?php echo Tools::status($this->user['user_last_connexion']); ?>" />
+    <div class="divPhoto" style="background:url('/planski/photos/small/<?php echo $imageUrl; ?>');background-position: top center;">
+        <img class="pictoStatus" src="planski/images/icone/<?php echo Tools::status($this->user['user_last_connexion']); ?>" />
     </div>
     <div class="divInfo">
         <span class="userFont" style="color:<?php echo ($this->user['user_gender'] == 1) ? '#3333CC' : '#CC0000'; ?>" >

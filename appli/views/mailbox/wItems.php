@@ -5,7 +5,7 @@
         </td>
         <td>
             <a href="<?php echo 'message/'.$message['user_id']; ?>">
-                <img src="MLink/images/icone/<?php echo ($message['state_id'] == MESSAGE_STATUS_SENT) ? 'message.png' : 'messagelu.png'; ?>" />
+                <img src="planski/images/icone/<?php echo ($message['state_id'] == MESSAGE_STATUS_SENT) ? 'message.png' : 'messagelu.png'; ?>" />
             </a>
         </td>
         <td align="left" style="overflow:hidden;">

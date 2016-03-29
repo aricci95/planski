@@ -124,9 +124,9 @@ abstract class AppController extends Controller
                 $this->redirect('user', array('msg' => ERR_NOT_VALIDATED));
             }
         } // Cas pas d'user en session, vérification des cookies
-        elseif (!empty($_COOKIE['MlinkLogin']) && !empty($_COOKIE['MlinkPwd'])) {
+        elseif (!empty($_COOKIE['planskiLogin']) && !empty($_COOKIE['planskiPwd'])) {
             try {
-                $logResult = $this->get('auth')->checkLogin($_COOKIE['MlinkLogin'], $_COOKIE['MlinkPwd']);
+                $logResult = $this->get('auth')->checkLogin($_COOKIE['planskiLogin'], $_COOKIE['planskiPwd']);
             } catch (Exception $e) {
                 $this->redirect('user', array('msg' => $e->getCode()));
             }

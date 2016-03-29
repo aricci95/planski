@@ -6,7 +6,7 @@
             <th>Email :</th>
             <td><?php echo $this->user['user_mail']; ?>
                 <span style="float:right;margin-right:20px;">
-                    <img src="MLink/images/icone/delete.png"/>
+                    <img src="planski/images/icone/delete.png"/>
                     <a href="profile/delete">Supprimer mon compte</a>
                 </span>
             </td>

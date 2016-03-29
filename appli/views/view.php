@@ -2,13 +2,13 @@
     <head>
         <base href="/" >
         <?php $this->render('wJavascript'); ?>
-        <link REL=StyleSheet HREF="MLink/appli/styles.css" TYPE="text/css" MEDIA=screen>
-        <link rel="icon" type="image/png" href="MLink/images/icone/Fav.png" />
-        <link type="text/css" rel="stylesheet" media="all" href="MLink/libraries/chat/css/chat.css" />
-        <link type="text/css" rel="stylesheet" media="all" href="MLink/libraries/chat/css/screen.css" />
-        <link rel="stylesheet" type="text/css" href="MLink/libraries/growler/css/gritter.css" />
+        <link REL=StyleSheet HREF="planski/appli/styles.css" TYPE="text/css" MEDIA=screen>
+        <link rel="icon" type="image/png" href="planski/images/icone/Fav.png" />
+        <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/chat.css" />
+        <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/screen.css" />
+        <link rel="stylesheet" type="text/css" href="planski/libraries/growler/css/gritter.css" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>MetalLink</title>
+        <title>PlanSKi</title>
     </head>
     <body>
         <div class="userMenu">
@@ -19,33 +19,33 @@
                         <a href="auth/disconnect" class="greyLink" style="text-align: left;">Deconnexion</a>
                     </div>
                     <span style="float: right;font-size: 25px;">
-                        <a class="menuIcone" href="mailbox"><img src="MLink/images/icone/message.png" />
+                        <a class="menuIcone" href="mailbox"><img src="planski/images/icone/message.png" />
                             <b><?php echo $this->context->get('new_messages'); ?></b>
                         </a>
                         <a class="menuIcone" href="link/<?php echo LINK_STATUS_SENT; ?>">
-                            <img src="MLink/images/icone/link.png" />
+                            <img src="planski/images/icone/link.png" />
                             <b><?php echo $this->context->get('links_count_received'); ?></b>
                         </a>
                         <a class="menuIcone" href="link/<?php echo LINK_STATUS_ACCEPTED; ?>">
-                            <img src="MLink/images/icone/linked.png" />
+                            <img src="planski/images/icone/linked.png" />
                             <b><?php echo $this->context->get('links_count_accepted'); ?></b>
                         </a>
                         <a class="menuIcone" href="views">
-                            <img src="MLink/images/icone/views.png" />
+                            <img src="planski/images/icone/views.png" />
                             <b><?php echo $this->context->get('views'); ?></b>
                         </a>
                         <a class="menuIcone" href="link/<?php echo LINK_STATUS_BLACKLIST; ?>">
-                            <img src="MLink/images/icone/blacklist.png" />
+                            <img src="planski/images/icone/blacklist.png" />
                             <b><?php echo $this->context->get('links_count_blacklist'); ?></b>
                         </a>
                     </span>
                 <?php else : ?>
-                    <div class="greyLink" style="font-family: Metallink;font-size:24px;color: white;">
+                    <div class="greyLink" style="font-family: PlanSKi;font-size:24px;color: white;">
                         <form action="auth/login" method="post">
                             Login : <input style="padding-top:-10px;margin-left:5px;margin-right:5px;" name="user_login" size="4" />
                             Password : <input style="margin-left:5px;" name="user_pwd" type="password" size="4" />
                             <input type="submit" value="Connexion" />
-                            <input type="button" onclick="window.location.href = 'MLink/libraries/socialauth/station.php';" class="facebookButton" value="Via Facebook" />
+                            <input type="button" onclick="window.location.href = 'planski/libraries/socialauth/station.php';" class="facebookButton" value="Via Facebook" />
                             <label style="margin-left:5px;" for="savepwd">Enregistrer</label><input id="savepwd" name="savepwd" type="checkbox" />
                             <a class="menuLien" style="margin-left:5px;"  href="lostpwd">Mot de passe oublie</a>
                             <a class="menuLien" style="margin:0;" href="subscribe">S'inscrire !</a>
@@ -56,7 +56,7 @@
         </div>
         <div style="text-align: center;margin:20px;">
             <a href="user">
-                <img src="MLink/images/structure/newheader.png" />
+                <img src="planski/images/structure/newheader.png" />
             </a>
         </div>
         <div class="site">

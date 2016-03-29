@@ -108,27 +108,27 @@ class Tools
     // Convertis les symboles en smileys
     public static function toSmiles($texte)
     {
-        $smiles = array(" :-)" => " <img src='MLink/images/smilies/content.png' />",
-                        " :)" => " <img src='MLink/images/smilies/content.png' />",
-                        " =)" => " <img src='MLink/images/smilies/content.png' />",
-                        " :p" => " <img src='MLink/images/smilies/langue.png' />",
-                        " :-P" => " <img src='MLink/images/smilies/langue.png' />",
-                        " :P" => " <img src='MLink/images/smilies/langue.png' />",
-                        " =P" => " <img src='MLink/images/smilies/langue.png' />",
-                        " :'(" => " <img src='MLink/images/smilies/triste.png' />",
-                        " :-'(" => " <img src='MLink/images/smilies/triste.png' />",
-                        " XD" => " <img src='MLink/images/smilies/XD.png' />",
-                        " xD" => " <img src='MLink/images/smilies/XD.png' />",
-                        " =/" => " <img src='MLink/images/smilies/septique.png' />",
-                        " :/" => " <img src='MLink/images/smilies/septique.png' />",
-                        " :-/" => " <img src='MLink/images/smilies/septique.png' />",
-                        " T.T" => " <img src='MLink/images/smilies/trestriste.png' />",
-                        " <3" => " <img src='MLink/images/smilies/love.png' />",
-                        " >.<" => " <img src='MLink/images/smilies/vener.png' />",
-                        " ;)" => " <img src='MLink/images/smilies/sourcils.png' />",
-                        " ;-)" => " <img src='MLink/images/smilies/sourcils.png' />",
-                        " ^^" => " <img src='MLink/images/smilies/sourcils.png' />",
-                        " ^.^" => " <img src='MLink/images/smilies/sourcils.png' />");
+        $smiles = array(" :-)" => " <img src='planski/images/smilies/content.png' />",
+                        " :)" => " <img src='planski/images/smilies/content.png' />",
+                        " =)" => " <img src='planski/images/smilies/content.png' />",
+                        " :p" => " <img src='planski/images/smilies/langue.png' />",
+                        " :-P" => " <img src='planski/images/smilies/langue.png' />",
+                        " :P" => " <img src='planski/images/smilies/langue.png' />",
+                        " =P" => " <img src='planski/images/smilies/langue.png' />",
+                        " :'(" => " <img src='planski/images/smilies/triste.png' />",
+                        " :-'(" => " <img src='planski/images/smilies/triste.png' />",
+                        " XD" => " <img src='planski/images/smilies/XD.png' />",
+                        " xD" => " <img src='planski/images/smilies/XD.png' />",
+                        " =/" => " <img src='planski/images/smilies/septique.png' />",
+                        " :/" => " <img src='planski/images/smilies/septique.png' />",
+                        " :-/" => " <img src='planski/images/smilies/septique.png' />",
+                        " T.T" => " <img src='planski/images/smilies/trestriste.png' />",
+                        " <3" => " <img src='planski/images/smilies/love.png' />",
+                        " >.<" => " <img src='planski/images/smilies/vener.png' />",
+                        " ;)" => " <img src='planski/images/smilies/sourcils.png' />",
+                        " ;-)" => " <img src='planski/images/smilies/sourcils.png' />",
+                        " ^^" => " <img src='planski/images/smilies/sourcils.png' />",
+                        " ^.^" => " <img src='planski/images/smilies/sourcils.png' />");
         return strtr($texte, $smiles);
     }
 

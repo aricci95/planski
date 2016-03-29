@@ -192,8 +192,8 @@ class ProfileController extends AppController
         if ($this->get('user')->delete($this->context->get('user_id'))) {
 
             //Destruction du Cookie
-            setcookie("MlinkPwd", 0);
-            setcookie("MlinkLogin", 0);
+            setcookie("planskiPwd", 0);
+            setcookie("planskiLogin", 0);
             session_destroy();
 
             // redirection

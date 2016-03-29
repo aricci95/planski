@@ -45,23 +45,23 @@ class ViewHelper {
         echo '<div align="center" style="clear:both;">';
 
         if($submit) {
-            echo '<input type="image" src="MLink/images/boutons/valider.png" value="Valider" style="border:0px;" border="0" />';
+            echo '<input type="image" src="planski/images/boutons/valider.png" value="Valider" style="border:0px;" border="0" />';
         }
 
-        echo '<a href="'.$previousUrl.'" /><img src="MLink/images/boutons/retour.png" /></a>';
+        echo '<a href="'.$previousUrl.'" /><img src="planski/images/boutons/retour.png" /></a>';
         echo '</div>';
     }
 
     public function printArticle($article)
     {
         if(!empty($article['art_id'])) {
-            $imageUrl = ((!empty($article['art_photo_url']) && file_exists($_SERVER["DOCUMENT_ROOT"]."/MLink/photos/small/".$article['art_photo_url']))) ? $article['art_photo_url'] : 'unknowUser.jpg';
+            $imageUrl = ((!empty($article['art_photo_url']) && file_exists($_SERVER["DOCUMENT_ROOT"]."/planski/photos/small/".$article['art_photo_url']))) ? $article['art_photo_url'] : 'unknowUser.jpg';
 
             echo '<div class="divElement">';
             echo '<a href="article/'.$article['art_id'].'" >';
                 // Partie PHOTO
                 echo '<div class="divPhoto" style="background:url(\'';
-                echo '/MLink/photos/small/'.$imageUrl.'\');background-position: top center;">';
+                echo '/planski/photos/small/'.$imageUrl.'\');background-position: top center;">';
 
                 echo '</div>';
                 // Partie INFO
@@ -94,14 +94,14 @@ class ViewHelper {
     // Affiche login, photo et état
     public function printUserSmall($user)
     {
-        $imageUrl = ((!empty($user['user_photo_url']) && file_exists($_SERVER["DOCUMENT_ROOT"] . "/MLink/photos/small/" . $user['user_photo_url']))) ? $user['user_photo_url'] : 'unknowUser.jpg';
+        $imageUrl = ((!empty($user['user_photo_url']) && file_exists($_SERVER["DOCUMENT_ROOT"] . "/planski/photos/small/" . $user['user_photo_url']))) ? $user['user_photo_url'] : 'unknowUser.jpg';
         echo '<a href="profile/'.$user['user_id'].'" >';
         echo '<div class="divElementSmall">';
 
             // Partie PHOTO
             echo '<div class="divPhoto" style="background:url(\'';
-            echo '/MLink/photos/small/'.$imageUrl.'\');background-position: top center;">';
-            echo '<img class="pictoStatus" src="MLink/images/icone/';
+            echo '/planski/photos/small/'.$imageUrl.'\');background-position: top center;">';
+            echo '<img class="pictoStatus" src="planski/images/icone/';
             echo $this->status($user['user_last_connexion']);
             echo '" />&nbsp;';
             echo '</div>';
@@ -140,9 +140,9 @@ class ViewHelper {
     public function showStatut($userLastConnexion, $full = false)
     {
         if($this->status($userLastConnexion) == 'online.gif') {
-            echo  '<img src="MLink/images/icone/online.gif" title="online" />';
+            echo  '<img src="planski/images/icone/online.gif" title="online" />';
         } else {
-            echo '<img src="MLink/images/icone/offline.png" title="offline" />';
+            echo '<img src="planski/images/icone/offline.png" title="offline" />';
         }
 
         if($full) echo '</span>';

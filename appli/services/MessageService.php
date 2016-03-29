@@ -31,9 +31,9 @@ Class MessageService extends Service
 
         if ($this->model->message->insert($message_data)) {
             $destinataire = $this->model->user->findById($destinataire_id);
-            $message      = $this->context->get('user_login').' vous a envoyé un nouveau message ! <a href="http://metallink.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
+            $message      = $this->context->get('user_login').' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
 
-            return $this->get('mailer')->send($destinataire['user_mail'], 'Nouveau message sur MetalLink !', $message);
+            return $this->get('mailer')->send($destinataire['user_mail'], 'Nouveau message sur PlanSKi !', $message);
         }
     }
 

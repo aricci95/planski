@@ -5,7 +5,7 @@ $(document).ready(function() {
     $('.autocomplete').autocomplete({
         source : function(requete, reponse) {
             $.ajax({
-                url : 'MLink/appli/index.php?page=suggest&action=' + type,
+                url : 'planski/appli/index.php?page=suggest&action=' + type,
                 dataType : 'json',
                 data : {
                     value : $('.autocomplete').val(),

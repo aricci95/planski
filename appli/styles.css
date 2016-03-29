@@ -1,8 +1,8 @@
 @CHARSET "utf-8";
 
 @font-face {
-    font-family: Metallink;
-    src: url(/MLink/libraries/fonts/menu.ttf), url(/MLink/libraries/fonts/menu.eot);
+    font-family: PlanSKi;
+    src: url(/planski/libraries/fonts/menu.ttf), url(/planski/libraries/fonts/menu.eot);
 }
 
 img {
@@ -23,7 +23,7 @@ body {
     color:rgb(84, 65, 70);
     font-family: Calibri;
     background-repeat:no-repeat;
-    background-image:url('/MLink/images/structure/emp_background.jpg');
+    background-image:url('/planski/images/structure/emp_background.jpg');
     background-attachment: fixed;
     background-position: top center;
     background-color:rgb(26, 26, 26);
@@ -83,29 +83,6 @@ a:visited {color: #808080;text-decoration: none ;}
 a:hover {color: white;text-decoration: none ;}
 a:visited:hover {color: white;text-decoration: none ;}
 a:link {color: #808080;text-decoration: none ;}
-
-.thMessageBoxMenu {
-    font-size:20px;
-    text-align:center;
-}
-
-.trNewMessage {
-    text-align:center;
-    background-color:#242424;
-    color:#808080;
-}
-
-.tableProfil {
-    font-weight: bold;
-    text-align:left;
-}
-
-.annonce {
-    display: inline-block;
-    width:800px;
-    height:100px;
-    text-align: left;
-}
 
 .form {
     padding-top: 19px;
@@ -195,7 +172,7 @@ a:link {color: #808080;text-decoration: none ;}
     background-color:rgb(38, 47, 42);
     margin-left: -17px;
     padding:20px;
-    font-family: Metallink;
+    font-family: PlanSKi;
     text-align: center;
     font-size: 28px;
     height: 26px;
@@ -208,35 +185,8 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .menuIcone {
-    font-family: Metallink;
+    font-family: PlanSKi;
     text-align: right;
-}
-
-h1 {
-    text-align:center;
-    color:grey;
-}
-
-h2 {
-    text-align:center;
-    color:grey;
-    font-size: 15px;
-}
-
-hr {
-    background:#E6E6E6;
-    border-top:1px grey dotted;
-    border-bottom: black;
-}
-
-h3 {
-    text-align:center;
-    color:white;
-}
-
-h4 {
-    text-align:center;
-    color:white;
 }
 
 .smallPortrait {
@@ -285,11 +235,6 @@ h4 {
     margin-right: auto;
 }
 
-.imgSousPortait {
-    border:1px #5E5E5E outset;
-    width:93px;
-}
-
 .newPhoto:hover {
     -moz-box-shadow: 0 0 10px #ccc;
     -webkit-box-shadow: 0 0 10px #ccc;
@@ -308,7 +253,7 @@ h4 {
     overflow: hidden;
     width:100px;
     height:120px;
-    background-image:url('/MLink/images/structure/backgrounduser.jpg');
+    background-image:url('/planski/images/structure/backgrounduser.jpg');
     border:1px grey solid;
     margin:5px;
     text-align:center;
@@ -337,7 +282,7 @@ h4 {
     overflow: hidden;
     width: 262px;
     height:100px;
-    background-image:url('/MLink/images/structure/backgrounduser.jpg');
+    background-image:url('/planski/images/structure/backgrounduser.jpg');
     background-position: right;
     border:1px grey solid;
     margin:1px;
@@ -381,21 +326,21 @@ h4 {
 .editPhoto .definePhoto {
     width:294px;
     height:294px;
-    background:url('/MLink/images/div/defineprofile.png') no-repeat;
+    background:url('/planski/images/div/defineprofile.png') no-repeat;
     opacity:0;
 }
 
 .editPhoto .removePhoto {
     width:50px;
     height:50px;
-    background:url('/MLink/images/boutons/remove.png') no-repeat;
+    background:url('/planski/images/boutons/remove.png') no-repeat;
     opacity:0;
 }
 
 .profilePhoto {
     width:294px;
     height:294px;
-    background:url('/MLink/images/div/profilephoto.png') no-repeat;
+    background:url('/planski/images/div/profilephoto.png') no-repeat;
 }
 
 .controlPanel {
@@ -417,24 +362,16 @@ h4 {
 .errorMessage {
     color:white;
     border:1px grey groove;
-    background:red url('/MLink/images/icone/alert2.png') no-repeat 10px center;
+    background:red url('/planski/images/icone/alert2.png') no-repeat 10px center;
     height:50px;
     padding-top:25px;
     text-align:center;
     margin:15px;
 }
 
-.tasteDatas li {
-    text-align:center;
-}
-
 li {
     margin-left:-40px;
     list-style-type:none;
-}
-
-.tasteDatas input {
-    width: 400px;
 }
 
 .maxWidth {
@@ -496,29 +433,4 @@ div.debug {
 .divModuleProfil {
     margin-top:20px;
     margin-bottom:20px;
-}
-
-.vesteAPatchs {
-    float:left;
-    padding: 46px;
-    padding-top: 72px;
-    font-size: 21px;
-    text-align: center;
-    max-height: 280px;
-    overflow: hidden;
-}
-
-.vesteAPatchs span {
-    text-align: center;
-    padding: 2px;
-    border:1px grey;
-    background-color: black;
-    background-image:url('/MLink/images/patch.jpg');
-    border-style:dotted;
-    display: inline-block;
-
-
-    margin:2px;
-    padding:3px;
-    color:#E6E6E6;
 }

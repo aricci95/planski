@@ -33,7 +33,7 @@ class SubscribeController extends AppController
     {
         // Agreements
         if (empty($this->context->params['agreements']) || $this->context->params['agreements'] != 'on') {
-            $this->view->growler("Vous devez accepter les mentions légales de MetalLinK.");
+            $this->view->growler("Vous devez accepter les mentions légales de PlanSKi.");
             return false;
         }
         // Champs vides
@@ -92,14 +92,14 @@ class SubscribeController extends AppController
                 $validationId = $this->model->User->createUser($newUser);
 
                 if (!empty($validationId)) {
-                    $message = 'Merci de vous être inscris sur MetalLink<br><br>
+                    $message = 'Merci de vous être inscris sur PlanSKi<br><br>
                             Avant de pouvoir vous connecter vous devez cliquer sur ce lien pour valider votre adresse message :<br><br>
-                            <a href="http://metallink.fr/subscribe/validate/' . $validationId . '">Cliquez ici pour valider votre compte ! </a><br><br>
+                            <a href="http://planski.fr/subscribe/validate/' . $validationId . '">Cliquez ici pour valider votre compte ! </a><br><br>
                             Voici vos identifiants :<br><br>
                             <u>Login :</u> '.$newUser['user_login'].'<br><br>
                             <u>Mot de passe :</u> '.$this->context->params['user_pwd'].'<br><br>
                             Si vous rencontrez des problèmes, n\'hésitez pas à nous envoyer un message en répondant directement à celui-ci, nous vous répondrons dans les plus bref délais.';
-                    if ($this->get('mailer')->send($newUser['user_mail'], 'Bienvenue sur MetalLink '.$newUser['user_login'].' !', $message)) {
+                    if ($this->get('mailer')->send($newUser['user_mail'], 'Bienvenue sur PlanSKi '.$newUser['user_login'].' !', $message)) {
                         $this->redirect('user', array('msg' => MSG_VALIDATION_SENT));
                     } else {
                         $this->view->growlerError();

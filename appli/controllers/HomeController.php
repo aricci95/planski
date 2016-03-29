@@ -6,24 +6,6 @@ class HomeController extends AppController
 
     public function render()
     {
-        $socialAppsData = $this->context->get('userprofile');
-
-        if (!empty($socialAppsData['email']) && $socialAppsData['verified']) {
-            if (!$this->get('Facebook')->login()) {
-                $this->redirect('subscribe');
-            }
-        }
-
-        $this->view->setViewName('wHome');
-
-        $concertCriterias = array(
-            'search_distance' => $this->context->get('user_valid') ? 50 : null,
-        );
-
-        $concerts = $this->model->concert->getSearch($concertCriterias, 0, 5);
-
-        $this->view->concert = !empty($concerts) ? $concerts[min(array_keys($concerts))] : null;
-
         $this->view->render();
     }
 

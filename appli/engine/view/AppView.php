@@ -19,7 +19,7 @@ class AppView
         $this->_helper = new ViewHelper();
 
         $date  = date('m');
-        $this->headerImg = 'MLink/images/structure/';
+        $this->headerImg = 'planski/images/structure/';
         $this->headerImg .= 'newheader.png';
     }
 
