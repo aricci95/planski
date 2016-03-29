@@ -1,46 +1,6 @@
-<script>
-$(function() {
-    $('.popup').magnificPopup({
-      items: [
-      <?php foreach($this->photos as $photo) : ?>
-          <?php echo " {
-            src: 'planski/photos/profile/" . $photo['photo_url'] . "'
-          }, ";
-          ?>
-      <?php endforeach; ?>
-    ],
-    gallery: {
-      enabled: true
-    },
-    type: 'image'
-    });
-});
-</script>
 <div style="margin:10px;text-align: left;">
     <div class="grey" style="height: 400px;">
-        <?php $photo = empty($this->user['user_photo_url']) ? 'unknowUser.jpg' : $this->user['user_photo_url']; ?>
-        <a class="popup" href="planski/photos/profile/<?php echo $photo; ?>">
-            <div class="profilePortrait shade" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);">
-                <div class="profileLogin gold">
-                    <div style="position:absolute;bottom:-50px;left: 55px;">
-                        <?php for ($i= 1 ; $i <= 4; $i++) : ?>
-                            <?php if ($this->user['rate'] >= $i) : ?>
-                                <img src="/planski/images/icones/star.png" />
-                            <?php else : ?>
-                                <img src="/planski/images/icones/star_off.png"/>
-                            <?php endif; ?>
-                        <?php endfor; ?>
-                    </div>
-                    <?php if (!empty($this->user['user_ride'])) : ?>
-                        <img src="/planski/images/icones/<?php echo User::$rides[$this->user['user_ride']]; ?>.png" style="position:absolute;left:-20px;bottom:-10px;" />
-                    <?php endif;
-                        echo strtoupper($this->user['user_login']);
-                        if (!empty($this->user['user_level'])) : ?>
-                            <img src="/planski/images/icones/<?php echo User::$medals[$this->user['user_level']]; ?>.png" style="position:absolute;right:-25px;bottom: -49px;" />
-                    <?php endif; ?>
-                </div>
-            </div>
-        </a>
+        <?php $this->render('user/wThumb', array('user' => $this->user)); ?>
         <div style="margin-left: 362px;margin-top: 20px;position: absolute;">
             <p>
                 <?php echo Tools::status($this->user['user_last_connexion']); ?>

@@ -1,8 +1,5 @@
 <?php
 
-/*
- *  Classe d'accès aux données des utilisateurs
- */
 class Photo extends AppModel
 {
 

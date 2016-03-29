@@ -44,13 +44,9 @@ class User extends AppModel
         $sql = 'SELECT
                     user.user_id as user_id,
                     user_login,
-                    user_pwd,
-                    user_mail,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
-                    user_birth,
                     user_photo_url,
-                    user_gender,
                     user_description,
                     ville_nom_reel,
                     user_ride,
@@ -60,9 +56,8 @@ class User extends AppModel
                     user_vehicule,
                     user_hygiene,
                     user_fun,
-                    user.ville_id as ville_id,
                     LEFT(ville_code_postal, 2) as ville_code_postal,
-                    (SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.user_id = user.user_id) AS rate
+                    (SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = ' . Vote::TYPE_USER . ') AS rate
                 FROM
                     user
                 LEFT JOIN user_data ON (user.user_id = user_data.user_id)
@@ -123,7 +118,17 @@ class User extends AppModel
         $stmt->bindValue('limit_begin', $offset * NB_SEARCH_RESULTS, PDO::PARAM_INT);
         $stmt->bindValue('limit_end', NB_SEARCH_RESULTS, PDO::PARAM_INT);
 
-        return $this->db->executeStmt($stmt)->fetchAll();
+        $users = $this->db->executeStmt($stmt)->fetchAll();
+
+        foreach ($users as $key => $user) {
+            $photos = Model_Manager::getInstance()->Photo->getPhotosByKey($user['user_id'], PHOTO_TYPE_USER);
+
+            if (!empty($photos)) {
+                $users[$key]['photos'] = $photos;
+            }
+        }
+
+        return $users;
     }
 
     public function getUserByIdDetails($userId)

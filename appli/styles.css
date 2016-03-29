@@ -27,6 +27,7 @@ body {
 }
 
 .modal {
+    width:60%;
     border-left: 1px black solid;
     border-right: 1px black solid;
     background-color:rgb(228, 229, 231);
@@ -230,15 +231,19 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .profileLogin {
-    color:black;
+    margin-left: 21px;
+    width: 294px;
+    height: 42px;
+    position: absolute;
+    color: black;
     box-shadow: 0 10px 6px -6px #777;
     border: 1px grey solid;
-    margin-top: 246px;
+    margin-top: 268px;
     text-align: center;
     font-family: Calibri;
     font-size: 35px;
-    letter-spacing:-2px;
-    font-weight: bold
+    letter-spacing: -2px;
+    font-weight: bold;
 }
 
 .editPhoto {
