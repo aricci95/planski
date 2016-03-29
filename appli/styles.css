@@ -9,6 +9,10 @@ img {
     border: none;
 }
 
+table {
+    border-collapse: collapse;
+}
+
 textarea {
     border:1px grey solid;
     background-color:#D8D8D8;
@@ -20,17 +24,16 @@ body {
     font-family: Calibri;
     background-repeat:no-repeat;
     background-attachment: fixed;
-    background-color:rgb(26, 26, 26);
     margin: 0; /* pour éviter les marges */
     margin-right:auto;
     margin-left:auto;
 }
 
 .modal {
-    width:60%;
+    background-color: white;
+    width:600px;
     border-left: 1px black solid;
     border-right: 1px black solid;
-    background-color:rgb(228, 229, 231);
     margin:0 auto;
     height:120%;
 }
@@ -221,6 +224,18 @@ a:link {color: #808080;text-decoration: none ;}
     border:2px outset;
 }
 
+.smallProfilePortrait {
+    margin: 20px;
+    border-radius: 50%;
+    background-size: cover;
+    min-width: 150px;
+    min-height: 150px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin-right: 9px;
+    border: 2px outset;
+}
+
 .shade {
     position: relative;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
@@ -242,6 +257,22 @@ a:link {color: #808080;text-decoration: none ;}
     text-align: center;
     font-family: Calibri;
     font-size: 35px;
+    letter-spacing: -2px;
+    font-weight: bold;
+}
+
+.smallProfileLogin {
+    margin-left: 21px;
+    width: 150px;
+    height: 26px;
+    position: absolute;
+    color: black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 139px;
+    text-align: center;
+    font-family: Calibri;
+    font-size: 21px;
     letter-spacing: -2px;
     font-weight: bold;
 }
