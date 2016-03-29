@@ -3,8 +3,6 @@
         <?php $this->render('user/wThumb', array('user' => $this->user)); ?>
         <div style="margin-left: 362px;margin-top: 20px;position: absolute;">
             <p>
-                <?php echo Tools::status($this->user['user_last_connexion']); ?>
-                <br/>
                 Dernière connexion <?php echo Tools::timeConvert($this->user['user_last_connexion']); ?>
             </p>
             <p>

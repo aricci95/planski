@@ -15,7 +15,7 @@
             <div style="width:815px;margin-right:auto;margin-left:auto;">
                 <?php if($this->context->get('user_id')) : ?>
                     <div style="float:left;width:90px;text-align: left;">
-                        <a class="lienProfil" href="profile/<?php echo $this->context->get('user_id'); ?>">Mon profil</a>
+                        <a class="lienProfil" href="profile/edit">Mon profil</a>
                         <a href="auth/disconnect" class="greyLink" style="text-align: left;">Deconnexion</a>
                     </div>
                     <span style="float: right;font-size: 25px;">

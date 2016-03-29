@@ -4,7 +4,7 @@ require_once ROOT_DIR . '/appli/controllers/SearchController.php';
 
 class CrewController extends SearchController
 {
-    protected $_type = SEARCH_TYPE_USER;
+    protected $_type = SEARCH_TYPE_CREW;
 
     protected $_searchParams = array(
         'search_login',

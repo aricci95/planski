@@ -151,6 +151,6 @@ class Tools
     {
         $delay = time() - $timestamp;
 
-        return ($delay < ONLINE_TIME_LIMIT) ? '<span style="color:green;">online</span>' : '<span style="color:red;">offline</span>';
+        return ($delay < ONLINE_TIME_LIMIT) ? '<img src="planski/images/icones/online.gif" />' : '';
     }
 }

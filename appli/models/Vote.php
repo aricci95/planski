@@ -13,7 +13,7 @@ class Vote extends AppModel
         $sql = 'SELECT
             *
             FROM vote
-            JOIN user ON (vote.key_id = user.user_id)
+            JOIN user ON (vote.voter_id = user.user_id)
             WHERE type_id = :type_id
             AND key_id = :key_id
             ORDER BY vote_date DESC;

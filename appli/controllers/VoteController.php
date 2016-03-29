@@ -10,13 +10,9 @@ class VoteController extends AppController
         $type = $this->context->getParam('value');
         $id   = $this->context->getParam('option');
 
-        $votes = $this->model->vote->get($type, $id);
+        $this->view->user = $this->model->user->findOne(array('user_login'), array('user_id' => $id));
 
-        if (!empty($votes)) {
-            $this->view->votes = $votes;
-        } else {
-            $this->view->growler('Aucun vote.');
-        }
+        $this->view->votes = $this->model->vote->get($type, $id);
 
         $this->view->setViewName('vote/wMain');
         $this->view->render('modalView');
