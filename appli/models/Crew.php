@@ -22,10 +22,6 @@ class Crew extends AppModel
                 WHERE TRUE
             ';
 
-        if (!empty($criterias['search_login'])) {
-            $sql .= " AND user_login LIKE :search_login ";
-        }
-
         if (!empty($criterias['search_gender'])) {
             $sql .= " AND user_gender = :user_gender ";
         }
@@ -49,10 +45,6 @@ class Crew extends AppModel
         $sql = str_replace(', )', ')', $sql);
 
         $stmt = $this->db->prepare($sql);
-
-        if (!empty($criterias['search_login'])) {
-            $stmt->bindValue('search_login', '%'. $criterias['search_login'] .'%', PDO::PARAM_STR);
-        }
 
         if (!empty($criterias['search_gender'])) {
             $stmt->bindValue('user_gender', $criterias['search_gender'], PDO::PARAM_INT);

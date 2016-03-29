@@ -1,7 +1,7 @@
 <form id="search_form" action="#" method="post">
     <div class="form allShadows" id="search_form_table" align="center">
         <span id="search_criterias">
-            <?php $this->render('search/w' . ucfirst($this->type)); ?>
+            <?php $this->render($this->type . '/wForm'); ?>
         </span>
         <input id="submit_button" type="submit" src="planski/images/boutons/bnt_search.png" ALT="Rechercher" value="Chercher" />
     </div>
@@ -12,7 +12,7 @@
         </div>
 <?php else : ?>
     <div align="center" class="results">
-        <?php $this->render($this->type . '/wItems'); ?>
+        <?php $this->render('search/wItems'); ?>
     </div>
     <img class="loading" src="planski/appli/js/loading.gif" style="display:none;" data-show="false" data-end="false" data-offset="0" data-href="<?php echo $this->type; ?>" />
 <?php endif; ?>
