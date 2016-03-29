@@ -8,7 +8,7 @@
         <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/screen.css" />
         <link rel="stylesheet" type="text/css" href="planski/libraries/growler/css/gritter.css" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>PlanSKi</title>
+        <title>PlanSki</title>
     </head>
     <body>
         <div class="userMenu">
@@ -22,11 +22,11 @@
                         <a class="menuIcone" href="mailbox"><img src="planski/images/icone/message.png" />
                             <b><?php echo $this->context->get('new_messages'); ?></b>
                         </a>
-                        <a class="menuIcone" href="link/<?php echo LINK_STATUS_SENT; ?>">
+                        <a class="menuIcone" href="">
                             <img src="planski/images/icone/link.png" />
                             <b><?php echo $this->context->get('links_count_received'); ?></b>
                         </a>
-                        <a class="menuIcone" href="link/<?php echo LINK_STATUS_ACCEPTED; ?>">
+                        <a class="menuIcone" href="">
                             <img src="planski/images/icone/linked.png" />
                             <b><?php echo $this->context->get('links_count_accepted'); ?></b>
                         </a>
@@ -34,13 +34,13 @@
                             <img src="planski/images/icone/views.png" />
                             <b><?php echo $this->context->get('views'); ?></b>
                         </a>
-                        <a class="menuIcone" href="link/<?php echo LINK_STATUS_BLACKLIST; ?>">
+                        <a class="menuIcone" href="">
                             <img src="planski/images/icone/blacklist.png" />
                             <b><?php echo $this->context->get('links_count_blacklist'); ?></b>
                         </a>
                     </span>
                 <?php else : ?>
-                    <div class="greyLink" style="font-family: PlanSKi;font-size:24px;color: white;">
+                    <div class="greyLink" style="font-family: PlanSki;font-size:24px;color: white;">
                         <form action="auth/login" method="post">
                             Login : <input style="padding-top:-10px;margin-left:5px;margin-right:5px;" name="user_login" size="4" />
                             Password : <input style="margin-left:5px;" name="user_pwd" type="password" size="4" />

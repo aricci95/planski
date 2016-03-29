@@ -33,7 +33,7 @@ Class MessageService extends Service
             $destinataire = $this->model->user->findById($destinataire_id);
             $message      = $this->context->get('user_login').' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
 
-            return $this->get('mailer')->send($destinataire['user_mail'], 'Nouveau message sur PlanSKi !', $message);
+            return $this->get('mailer')->send($destinataire['user_mail'], 'Nouveau message sur PlanSki !', $message);
         }
     }
 

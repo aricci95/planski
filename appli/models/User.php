@@ -1,8 +1,5 @@
 <?php
 
-/*
- *  Classe d'accés aux donnés des utilisateurs
- */
 class User extends AppModel
 {
 
@@ -14,7 +11,6 @@ class User extends AppModel
         'user_birth',
         'style_id',
         'ville_id',
-        'user_light_description',
         'user_description',
         'user_data',
     );
@@ -48,26 +44,19 @@ class User extends AppModel
         return true;
     }
 
-    // Récupéres les utilisateurs par critéres
     public function getSearch($criterias, $offset = 0)
     {
         $sql = 'SELECT user_id,
                     user_login,
                     ville_nom_reel,
                     user_mail,
-                    look_libel,
                     user_gender,
                     user_photo_url,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age
                 FROM user
                 LEFT JOIN city ON user.ville_id = city.ville_id
-                LEFT JOIN ref_look ON user.look_id = ref_look.look_id
-                WHERE user_id NOT
-                    IN (SELECT expediteur_id FROM
-                        link WHERE status = :link_status_blacklist
-                        AND destinataire_id = :context_user_id)
-                AND user_valid = 1
+                WHERE  user_valid = 1
                 AND user_id != :context_user_id
             ';
 
@@ -100,7 +89,6 @@ class User extends AppModel
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue('context_user_id', $this->context->get('user_id'), PDO::PARAM_INT);
-        $stmt->bindValue('link_status_blacklist', LINK_STATUS_BLACKLIST, PDO::PARAM_INT);
 
         if (!empty($criterias['search_login'])) {
             $stmt->bindValue('search_login', '%'. $criterias['search_login'] .'%', PDO::PARAM_STR);
@@ -382,10 +370,7 @@ class User extends AppModel
                     ville_nom_reel,
                     ville_code_postal,
                     user_mail,
-                    forum_notification,
-                    user.ville_id as ville_id,
-                    ville_longitude_deg,
-                    ville_latitude_deg
+                    user.ville_id as ville_id
                 FROM user
                 LEFT JOIN city ON user.ville_id = city.ville_id
                 WHERE LOWER(user_login) = LOWER(:user_login)

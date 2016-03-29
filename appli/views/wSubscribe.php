@@ -30,7 +30,7 @@
             <table>
                 <tr>
                     <td>
-                        <label><input type="checkbox" name="agreements" />&nbsp;J'ai lu et j'accepte les mentions légales du site PlanSKi.fr <a href="subscribe/terms" target="_blank"><u>disponibles ICI</u></a></label>
+                        <label><input type="checkbox" name="agreements" />&nbsp;J'ai lu et j'accepte les mentions légales du site PlanSki.fr <a href="subscribe/terms" target="_blank"><u>disponibles ICI</u></a></label>
                     </td>
                 </tr>
                 <tr>

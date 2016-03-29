@@ -9,10 +9,6 @@ class Views extends AppModel
                 FROM
                     user_views
                 WHERE viewed_id = '".$this->context->get('user_id')."'
-                AND viewer_id NOT IN (
-                    SELECT destinataire_id FROM link
-                    WHERE status = ".LINK_STATUS_BLACKLIST."
-                    AND expediteur_id = '".$this->context->get('user_id')."')
                 AND viewer_id != ".$this->context->get('user_id');
 
         $resultat = $this->fetchOnly($sql);

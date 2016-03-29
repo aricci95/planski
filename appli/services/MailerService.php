@@ -6,7 +6,7 @@ class MailerService extends Service
     public function send($email, $title, $content, $additionnalContent = true)
     {
         // HEADERS
-        $headers = 'From: "PlanSKi"<contact.planski@gmail.com>' . "\n";
+        $headers = 'From: "PlanSki"<contact.planski@gmail.com>' . "\n";
         $headers .='Reply-To: contact.planski@gmail.com' . "\n";
         $headers .='Content-Type: text/html; charset="utf-8"' . "\n";
         $headers .='Content-Transfer-Encoding: 8bit';
@@ -15,7 +15,7 @@ class MailerService extends Service
 
         if ($additionnalContent) {
             $content = $previousContent.$content;
-            $content .= '<br><br>Bien cordialement, <br><br> L\'équipe <a href="http://planski.fr">PlanSKi</a>.';
+            $content .= '<br><br>Bien cordialement, <br><br> L\'équipe <a href="http://planski.fr">PlanSki</a>.';
         }
 
         if (MAIL_SERVER) {
@@ -68,6 +68,6 @@ class MailerService extends Service
 
         Log::err(str_replace(array('<br/>', '<b>', '</b>', '<br />'), array("\n", '', '', ''), $message));
 
-        return $this->send(ADMIN_MAIL, 'Erreur sur PlanSKi !', $message, false);
+        return $this->send(ADMIN_MAIL, 'Erreur sur PlanSki !', $message, false);
     }
 }

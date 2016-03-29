@@ -1,7 +1,7 @@
 @CHARSET "utf-8";
 
 @font-face {
-    font-family: PlanSKi;
+    font-family: PlanSki;
     src: url(/planski/libraries/fonts/menu.ttf), url(/planski/libraries/fonts/menu.eot);
 }
 
@@ -172,7 +172,7 @@ a:link {color: #808080;text-decoration: none ;}
     background-color:rgb(38, 47, 42);
     margin-left: -17px;
     padding:20px;
-    font-family: PlanSKi;
+    font-family: PlanSki;
     text-align: center;
     font-size: 28px;
     height: 26px;
@@ -185,7 +185,7 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .menuIcone {
-    font-family: PlanSKi;
+    font-family: PlanSki;
     text-align: right;
 }
 

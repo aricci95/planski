@@ -104,7 +104,7 @@ class AuthService extends Service
 
             $message = 'Pour modifier ton mot de passe clique sur le lien suivant : <a href="http://www.planski.fr/lostpwd/new/' . $pwd_valid . '">modifier mon mot de passe</a>';
 
-            return $this->get('mailer')->send($user['user_mail'], 'Modifcation du mot de passe PlanSKi', $message);
+            return $this->get('mailer')->send($user['user_mail'], 'Modifcation du mot de passe PlanSki', $message);
         } else {
             return false;
         }
