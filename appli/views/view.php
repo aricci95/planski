@@ -3,7 +3,7 @@
         <base href="/" >
         <?php $this->render('wJavascript'); ?>
         <link REL=StyleSheet HREF="planski/appli/styles.css" TYPE="text/css" MEDIA=screen>
-        <link rel="icon" type="image/png" href="planski/images/icone/Fav.png" />
+        <link rel="icon" type="image/png" href="planski/images/icones/Fav.png" />
         <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/chat.css" />
         <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/screen.css" />
         <link rel="stylesheet" type="text/css" href="planski/libraries/growler/css/gritter.css" />
@@ -36,7 +36,7 @@
                         </a>
                     </span>
                 <?php else : ?>
-                    <div class="greyLink" style="font-family: PlanSki;font-size:24px;color: white;">
+                    <div class="greyLink" style="color: white;">
                         <form action="auth/login" method="post">
                             Login : <input style="padding-top:-10px;margin-left:5px;margin-right:5px;" name="user_login" size="4" />
                             Password : <input style="margin-left:5px;" name="user_pwd" type="password" size="4" />
@@ -67,9 +67,9 @@
             <div style="min-height: 550px;">
                 <?php include($this->getViewFileName()); ?>
             </div>
-            <div class="footer">
-                Réalisé par Antoine Ricci - aricci95@gmail.com<br/>Design par Laurianne Abbe - abbe.lauriane@gmail.com
-            </div>
+        </div>
+        <div class="footer">
+            Réalisé par Antoine Ricci - aricci95@gmail.com
         </div>
     </body>
 </html>

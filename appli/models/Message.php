@@ -126,11 +126,6 @@ class Message extends AppModel
                             JOIN ref_message_state ON (ref_message_state.state_id = message.state_id)
                 WHERE
                      destinataire_id = :context_user_id
-                     AND user_id NOT IN (
-                            SELECT destinataire_id FROM link
-                            WHERE expediteur_id = :context_user_id
-                            AND status = :link_status_blacklist
-                        )
                 ORDER BY date DESC
                 LIMIT :limit_begin, :limit_stop
             ;";
@@ -138,7 +133,6 @@ class Message extends AppModel
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue('context_user_id', $this->context->get('user_id'), PDO::PARAM_INT);
-        $stmt->bindValue('link_status_blacklist', LINK_STATUS_BLACKLIST, PDO::PARAM_INT);
         $stmt->bindValue('limit_begin', ($offset * NB_MAILBOX_RESULTS), PDO::PARAM_INT);
         $stmt->bindValue('limit_stop', NB_MAILBOX_RESULTS, PDO::PARAM_INT);
 

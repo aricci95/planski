@@ -18,22 +18,6 @@ class ProfileController extends AppController
             $this->redirect('user', array('msg' => ERR_BLACKLISTED));
         }
 
-        $this->view->tasteTypes = $this->model->Taste->getTasteTypes();
-        $tastes                 = $this->model->Taste->getTastes($this->context->params['value']);
-
-        if (!empty($tastes)) {
-            foreach ($tastes['data'] as $type => $tasteData) {
-                if ($type == 'livres') {
-                    foreach ($tasteData as $key => $value) {
-                        $tastes['data'][$type][$key] = "<a target='_blank' href='http://www.allocine.fr/recherche/?q=".str_replace(' ', '+', trim($value))."' >".$value.'</a>';
-                    }
-                }
-            }
-        }
-
-        $this->view->tastes = $tastes;
-
-        // Ajout de la vue
         if ($this->context->get('user_id') != $this->context->params['value']) {
             $this->model->views->addView($this->context->params['value']);
         }
@@ -42,7 +26,6 @@ class ProfileController extends AppController
         $this->view->addictions = $this->model->User->convertQuantities($user);
 
         $user['user_description'] = Tools::toSmiles($user['user_description']);
-        $user['user_light_description'] = Tools::toSmiles($user['user_light_description']);
 
         if (empty($user['user_photo_url'])) {
             $user['user_photo_url'] = 'unknowUser.jpg';
@@ -59,8 +42,6 @@ class ProfileController extends AppController
 
         $this->view->photos = $photos;
 
-        // Vérificiation état link
-        $this->view->link = $this->model->Link->getLink($user['user_id']);
         $this->view->setViewName('user/wMain');
         $this->view->render();
     }
@@ -68,41 +49,8 @@ class ProfileController extends AppController
     public function renderEdit()
     {
         $this->view->addJS(JS_DATEPICKER);
-        $this->view->addJS(JS_TASTE);
 
-        // Récupération des informations de l'utilisateur
         $this->view->user = $this->model->User->getUserByIdDetails($this->context->get('user_id'));
-
-        // Récupération des listes déroulantes
-        $this->view->styles     = $this->model->find('style', array(), array(), array('style_libel'));
-        $this->view->looks      = $this->model->find('ref_look', array(), array(), array('look_libel'));
-        $this->view->quantities = $this->model->find('ref_quantity', array(), array(), array('quantity_libel'));
-
-        // PASSIONS
-        $types = $this->model->Taste->getTasteTypes();
-
-        foreach ($types as $type) {
-            if (!empty($this->context->getParam($type))) {
-                $datas = $this->context->getParam($type);
-
-                foreach ($datas as $key => $data) {
-                    if ($data == '') {
-                        unset($datas[$key]);
-                    } else {
-                        $datas[$key] = htmlspecialchars(trim($data), ENT_QUOTES, 'utf-8');
-                    }
-                }
-
-                $tastes[$type] = $datas;
-            }
-        }
-
-        if (!empty($tastes)) {
-            $this->model->Taste->save($tastes);
-        }
-
-        $this->view->tastes = $this->model->Taste->getTastes();
-        $this->view->tasteTypes = $types;
 
         $this->view->setTitle('Edition du profil');
         $this->view->setViewName('user/wEdit');
@@ -113,7 +61,6 @@ class ProfileController extends AppController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($this->context->params['user_login'])) {
             $this->context->params['user_login']             = Tools::no_special_character($this->context->params['user_login']);
-            $this->context->params['user_light_description'] = htmlspecialchars($this->context->params['user_light_description'], ENT_QUOTES, 'utf-8');
             $this->context->params['user_description']       = htmlspecialchars($this->context->params['user_description'], ENT_QUOTES, 'utf-8');
             $this->context->params['user_profession']        = htmlspecialchars($this->context->params['user_profession'], ENT_QUOTES, 'utf-8');
 
@@ -145,45 +92,6 @@ class ProfileController extends AppController
         }
 
         $this->renderEdit();
-    }
-
-    public function renderBlock()
-    {
-        $this->_block(true);
-    }
-
-    public function renderUnblock()
-    {
-        $this->_block(false);
-    }
-
-    private function _block($block = true)
-    {
-        if (!empty($this->context->params['value'])) {
-            if ($block) {
-                $status = $this->get('link')->getLinkStatus($this->context->params['value']);
-                if ($status == LINK_STATUS_NONE) {
-                    if ($this->model->Link->block($this->context->params['value'])) {
-                        $this->view->growler('Utilisateur bloqué.', GROWLER_OK);
-                    } else {
-                        $this->view->growlerError();
-                    }
-                } else {
-                    if ($this->model->Link->updateLink($this->context->params['value'], LINK_STATUS_BLACKLIST)) {
-                        $this->view->growler('Utilisateur bloqué.', GROWLER_OK);
-                    } else {
-                        $this->view->growlerError();
-                    }
-                }
-            } else {
-                if ($this->model->Link->unlink($this->context->params['value'])) {
-                        $this->view->growler('Utilisateur débloqué.', GROWLER_OK);
-                } else {
-                    $this->view->growlerError();
-                }
-            }
-        }
-        $this->render();
     }
 
     public function renderDelete()

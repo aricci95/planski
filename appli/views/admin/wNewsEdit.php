@@ -4,7 +4,7 @@
         <table>
             <?php if(!empty($this->currentNews['news_id'])) : ?>
                 <tr>
-                    <td colspan="2" align="right"><img src="planski/images/icone/delete.png"/> <a href="adminNews/delete/<?php echo $this->currentNews['news_id']; ?>">Supprimer la news</a></td>
+                    <td colspan="2" align="right"><img src="planski/images/icones/delete.png"/> <a href="adminNews/delete/<?php echo $this->currentNews['news_id']; ?>">Supprimer la news</a></td>
                 </tr>
             <?php endif; ?>
             <tr>

@@ -4,7 +4,7 @@
 <div class="divElement">
     <a href="profile/<?php echo $this->user['user_id']; ?>" >
     <div class="divPhoto" style="background:url('/planski/photos/small/<?php echo $imageUrl; ?>');background-position: top center;">
-        <img class="pictoStatus" src="planski/images/icone/<?php echo Tools::status($this->user['user_last_connexion']); ?>" />
+        <img class="pictoStatus" src="planski/images/icones/<?php echo Tools::status($this->user['user_last_connexion']); ?>" />
     </div>
     <div class="divInfo">
         <span class="userFont" style="color:<?php echo ($this->user['user_gender'] == 1) ? '#3333CC' : '#CC0000'; ?>" >
@@ -14,7 +14,6 @@
         <?php
             echo (isset($this->user['age']) && $this->user['age'] < 2000) ? $this->user['age'].' ans' : '';
             echo !empty($this->user['ville_nom_reel']) ? '<br/>' . $this->user['ville_nom_reel'] : '';
-            echo !empty($this->user['look_libel']) ? '<br/>' . $this->user['look_libel'] : '';
         ?>
         <div class="divLink" style="position:absolute;bottom:3;right:5;">
             <?php $this->render('link/wItem', array('user' => $this->user)); ?>

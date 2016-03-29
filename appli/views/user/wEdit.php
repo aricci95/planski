@@ -1,12 +1,12 @@
 <form action="profile/save" method="post" enctype="multipart/form-data">
     <div class="title topShadow">GENERAL</div>
     <div class="shadow"></div>
-    <table style="text-align: left;margin:10px;width:800px;">
+    <table style="text-align: left;margin:10px;width:950px;">
         <tr>
             <th>Email :</th>
             <td><?php echo $this->user['user_mail']; ?>
                 <span style="float:right;margin-right:20px;">
-                    <img src="planski/images/icone/delete.png"/>
+                    <img src="planski/images/icones/delete.png"/>
                     <a href="profile/delete">Supprimer mon compte</a>
                 </span>
             </td>
@@ -44,16 +44,6 @@
         <tr>
             <th>Style de métal favori :</th>
             <td>
-                <select name="style_id">
-                    <option value="">selectionnez</option>
-                    <?php foreach($this->styles as $key => $value)
-                    {
-                         echo '<option value="'.$value['style_id'].'"';
-                        if($value['style_id'] == $this->user['style_id']) echo ' selected="selected" ';
-                        echo '>'.$value['style_libel'].'</option>';
-                    }
-                    ?>
-                </select>
             </td>
         </tr>
         <tr>
@@ -66,10 +56,6 @@
         <tr>
             <th>Profession :</th>
             <td><input name="user_profession" size="40" value="<?php $this->user['user_profession']; ?>" /></td>
-        </tr>
-        <tr>
-            <th>Description courte :</th>
-            <td><input name="user_light_description" size="75" value="<?php echo $this->user['user_light_description']; ?>" /></td>
         </tr>
         <tr>
             <th>Description longue :</th>
@@ -104,14 +90,7 @@
             <th>Alcool :</th>
             <td>
                 <select name="user_alcohol">
-                    <option value="">selectionnez</option>
-                    <?php foreach($this->quantities as $key => $value)
-                    {
-                         echo '<option value="'.$value['quantity_id'].'"';
-                        if($value['quantity_id'] == $this->user['user_alcohol']) echo ' selected="selected" ';
-                        echo '>'.$value['quantity_libel'].'</option>';
-                    }
-                    ?>
+
                 </select>
             </td>
         </tr>
@@ -139,40 +118,10 @@
             <th>Look :</th>
             <td>
                 <select name="look_id">
-                    <option value="">selectionnez</option>
-                    <?php foreach($this->looks as $key => $value)
-                    {
-                         echo '<option value="'.$value['look_id'].'"';
-                        if($value['look_id'] == $this->user['look_id']) echo ' selected="selected" ';
-                        echo '>'.$value['look_libel'].'</option>';
-                    }
-                    ?>
                 </select>
             </td>
         </tr>
     </table>
-
-    <div class="title">PASSIONS</div>
-    <div class="shadow"></div>
-    <div style="text-align:center;padding-bottom:10px;font-size:14px;">
-        <i>30 caractères maxi par champ</i>
-    </div>
-        <?php foreach($this->tasteTypes as $typeId => $typeLibel) : ?>
-            <div style=" margin-left:10px;margin-bottom:10px;">
-                <h2><?php echo ucfirst($typeLibel); ?></h2>
-                <ul class="tasteDatas" data-taste-type="<?php echo $typeLibel; ?>">
-                    <?php if(!empty($this->tastes['data'][$typeLibel])) : ?>
-                        <?php foreach($this->tastes['data'][$typeLibel] as $info) : ?>
-                            <?php $this->render('taste/wItem', array('type' => $typeLibel, 'libel' => $info)); ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    <li>
-                        <input class="addTaste taste" name="<?php echo $typeLibel ?>[]" maxlength="30" />
-                    </li>
-                </ul>
-            </div>
-        <?php endforeach; ?>
-
     <?php $this->_helper->formFooter('profile/'.$this->context->get('user_id')); ?>
 </form>
 

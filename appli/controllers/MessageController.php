@@ -65,14 +65,6 @@ class MessageController extends AppController
 
         $userId = $this->context->params['value'];
 
-        $isLinked = $this->get('link')->isLinked($userId);
-
-        if (!$isLinked) {
-            Log::err('destinataire sans link');
-            $this->redirect('mailbox', array('msg' => ERR_DEFAULT));
-        }
-
-        // On récupère les information du message
         $parentMessages = $this->model->message->getConversation($userId);
 
         if ($this->_checkMessages($parentMessages, $userId)) {
@@ -94,13 +86,6 @@ class MessageController extends AppController
 
         if (empty($this->context->params['destinataire_id'])) {
             Log::err('destinataire vide');
-            $this->redirect('mailbox', array('msg' => ERR_DEFAULT));
-        }
-
-        $isLinked = $this->get('link')->isLinked($this->context->params['destinataire_id']);
-
-        if (!$isLinked) {
-            Log::err('destinataire sans link');
             $this->redirect('mailbox', array('msg' => ERR_DEFAULT));
         }
 

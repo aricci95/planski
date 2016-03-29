@@ -2,7 +2,7 @@
 <?php $this->_helper->blackBoxOpen(); ?>
     <div <?php if(empty($this->currentNews['news_contenu'])) echo 'align="center"'; ?>>
         <?php if(empty($this->currentNews['news_contenu']) && !empty($this->currentNews['news_photo_url'])) : ?>
-            <img  style="max-width:720px;max-height:800px;" src="<?php echo $this->currentNews['news_photo_url']; ?>"/>
+            <img  style="max-width:720px;max-height:950px;" src="<?php echo $this->currentNews['news_photo_url']; ?>"/>
         <?php else : ?>
             <?php if ($this->currentNews['news_photo_url'] != '') : ?>
                 <div style="float:left;margin:10px;">

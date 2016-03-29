@@ -3,30 +3,6 @@
 class User extends AppModel
 {
 
-    private $_attributes = array(
-        'user_login',
-        'user_pwd',
-        'user_mail',
-        'user_gender',
-        'user_birth',
-        'style_id',
-        'ville_id',
-        'user_description',
-        'user_data',
-    );
-
-    private $_serialized = array(
-        'user_profession',
-        'user_poids',
-        'user_taille',
-        'user_tattoo',
-        'user_piercing',
-        'look_id',
-        'user_smoke',
-        'user_alcohol',
-        'user_drugs',
-    );
-
     public function updateLastConnexion($userId = null)
     {
         if (empty($userId)) {
@@ -145,16 +121,6 @@ class User extends AppModel
         }
     }
 
-    public function countUsers()
-    {
-        $sql = "SELECT count(*) as number
-                FROM user
-                GROUP BY user_gender;";
-
-        $resultat = $this->fetch($sql);
-        return $resultat;
-    }
-
     // Récupére un utilisateur
     public function getUserByIdDetails($userId)
     {
@@ -168,15 +134,14 @@ class User extends AppModel
                     user_birth,
                     user_photo_url,
                     user_gender,
-                    user_light_description,
                     user_description,
-                    style_id,
                     user_data,
                     ville_nom_reel,
                     user.ville_id as ville_id,
                     LEFT(ville_code_postal, 2) as ville_code_postal
                 FROM
                     user
+                LEFT JOIN user_data ON (user.user_id = user_data.user_id)
                 LEFT JOIN city ON (user.ville_id = city.ville_id)
                 WHERE user_id = :user_id
             ;";
@@ -185,26 +150,7 @@ class User extends AppModel
 
         $stmt->bindValue('user_id', (int) $userId);
 
-        $user = $this->db->executeStmt($stmt)->fetch();
-
-        if (!empty($user)) {
-            return $this->_injectUserData($user);
-        } else {
-            return false;
-        }
-    }
-
-    private function _injectUserData($user)
-    {
-        $data = unserialize($user['user_data']);
-
-        foreach ($this->_serialized as $key) {
-            $user[$key] = empty($data[$key]) ? 0 : $data[$key];
-        }
-
-        unset($user['user_data']);
-
-        return $user;
+        return $this->db->executeStmt($stmt)->fetch();
     }
 
     public function deleteById($id)
@@ -212,7 +158,6 @@ class User extends AppModel
         $sql = "DELETE FROM user WHERE user_id = :id;
                 DELETE FROM user_views WHERE viewer_id = :id OR viewed_id = :id;
                 DELETE FROM message WHERE destinataire_id = :id OR expediteur_id = :id;
-                DELETE FROM link WHERE destinataire_id = :id OR expediteur_id = :id;
                 DELETE FROM chat WHERE `from` = :user_login OR `to` = :user_login;
             ";
 
@@ -222,35 +167,6 @@ class User extends AppModel
         $stmt->bindValue('user_login', $id, PDO::PARAM_STR);
 
         return $this->db->executeStmt($stmt);
-    }
-
-    // Modifie un utilisateur
-    public function updateUserById(array $data = array())
-    {
-        if (!empty($data)) {
-            // Update serialized data
-            $serialize = array();
-
-            foreach ($data as $attribute => $value) {
-                if (in_array($attribute, $this->_serialized) && $value > 0) {
-                    $serialize[$attribute] = $value;
-                }
-            }
-
-            $data['user_data'] = serialize($serialize);
-
-            $sql = 'UPDATE user SET ';
-            foreach ($this->_attributes as $attribute) {
-                if (!empty($data[$attribute])) {
-                    $sql .= " ".$attribute." = '".$data[$attribute]."',";
-                }
-            }
-            $sql .= ' WHERE user_id = '.$this->securize($this->context->get('user_id'));
-            $sql = str_replace(', WHERE', ' WHERE', $sql);
-
-            return $this->execute($sql);
-        }
-
     }
 
     public function setValid($code)
@@ -348,7 +264,6 @@ class User extends AppModel
 
         $stmt->bindValue('expediteur_id', 1, PDO::PARAM_INT);
         $stmt->bindValue('destinataire_id', $this->db->lastInsertId(), PDO::PARAM_INT);
-        $stmt->bindValue('status', LINK_STATUS_ACCEPTED, PDO::PARAM_INT);
 
         $this->db->executeStmt($stmt);
 
@@ -401,8 +316,7 @@ class User extends AppModel
                     user_mail,
                     ville_longitude_deg,
                     ville_latitude_deg,
-                    user.ville_id as ville_id,
-                    forum_notification
+                    user.ville_id as ville_id
                 FROM user
                 LEFT JOIN city ON (user.ville_id = city.ville_id)
                 WHERE LOWER(user_mail) = LOWER(:email)

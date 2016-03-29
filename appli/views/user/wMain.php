@@ -19,23 +19,12 @@ $(function() {
 <div style="background-color:rgb(247, 247, 248);">
     <div class="heading topShadow" style="height: 31px;padding:25px;">
         <div style="float: left;padding-top: 5px;">
-            <?php if(!empty($this->user['user_light_description'])) : ?>
-                <i>" <?php echo stripslashes($this->user['user_light_description']); ?> "</i>
-            <?php endif; ?>
+            CONTENT
         </div>
         <div style="float: right;">
-            <?php if($this->_helper->getLinkStatus($this->user['user_id']) == LINK_STATUS_ACCEPTED) : ?>
-                    <a href="profile/block/<?php echo $this->user['user_id']; ?>">
-                        <img src="planski/images/icone/blacklist.png" title="Bloquer cette personne" />
-                    </a>
-                    <a style="padding-left:50px;" href="message/<?php echo $this->user['user_id']; ?>">
-                        <img src="planski/images/boutons/big_email.jpg" title="envoyer un message" />
-                    </a>
-            <?php elseif($this->_helper->getLinkStatus($this->user['user_id']) == LINK_STATUS_BLACKLIST) : ?>
-                <a href="profile/unblock/<?php echo $this->user['user_id']; ?>">
-                    <img src="planski/images/icone/link.png" title="Débloquer cette personne" />
-                </a>
-            <?php endif; ?>
+            <a style="padding-left:50px;" href="message/<?php echo $this->user['user_id']; ?>">
+                <img src="planski/images/boutons/big_email.jpg" title="envoyer un message" />
+            </a>
         </div>
     </div>
 </div>
@@ -45,7 +34,7 @@ $(function() {
         <a class="test-popup-link" href="planski/photos/profile/<?php echo $photo; ?>">
             <div class="profilePortrait" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);">
                 <?php if ($this->context->get('user_id') == $this->user['user_id']) : ?>
-                    <a style="position:absolute;margin-top: 8px;margin-left: 11px;" href="photo/<?php echo PHOTO_TYPE_USER; ?>" title="Modifier les photos"><img src="planski/images/icone/photo.png" /></a>
+                    <a style="position:absolute;margin-top: 8px;margin-left: 11px;" href="photo/<?php echo PHOTO_TYPE_USER; ?>" title="Modifier les photos"><img src="planski/images/icones/photo.png" /></a>
                 <?php endif; ?>
             </div>
         </a>
@@ -55,7 +44,7 @@ $(function() {
                 <?php echo strtoupper($this->user['user_login']); ?> <?php $this->_helper->showStatut($this->user['user_last_connexion'], true); ?>
                 <?php if ($this->context->get('user_id') == $this->user['user_id']) : ?>
                     <span style="float:right;">
-                        <a href="profile/edit" title="Editer"><img src="planski/images/icone/edit.png" /></a>
+                        <a href="profile/edit" title="Editer"><img src="planski/images/icones/edit.png" /></a>
                     </span>
                 <?php endif; ?>
             </div>
@@ -72,18 +61,6 @@ $(function() {
                     <tr>
                         <th>Profession</th>
                         <td><?php echo ucfirst($this->user['user_profession']); ?></td>
-                    </tr>
-                <?php endif; ?>
-                <?php if (!empty($this->user['look_libel'])) : ?>
-                    <tr>
-                        <th>Lifestyle</th>
-                        <td><?php echo ucfirst($this->user['look_libel']); ?></td>
-                    </tr>
-                <?php endif; ?>
-                <?php if (!empty($this->user['style_libel'])) : ?>
-                    <tr>
-                        <th>Style musical</th>
-                        <td><?php echo ucfirst($this->user['style_libel']); ?></td>
                     </tr>
                 <?php endif; ?>
                 <tr>
@@ -115,38 +92,5 @@ $(function() {
         <div class="shadow noMargin"></div>
         <?php echo nl2br(stripcslashes($this->user['user_description'])); ?>
         <div style="height:25px"></div>
-    <?php endif; ?>
-    <?php if (!empty($this->tastes)) : ?>
-        <div class="title noMargin">PASSIONS</div>
-        <div class="shadow noMargin"></div>
-        <div style="display: inline-block;">
-            <div style="float:left;background-image:url('planski/images/260882b-emp.jpg');width:350px;height:500px;">
-                <div class="vesteAPatchs">
-                    <?php for ($i=0; $i < 15; $i++) : ?>
-                        <?php if (!empty($this->tastes['data']['groupes'][$i])) : ?>
-                            <span><?php echo $this->tastes['data']['groupes'][$i]; ?></span>
-                    <?php else :
-                            break;
-                        endif;
-                    endfor; ?>
-                </div>
-            </div>
-            <?php if(!empty($this->tastes)) : ?>
-                <div style="float:left;width:400px;">
-                    <?php foreach($this->tasteTypes as $typeId => $title) : ?>
-                        <?php if (!empty($this->tastes['data'][$title]) && $typeId > 1 && is_array($this->tastes['data'][$title])) : ?>
-                            <h2><?php echo strtoupper($title); ?></h2>
-                            <ul class="tasteDatas" data-taste-type="<?php echo $title; ?>">
-                                <?php foreach($this->tastes['data'][$title] as $info) : ?>
-                                    <li>
-                                        <?php echo nl2br(stripcslashes($info)); ?>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-        </div>
     <?php endif; ?>
 </div>

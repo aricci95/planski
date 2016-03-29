@@ -32,11 +32,6 @@ class Mailbox extends AppModel
                             JOIN ref_state ON (ref_state.state_id = message.state_id)
                 WHERE
                      destinataire_id = '". $this->context->get('user_id') ."'
-                     AND user_id NOT IN (
-                            SELECT destinataire_id FROM link
-                            WHERE expediteur_id = '".$this->context->get('user_id')."'
-                            AND status = ".LINK_STATUS_BLACKLIST."
-                        )
                 ORDER BY date DESC
                 LIMIT ".($offset * NB_MAILBOX_RESULTS).", ".NB_MAILBOX_RESULTS.";";
 

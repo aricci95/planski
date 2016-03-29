@@ -37,7 +37,7 @@ body {
     background-color:rgb(228, 229, 231);
     margin:0 auto;
     height:120%;
-    width: 800px;
+    width: 950px;
 }
 
 form {
@@ -47,7 +47,7 @@ form {
 .pancarte {
     padding-top: 12px;
     margin: 0 auto;
-    width: 800px;
+    width: 950px;
     height: 110px;
     text-align: center;
 }
@@ -128,7 +128,7 @@ a:link {color: #808080;text-decoration: none ;}
     padding: 20px;
     padding-top: 13px;
     height: 16px;
-    width:765px;
+    width: 910px;
     background-color: rgb(29, 39, 35);
     color: rgb(162, 204, 57);
 }
@@ -138,7 +138,7 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .shadow {
-    width:800px;
+    width:950px;
     height: 18px;
     -webkit-box-shadow: inset 2px 22px 20px -20px rgb(26, 26, 26);
     -moz-box-shadow: inset 2px 22px 20px -20px rgb(26, 26, 26);
@@ -176,13 +176,18 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .footer {
-    margin-top:31px;
+    width:925px;
     font-size: 13px;
     color: #CECECE;
     background-color: rgb(29, 39, 35);
     height: 33px;
     padding: 12px;
     bottom: 0;
+    border-left: 1px #808080 solid;
+    border-right: 1px #808080 solid;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .menu {
@@ -195,7 +200,7 @@ a:link {color: #808080;text-decoration: none ;}
     text-align: center;
     font-size: 28px;
     height: 26px;
-    width:794px;
+    width: 940px;
 }
 
 .menuLien {
@@ -248,8 +253,8 @@ a:link {color: #808080;text-decoration: none ;}
     border-left: 1px #808080 solid;
     border-right: 1px #808080 solid;
     background-color:rgb(247, 247, 248);
-    width:800px;
-    min-height: 500px;
+    width:950px;
+    min-height: 90%;
     text-align:center;
     margin-left: auto;
     margin-right: auto;
@@ -382,7 +387,7 @@ a:link {color: #808080;text-decoration: none ;}
 .errorMessage {
     color:white;
     border:1px grey groove;
-    background:red url('/planski/images/icone/alert2.png') no-repeat 10px center;
+    background:red url('/planski/images/icones/alert2.png') no-repeat 10px center;
     height:50px;
     padding-top:25px;
     text-align:center;
@@ -395,7 +400,7 @@ li {
 }
 
 .maxWidth {
-    width: 800px;
+    width: 950px;
 }
 
 div.autocomplete {
