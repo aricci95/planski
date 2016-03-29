@@ -2,10 +2,12 @@
 
 class Vote extends AppModel
 {
-    const TYPE_USER = 1;
+    const TYPE_USER   = 1;
+    const TYPE_APPART = 2;
 
     public static $types = array(
         self::TYPE_USER => 'user',
+        self::TYPE_APPART => 'appart',
     );
 
     public function get($type_id, $key_id)

@@ -6,6 +6,7 @@ class Appart extends AppModel
     public function getSearch($criterias, $offset = 0)
     {
         $sql = 'SELECT
+                    appart_id,
                     user.user_id as user_id,
                     user_login,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
@@ -20,7 +21,8 @@ class Appart extends AppModel
                     appart_type,
                     appart_description,
                     appart_zone_info,
-                    appart_equipment_info
+                    appart_equipment_info,
+                    (SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = appart.appart_id AND type_id = ' . Vote::TYPE_APPART . ') AS rate
                 FROM
                     appart
                 LEFT JOIN user ON (appart.user_id = user.user_id)

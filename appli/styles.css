@@ -216,8 +216,8 @@ a:link {color: #808080;text-decoration: none ;}
     margin:20px;
     border-radius:50%;
     background-size: cover;
-    min-width:294px;
-    min-height:294px;
+    width:294px;
+    height:294px;
     background-repeat: no-repeat;
     background-position: top center;
     margin-right:9px;
@@ -241,11 +241,21 @@ a:link {color: #808080;text-decoration: none ;}
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-.gold {
+.appartLibel {
     background-image:linear-gradient(30deg, white, #908A8A);
+    margin-left: 21px;
+    width: 294px;
+    height: 42px;
+    position: absolute;
+    color: black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 268px;
+    text-align: center;
 }
 
 .profileLogin {
+    background-image:linear-gradient(30deg, white, #908A8A);
     margin-left: 21px;
     width: 294px;
     height: 42px;
@@ -262,6 +272,7 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .smallProfileLogin {
+    background-image:linear-gradient(30deg, white, #908A8A);
     margin-left: -2px;
     width: 150px;
     height: 26px;
