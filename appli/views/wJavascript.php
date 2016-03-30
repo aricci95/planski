@@ -36,6 +36,9 @@ if($this->isJSActivated(JS_PHOTO)) : ?>
 if($this->isJSActivated(JS_SEARCH)) : ?>
     <script type="text/javascript" src="planski/appli/js/search.js"></script>
 <?php endif;
+if($this->isJSActivated(JS_CREW)) : ?>
+    <script type="text/javascript" src="planski/appli/js/crew.js"></script>
+<?php endif;
 if($this->isJSActivated(JS_EDIT)) : ?>
     <script type="text/javascript" src="planski/appli/js/edit.js"></script>
 <?php endif; ?>
