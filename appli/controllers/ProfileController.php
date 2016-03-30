@@ -50,7 +50,22 @@ class ProfileController extends AppController
 
         $this->view->user = $this->model->User->getUserByIdDetails($this->context->get('user_id'));
 
-        $this->view->setTitle('Edition du profil');
+        $this->view->setViewName('user/wEdit');
+        $this->view->render();
+    }
+
+    public function renderChange()
+    {
+        $data = array(
+            $this->context->getParam('name') => $this->context->getParam('value'),
+        );
+
+        if($this->model->user->updateUserData($data)) {
+            $this->view->growler("Modification enregistrée.", GROWLER_OK);
+        } else {
+            $this->view->growlerError();
+        }
+
         $this->view->setViewName('user/wEdit');
         $this->view->render();
     }

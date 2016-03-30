@@ -39,6 +39,27 @@ class User extends AppModel
         return true;
     }
 
+    public function updateUserData(array $data = array())
+    {
+        $sql = 'UPDATE user_data SET ';
+
+        foreach ($data as $key => $value) {
+            $sql .= $key . ' = :'. $key;
+        }
+
+        $sql .= ' WHERE user_id = :user_id;';
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue('user_id', $this->context->get('user_id'), PDO::PARAM_INT);
+
+        foreach ($data as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+
+        return $this->db->executeStmt($stmt);
+    }
+
     public function getSearch($criterias, $offset = 0)
     {
         $sql = 'SELECT

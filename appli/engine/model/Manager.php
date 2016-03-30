@@ -10,8 +10,8 @@ class Model_Manager extends Model
     public static function getInstance()
     {
         if (empty(self::$_instance)) {
-             $db = new Db();
-             $context = Context::getInstance();
+            $db = new Db();
+            $context = Context::getInstance();
 
             self::$_instance = new self($db, $context);
         }
@@ -51,7 +51,7 @@ class Model_Manager extends Model
     {
         $attributes_string = empty($attributes) ? '*' : implode(',', $attributes);
 
-        return $this->_queryBuilder($table, $attributes_string, $where, $orderBy, $limit);
+        return $this->_selectBuilder($table, $attributes_string, $where, $orderBy, $limit);
     }
 
     public function findOne($table, array $attributes = array(), array $where = array(), array $orderBy = array(), $limit = null)
@@ -61,19 +61,8 @@ class Model_Manager extends Model
         return empty($fetch) ? null : $fetch[0];
     }
 
-    public function hasSpecialChar($chaine)
+    public function updateById($table, $attributes, $id)
     {
-        $specialChars = array(
-        'À' => 'a', 'Á' => 'a', 'Â' => 'a', 'Ä' => 'a', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ä' => 'a', '@' => 'a',
-        'È' => 'e', 'É' => 'e', 'Ê' => 'e', 'Ë' => 'e', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', '€' => 'e',
-        'Ì' => 'i', 'Í' => 'i', 'Î' => 'i', 'Ï' => 'i', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
-        'Ò' => 'o', 'Ó' => 'o', 'Ô' => 'o', 'Ö' => 'o', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'ö' => 'o',
-        'Ù' => 'u', 'Ú' => 'u', 'Û' => 'u', 'Ü' => 'u', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u', 'µ' => 'u',
-        'Œ' => 'oe', 'œ' => 'oe',
-        '$' => 's');
-        $compareString = strtr($chaine, $specialChars);
-        $compareString = preg_replace('#[^A-Za-z0-9]+#', '-', $compareString);
-
-        return ($compareString != $chaine);
+        return $this->_updateBuilder($table, $attributes, $id);
     }
 }

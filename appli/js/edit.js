@@ -9,6 +9,13 @@ $(document).ready(function() {
             $('input[name="' + name + '"][value="' + value + '"]').prop( "checked", true);
             $('.selected[data-name="' + name + '"]').removeClass('selected');
             $(e.target).addClass('selected');
+
+            $.post("profile/change", { name : name, value : value}, function(data) {
+                $.gritter.add({
+                    text:  'Modification enregistrée.',
+                    class_name : 'gritter-ok'
+                });
+            });
         }
     });
 
@@ -24,6 +31,13 @@ $(document).ready(function() {
             $('img[data-name="' + $(e.target).attr('data-name') + '"]:lt(' + ($(e.target).attr('data-value')) + ')').removeClass('opacity');
             $('img[data-name="' + $(e.target).attr('data-name') + '"]:gt(' + ($(e.target).attr('data-value') - 1) + ')').addClass('opacity');
             $(e.target).removeClass('opacity');
+
+            $.post("profile/change", { name : name, value : value}, function(data) {
+                $.gritter.add({
+                    text:  'Modification enregistrée.',
+                    class_name : 'gritter-ok'
+                });
+            });
         }
     });
 });

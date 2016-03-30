@@ -53,6 +53,10 @@ body {
     width:300px;
 }
 
+.dropdownIndex {
+    background-color:rgb(170, 229, 247);
+}
+
 .dropdown-menu {
     display:none;
     font-size: 14px;
@@ -254,7 +258,7 @@ a:link {color: #808080;text-decoration: none ;}
 
 .caret {
     top: 10px;
-    right: -16px;
+    right: -10px;
     position:absolute;
     border-top: 4px solid white;
     border-right: 4px solid transparent;

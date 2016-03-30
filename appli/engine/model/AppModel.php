@@ -28,7 +28,7 @@ abstract class AppModel extends Model
     {
         $attributes_string = 'count(*) AS counter';
 
-        $data = $this->_queryBuilder($this->getTable(), $attributes_string, $where, $orderBy, $limit);
+        $data = $this->_selectBuilder($this->getTable(), $attributes_string, $where, $orderBy, $limit);
 
         return (int) $data[0]['counter'];
     }
@@ -37,7 +37,7 @@ abstract class AppModel extends Model
     {
         $attributes_string = empty($attributes) ? '*' : implode(',', $attributes);
 
-        return $this->_queryBuilder($this->getTable(), $attributes_string, $where, $orderBy, $limit);
+        return $this->_selectBuilder($this->getTable(), $attributes_string, $where, $orderBy, $limit);
     }
 
     public function findOne(array $attributes = array(), array $where = array(), array $orderBy = array(), $limit = null)
@@ -55,55 +55,14 @@ abstract class AppModel extends Model
             $this->getPrimary() => (int) $id,
         );
 
-        $results = $this->_queryBuilder($this->getTable(), $attributes_string, $where, $orderBy, $limit);
+        $results = $this->_selectBuilder($this->getTable(), $attributes_string, $where, $orderBy, $limit);
 
         return empty($results[0]) ? array() : $results[0];
     }
 
     public function updateById($attributes, $id)
     {
-        if (is_array($attributes)) {
-            $sql = 'UPDATE ' . $this->getTable() . ' SET ';
-
-            foreach ($attributes as $key => $value) {
-                if (!is_int($key)) {
-                    $sql .= $key . ' = ' . ':' . $key . ', ';
-                }
-            }
-
-            $sql .= 'WHERE ' . $this->getPrimary() . ' = :id;';
-
-            $sql = str_replace(', WHERE', ' WHERE', $sql);
-
-            $stmt = $this->db->prepare($sql);
-
-            foreach ($attributes as $key => $value) {
-                if (!is_int($key)) {
-                    $stmt->bindValue(':' . $key, $value);
-                }
-            }
-        } else {
-            $sql = 'UPDATE ' . $this->getTable() . ' SET ' . $attributes . ' = :new_value WHERE ' . $this->getPrimary() . ' = :id;';
-
-            $stmt = $this->db->prepare($sql);
-
-            $stmt->bindValue(':new_value', $newValue);
-        }
-
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-        return $this->db->executeStmt($stmt);
-    }
-
-    public function deleteById($id)
-    {
-        $sql = 'DELETE FROM ' . $this->getTable() . ' WHERE ' . $this->getPrimary() . ' = :id';
-
-        $stmt = $this->db->prepare($sql);
-
-        $stmt->bindValue('id', (int) $id, PDO::PARAM_INT);
-
-        return $this->db->executeStmt($stmt);
+        return $this->_updateBuilder($this->getTable(), $attributes, $id);
     }
 
     public function insert(array $values)

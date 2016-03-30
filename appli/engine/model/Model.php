@@ -12,16 +12,7 @@ abstract class Model
         $this->context = Context::getInstance();
     }
 
-    /**
-     * [find description]
-     * @param  string $table
-     * @param  array  $attributes
-     * @param  array  $where
-     * @param  array $orderBy
-     * @param  string $limit
-     * @return array
-     */
-    protected function _queryBuilder($table, $attributes_string = null, array $where = array(), array $orderBy = array(), $limit = null)
+    protected function _selectBuilder($table, $attributes_string = null, array $where = array(), array $orderBy = array(), $limit = null)
     {
         $sql = '
             SELECT
@@ -67,6 +58,41 @@ abstract class Model
         }
 
         return $this->db->executeStmt($stmt)->fetchAll();
+    }
+
+    protected function _updateBuilder($table, $attributes, $id)
+    {
+        if (is_array($attributes)) {
+            $sql = 'UPDATE ' . $table . ' SET ';
+
+            foreach ($attributes as $key => $value) {
+                if (!is_int($key)) {
+                    $sql .= $key . ' = ' . ':' . $key . ', ';
+                }
+            }
+
+            $sql .= 'WHERE ' . $table . '_id = :id;';
+
+            $sql = str_replace(', WHERE', ' WHERE', $sql);
+
+            $stmt = $this->db->prepare($sql);
+
+            foreach ($attributes as $key => $value) {
+                if (!is_int($key)) {
+                    $stmt->bindValue(':' . $key, $value);
+                }
+            }
+        } else {
+            $sql = 'UPDATE ' . $table . ' SET ' . $attributes . ' = :new_value WHERE ' . $table . '_id = :id;';
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindValue(':new_value', $newValue);
+        }
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $this->db->executeStmt($stmt);
     }
 
     public function fetch($sql)

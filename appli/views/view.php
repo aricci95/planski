@@ -33,10 +33,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="profile/edit">Profil</a>
+                            <a class="dropdownOption" href="profile/edit">Profil</a>
                         </li>
                         <li>
-                            <a href="auth/disconnect">Déconnexion</a>
+                            <a class="dropdownOption" href="auth/disconnect">Déconnexion</a>
                         </li>
                     </ul>
                 <?php else : ?>
