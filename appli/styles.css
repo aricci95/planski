@@ -24,9 +24,52 @@ body {
     font-family: Calibri;
     background-repeat:no-repeat;
     background-attachment: fixed;
-    margin: 0; /* pour éviter les marges */
+    margin: 0;
     margin-right:auto;
     margin-left:auto;
+}
+
+.editTable {
+    height:44%;
+    float:left;
+    text-align: left;
+    margin:10px;
+    margin-left: 30px;
+    width: 508px;
+}
+
+.editTable th {
+    text-align: left;
+}
+
+.editTable input {
+    width:300px;
+}
+
+.dropdown-menu {
+    display:none;
+    font-size: 14px;
+    position: absolute;
+    top: 46px;
+    right: 12px;
+    z-index: 1000;
+    float: left;
+    min-width: 100px;
+    padding: 5px 10px;
+    margin: 2px 0 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
 }
 
 .modal {
@@ -83,11 +126,11 @@ form {
 .lienProfil:visited:hover {color: white;}
 .lienProfil:active {color: #E8E8E8;}
 
-.menuLien:link {color: #E8E8E8;}
-.menuLien:hover {color: white;}
-.menuLien:visited {color: #E8E8E8;}
-.menuLien:visited:hover {color: white;}
-.menuLien:active {color: #E8E8E8;}
+.menuLien:link {color: white;}
+.menuLien:hover {color: #E8E8E8;}
+.menuLien:visited {color: white;}
+.menuLien:visited:hover {color: #E8E8E8;}
+.menuLien:active {color: white;}
 
 a:visited {color: #808080;text-decoration: none ;}
 a:hover {color: white;text-decoration: none ;}
@@ -99,7 +142,7 @@ a:link {color: #808080;text-decoration: none ;}
     font-size: 16px;
     height: 60px;
     background-color: rgb(29, 39, 35);
-    color: rgb(162, 204, 57);
+    color: rgb(170, 229, 247);
 }
 
 .heading {
@@ -110,7 +153,7 @@ a:link {color: #808080;text-decoration: none ;}
     padding-top: 13px;
     height: 16px;
     background-color: rgb(29, 39, 35);
-    color: rgb(162, 204, 57);
+    color: rgb(170, 229, 247);
 }
 
 .title {
@@ -120,9 +163,8 @@ a:link {color: #808080;text-decoration: none ;}
     padding: 20px;
     padding-top: 13px;
     height: 16px;
-    width: 910px;
     background-color: rgb(29, 39, 35);
-    color: rgb(162, 204, 57);
+    color: rgb(170, 229, 247);
 }
 
 .noMargin {
@@ -182,14 +224,15 @@ a:link {color: #808080;text-decoration: none ;}
 
 .menu {
     border: 1px black solid;
-    color: #CECECE;
-    background-color:rgb(38, 47, 42);
+    background-image: url(/planski/images/structure/montagnes.jpg);
+    background-position: center;
     margin-left: -17px;
-    padding:20px;
+    padding-top: 35px;
     font-family: PlanSki;
     text-align: center;
-    font-size: 28px;
-    height: 26px;
+    font-size: 33px;
+    height: 62px;
+    text-shadow: 2px 2px black;
 }
 
 .menuLien {
@@ -203,7 +246,9 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .caret {
-    vertical-align: top;
+    top: 10px;
+    right: -16px;
+    position:absolute;
     border-top: 4px solid white;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
@@ -232,8 +277,8 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .connectedPhoto {
-    width:40px;
-    height:40px;
+    width:30px;
+    height:30px;
     border-radius: 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -464,11 +509,6 @@ a:link {color: #808080;text-decoration: none ;}
     padding-top:25px;
     text-align:center;
     margin:15px;
-}
-
-li {
-    margin-left:-40px;
-    list-style-type:none;
 }
 
 .maxWidth {

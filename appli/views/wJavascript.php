@@ -2,6 +2,7 @@
 <script type="text/javascript" src="planski/libraries/chat/js/chat.js"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="planski/libraries/growler/js/gritter.js"></script>
+<script type="text/javascript" src="planski/appli/js/dropdown.js"></script>
 <script>
     $.extend($.gritter.options, {
         position: 'bottom-right'

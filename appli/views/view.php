@@ -3,7 +3,7 @@
         <base href="/" >
         <?php $this->render('wJavascript'); ?>
         <link REL=StyleSheet HREF="planski/appli/styles.css" TYPE="text/css" MEDIA=screen>
-        <link rel="icon" type="image/png" href="planski/images/icones/Fav.png" />
+        <link rel="icon" type="image/png" href="planski/images/icones/fav.gif" />
         <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/chat.css" />
         <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/screen.css" />
         <link rel="stylesheet" type="text/css" href="planski/libraries/growler/css/gritter.css" />
@@ -26,26 +26,36 @@
                         </a>
                     </div>
                     <?php $photo = empty($this->context->get('user_photo_url')) ? 'unknowUser.jpg' : $this->context->get('user_photo_url'); ?>
-                    <img style="position:absolute;top:16px;right:103px;" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
-                    <a style="position:absolute;top:25px;right:47px;" class="menuIcone"  href="#">
+                    <img style="position:absolute;top: 20px;right:103px;" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
+                    <a style="position:absolute;top:25px;right:47px;" class="dropdown menuIcone"  href="#">
                         <?php echo $this->context->get('user_login'); ?>
+                        <i class="caret" aria-hidden="true"></i>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="profile/edit">Profil</a>
+                        </li>
+                        <li>
+                            <a href="auth/disconnect">Déconnexion</a>
+                        </li>
+                    </ul>
                 <?php else : ?>
-                    <div class="greyLink" style="color: white;">
+                    <span class="greyLink" style="text-align:center; color: white;">
                         <form action="auth/login" method="post">
-                            Login : <input style="padding-top:-10px;margin-left:5px;margin-right:5px;" name="user_login" size="4" />
-                            Password : <input style="margin-left:5px;" name="user_pwd" type="password" size="4" />
+                            Login : <input style="padding-top:-10px;margin-left:5px;margin-right:5px;" name="user_login" size="8" />
+                            Password : <input style="margin-left:5px;" name="user_pwd" type="password" size="8" />
                             <input type="submit" value="Connexion" />
                             <input type="button" onclick="window.location.href = 'planski/libraries/socialauth/station.php';" class="facebookButton" value="Via Facebook" />
                             <label style="margin-left:5px;" for="savepwd">Enregistrer</label><input id="savepwd" name="savepwd" type="checkbox" />
-                            <a class="menuLien" style="margin-left:5px;" href="lostpwd">Mot de passe oublie</a>
-                            <a class="menuLien" style="margin:0;" href="subscribe">S'inscrire !</a>
                         </form>
-                    </div>
+                    </span>
+                    <span style="position:absolute;right:20;top:20;">
+                        <a class="menuLien" style="margin-left:5px;" href="lostpwd">Mot de passe oublie</a>
+                        <a class="menuLien" style="margin:0;" href="subscribe">S'inscrire !</a>
+                    </span>
                 <?php endif; ?>
             </div>
         </div>
-        <div class="pancarte"></div>
         <div class="site">
             <div class="menu">
                 <a class="menuLien" <?php echo ($this->page == 'member') ? 'style="color:white;"' : ''; ?> href="user">Membres</a>
