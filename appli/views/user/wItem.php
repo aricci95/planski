@@ -67,6 +67,17 @@
                         </td>
                     </tr>
                 <?php endif; ?>
+
+                <?php if(!empty($this->user['user_cash'])) : ?>
+                    <tr style="height:35px;">
+                        <td><b>Dépenses :</b></td>
+                        <td style="position: absolute;">
+                            <?php for ($i = 1; $i <= (int) $this->user['user_cash']; $i++) : ?>
+                                <img src="/planski/images/icones/cash.png" style="margin-right:7px;" />
+                            <?php endfor; ?>
+                        </td>
+                    </tr>
+                <?php endif; ?>
             </table>
         </div>
     </div>

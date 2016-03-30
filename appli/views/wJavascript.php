@@ -3,6 +3,9 @@
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="planski/libraries/growler/js/gritter.js"></script>
 <script type="text/javascript" src="planski/appli/js/dropdown.js"></script>
+<link rel="stylesheet" type="text/css" href="planski/libraries/modal/css/magnific-popup.css" />
+<script type="text/javascript" src="planski/libraries/modal/js/jquery.magnific-popup.js"></script>
+<script type="text/javascript" src="planski/appli/js/modal.js"></script>
 <script>
     $.extend($.gritter.options, {
         position: 'bottom-right'
@@ -33,8 +36,6 @@ if($this->isJSActivated(JS_PHOTO)) : ?>
 if($this->isJSActivated(JS_SEARCH)) : ?>
     <script type="text/javascript" src="planski/appli/js/search.js"></script>
 <?php endif;
-if($this->isJSActivated(JS_MODAL)) : ?>
-    <link rel="stylesheet" type="text/css" href="planski/libraries/modal/css/magnific-popup.css" />
-    <script type="text/javascript" src="planski/libraries/modal/js/jquery.magnific-popup.js"></script>
-    <script type="text/javascript" src="planski/appli/js/modal.js"></script>
+if($this->isJSActivated(JS_EDIT)) : ?>
+    <script type="text/javascript" src="planski/appli/js/edit.js"></script>
 <?php endif; ?>

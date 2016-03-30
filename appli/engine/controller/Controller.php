@@ -35,13 +35,9 @@ abstract class Controller
     private function _setContext()
     {
         $init_vars = array(
-            'id' => null,
+            'user_id' => null,
             'user_login' => null,
-            'last_connexion' => null,
-            'role_id' => '',
-            'photo_url' => 'unknowUser.jpg',
-            'age' => null,
-            'gender' => null,
+            'user_photo_url' => 'unknowUser.jpg',
         );
 
         $this->context = array_merge($_SESSION, $init_vars);

@@ -1,5 +1,5 @@
 <form action="profile/save" method="post" enctype="multipart/form-data">
-    <div class="title topShadow">GENERAL</div>
+    <div class="title topShadow">INFORMATIONS</div>
     <div class="shadow"></div>
     <div style="display:inline-block;">
         <?php $this->render('user/wThumb', array('user' => $this->user)); ?>
@@ -27,6 +27,17 @@
                 <td><input name="verif_pwd" type="password" value="" /></td>
             </tr>
             <tr>
+                <th>Adresse :</th>
+                <td><input name="user_adresse" value="<?php echo $this->user['user_adresse']; ?>" /></td>
+            </tr>
+            <tr>
+                <th>Ville :</th>
+                <td>
+                    <input type="text" class="autocomplete" data-type="city" value="<?php if (!empty($this->user['ville_nom_reel'])) : echo $this->user['ville_nom_reel'] . ' ('. $this->user['ville_code_postal'] . ')'; endif; ?>" />
+                    <input type="hidden" name="ville_id" class="autocompleteValue" />
+                </td>
+            </tr>
+            <tr>
                 <th>Sexe :</th>
                 <td>
                     <select name="user_gender">
@@ -40,13 +51,6 @@
                 <th>Date de naissance :</th>
                 <td>
                     <input name="user_birth" class="datetimepicker" id="datetimepicker" type="text" format="d/m/Y" value="<?php if(!empty($this->user['user_birth'])) echo date("d/m/Y", strtotime($this->user['user_birth'])); ?>">
-                </td>
-            </tr>
-            <tr>
-                <th>Ville :</th>
-                <td>
-                    <input type="text" class="autocomplete" data-type="city" value="<?php if (!empty($this->user['ville_nom_reel'])) : echo $this->user['ville_nom_reel'] . ' ('. $this->user['ville_code_postal'] . ')'; endif; ?>" />
-                    <input type="hidden" name="ville_id" class="autocompleteValue" />
                 </td>
             </tr>
                 <th>Profession :</th>
@@ -82,16 +86,99 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="padding-top:20px;padding-left:100px;">
+                <td colspan="2" style="height:100px;">
                     <input type="submit" value="enregistrer" style="width:200px;height:30px;" />
                 </td>
             </tr>
-            <tr>
-                <td colspan="2" style="padding-top:50px;padding-left:100px;">
-                    <img src="planski/images/icones/delete.png"/>
-                    <a href="profile/delete">Supprimer mon compte</a>
-                </td>
         </table>
     </div>
+    <div class="title topShadow">GENERAL</div>
+    <div class="shadow"></div>
+    <div style="display:inline-block;">
+        <table class="editTable">
+            <tr style="height:70px;">
+                <th style="width: 128px;">Ski / Snowboard :</th>
+                <td>
+                    <a class="radio_img" href="#">
+                        <img class="selected" data-name="user_ride" data-value="1" src="/planski/images/icones/ski.png" />
+                        <input style="display:none" type="radio" name="user_ride" value="1" <?php echo ($this->user['user_ride'] == User::RIDE_SKI) ? 'checked' : '' ; ?>>
+                    </a>
+                    <a class="radio_img" href="#">
+                        <img data-name="user_ride" data-value="2" src="/planski/images/icones/snowboard.png" />
+                        <input style="display:none" type="radio" name="user_ride" value="2" <?php echo ($this->user['user_ride'] == User::RIDE_SNOWBOARD) ? 'checked' : '' ; ?>>
+                    </a>
+                </td>
+            </tr>
+            <tr style="height:100px;">
+                <th style="width: 128px;">Niveau :</th>
+                <td>
+                    <?php for ($i = 0; $i <= 3; $i++) : ?>
+                        <a class="radio_img" href="#">
+                            <img data-name="user_level" data-value="<?php echo $i; ?>" src="/planski/images/medals/<?php echo $i; ?>.png" />
+                            <input style="display:none" type="radio" name="user_level" value="<?php echo $i; ?>" <?php echo ($this->user['user_level'] == $i) ? 'checked' : '' ; ?>>
+                        </a>
+                    <?php endfor; ?>
+                    <br/>
+                    <?php for ($i = 5; $i <= 7; $i++) : ?>
+                        <a class="radio_img" href="#">
+                            <img data-name="user_level" data-value="<?php echo $i; ?>" src="/planski/images/medals/<?php echo $i; ?>.png" />
+                            <input style="display:none" type="radio" name="user_level" value="<?php echo $i; ?>" <?php echo ($this->user['user_level'] == $i) ? 'checked' : '' ; ?>>
+                        </a>
+                    <?php endfor; ?>
+                </td>
+            </tr>
+        </table>
+        <table class="editTable">
+            <tr style="height:40px;">
+                <th style="width:80px;">Cuisine :</th>
+                <td style="position: absolute;">
+                    <?php for ($i = 1; $i <= 4; $i++) : ?>
+                        <a class="cursor_img" href="#">
+                            <img data-name="user_cuisine" data-value="<?php echo $i; ?>" <?php echo ($this->user['user_cuisine'] >= $i) ? '' : 'class="opacity"'; ?> src="/planski/images/icones/food.png" />
+                            <input style="display:none" type="radio" name="user_cuisine" value="<?php echo $i; ?>" <?php echo ($this->user['user_cuisine'] == $i) ? 'checked' : '' ; ?>>
+                        </a>
+                    <?php endfor; ?>
+                </td>
+            </tr>
+            <tr style="height:40px;">
+                <th style="width:80px;">Fun :</th>
+                <td style="position: absolute;">
+                    <?php for ($i = 1; $i <= 4; $i++) : ?>
+                        <a class="cursor_img" href="#">
+                            <img data-name="user_fun" data-value="<?php echo $i; ?>" <?php echo ($this->user['user_fun'] >= $i) ? '' : 'class="opacity"'; ?> src="/planski/images/icones/fun.png" style="margin-right:12px;" />
+                            <input style="display:none" type="radio" name="user_fun" value="<?php echo $i; ?>" <?php echo ($this->user['user_fun'] == $i) ? 'checked' : '' ; ?>>
+                        </a>
+                    <?php endfor; ?>
+                </td>
+            </tr>
+            <tr style="height:40px;">
+                <th style="width:80px;">Hygiène :</th>
+                <td style="position: absolute;">
+                    <?php for ($i = 1; $i <= 4; $i++) : ?>
+                        <a class="cursor_img" href="#">
+                            <img data-name="user_hygiene" data-value="<?php echo $i; ?>" <?php echo ($this->user['user_hygiene'] >= $i) ? '' : 'class="opacity"'; ?> src="/planski/images/icones/hygiene.png" style="margin-right:12px;" />
+                            <input style="display:none" type="radio" name="user_hygiene" value="<?php echo $i; ?>" <?php echo ($this->user['user_hygiene'] == $i) ? 'checked' : '' ; ?>>
+                        </a>
+                    <?php endfor; ?>
+                </td>
+            </tr>
+            <tr style="height:40px;">
+                <th style="width:80px;">Dépenses :</th>
+                <td style="position: absolute;">
+                    <?php for ($i = 1; $i <= 4; $i++) : ?>
+                        <a class="cursor_img" href="#">
+                            <img data-name="user_cash" data-value="<?php echo $i; ?>" <?php echo ($this->user['user_cash'] >= $i) ? '' : 'class="opacity"'; ?> src="/planski/images/icones/cash.png" style="margin-right:7px;" />
+                            <input style="display:none" type="radio" name="user_cash" value="<?php echo $i; ?>" <?php echo ($this->user['user_cash'] == $i) ? 'checked' : '' ; ?>>
+                        </a>
+                    <?php endfor; ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="title topShadow">COMPTE</div>
+    <div class="shadow"></div>
+    <img src="planski/images/icones/delete.png"/>
+    <a href="profile/delete">Supprimer mon compte</a>
+    <div style="height:50px;"></div>
 </form>
 

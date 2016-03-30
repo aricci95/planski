@@ -3,10 +3,10 @@
 class ProfileController extends AppController
 {
 
-    protected $_JS = array(JS_MODAL, JS_AUTOCOMPLETE);
-
     public function render()
     {
+        $this->view->addJS(JS_MODAL);
+
         if (empty($this->context->params['value'])) {
             $this->redirect('user', array('msg' => ERR_BLACKLISTED));
         }
@@ -45,6 +45,8 @@ class ProfileController extends AppController
     public function renderEdit()
     {
         $this->view->addJS(JS_DATEPICKER);
+        $this->view->addJS(JS_EDIT);
+        $this->view->addJS(JS_AUTOCOMPLETE);
 
         $this->view->user = $this->model->User->getUserByIdDetails($this->context->get('user_id'));
 
@@ -64,6 +66,12 @@ class ProfileController extends AppController
             if ($this->context->params['user_pwd'] != $this->context->params['verif_pwd']) {
                 $this->view->growler("les deux mots de passes ne sont pas identiques.", GROWLER_ERR);
             } else {
+                foreach ($this->context->params as $key => $param) {
+                    if (empty($param)) {
+                        unset($this->context->params[$key]);
+                    }
+                }
+
                 if (!empty($this->context->params['user_pwd'])) {
                     $this->context->params['user_pwd'] = md5($this->context->params['user_pwd']);
                 }
@@ -77,10 +85,9 @@ class ProfileController extends AppController
                 $user_data = $this->context->params;
 
                 unset($user_data['user_id']);
-                unset($user_data['verif_pwd']);
                 unset($user_data['user_profession']);
 
-                if ($this->model->user->updateById($user_data, $this->context->getParam('user_id'))) {
+                if ($this->model->user->updateById($user_data, $this->context->get('user_id'))) {
                     $ville = $this->model->city->findOne(array('ville_longitude_deg', 'ville_latitude_deg'), array('ville_id' => $this->context->getParam('ville_id')));
 
                     $this->context->set('ville_longitude_deg', $ville['ville_longitude_deg']);

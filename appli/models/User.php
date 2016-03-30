@@ -56,6 +56,7 @@ class User extends AppModel
                     user_vehicule,
                     user_hygiene,
                     user_fun,
+                    user_cash,
                     LEFT(ville_code_postal, 2) as ville_code_postal,
                     (SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = ' . Vote::TYPE_USER . ') AS rate
                 FROM
@@ -135,11 +136,13 @@ class User extends AppModel
     {
         $sql = "SELECT
                     user.user_id as user_id,
+                    user_cash,
                     user_mail,
                     user_gender,
                     user_login,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
+                    user_birth,
                     user_photo_url,
                     user_description,
                     ville_nom_reel,
@@ -150,6 +153,9 @@ class User extends AppModel
                     user_vehicule,
                     user_hygiene,
                     user_fun,
+                    user_poids,
+                    user_taille,
+                    user_adresse,
                     LEFT(ville_code_postal, 2) as ville_code_postal,
                     (SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = :type_id) AS rate
                 FROM

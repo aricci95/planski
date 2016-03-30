@@ -23,6 +23,7 @@ DEFINE('JS_SCROLL_REFRESH', 'scroll_refresh');
 DEFINE('JS_AUTOCOMPLETE', 'autocomplete');
 DEFINE('JS_DATEPICKER', 'datepicker');
 DEFINE('JS_SEARCH', 'search');
+DEFINE('JS_EDIT', 'edit');
 
 // Dimensions des photos
 DEFINE("MAX_SIZE", 1000);

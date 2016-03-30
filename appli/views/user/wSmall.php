@@ -13,9 +13,9 @@
         <?php endfor; ?>
     </div>
     <?php if (!empty($this->user['user_ride'])) : ?>
-        <img src="/planski/images/icones/<?php echo User::$rides[$this->user['user_ride']]; ?>.png" style="width:40px;left:-15px;position: absolute;top: 130px;" />
+        <img src="/planski/images/icones/<?php echo User::$rides[$this->user['user_ride']]; ?>.png" style="width: 30px;left: -3px;position: absolute;top: 164px;" />
     <?php endif; ?>
     <?php if (!empty($this->user['user_level'])) : ?>
-            <img src="/planski/images/icones/<?php echo User::$medals[$this->user['user_level']]; ?>.png" style="width:35px;position: absolute;right: -10px;top: 130px;" />
+            <img src="/planski/images/medals/<?php echo $this->user['user_level']; ?>.png" style="width: 35px;position: absolute;right: -6px;top: 163px;" />
     <?php endif; ?>
 </div>
