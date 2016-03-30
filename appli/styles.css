@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: PlanSki;
-    src: url(/planski/libraries/fonts/planski.ttf), url(/planski/libraries/fonts/planski.ttf);
+    src: url(/planski/libraries/fonts/planski.ttf), url(/planski/libraries/fonts/planski.eot);
 }
 
 img {
@@ -43,7 +43,7 @@ form {
 }
 
 .pancarte {
-    background-image:url('/planski/images/structure/back.jpg');
+    background-image:url('/planski/images/structure/montagnes.jpg');
     padding-top: 12px;
     margin: 0 auto;
     height: 110px;
@@ -198,8 +198,15 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .menuIcone {
-    font-family: PlanSki;
-    text-align: right;
+    font-family: Calibri;
+    margin-right: 15px;
+}
+
+.caret {
+    vertical-align: top;
+    border-top: 4px solid white;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .smallPortrait {
@@ -224,6 +231,15 @@ a:link {color: #808080;text-decoration: none ;}
     border:2px outset;
 }
 
+.connectedPhoto {
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
 .smallProfilePortrait {
     margin: 20px;
     width:150px;
@@ -242,16 +258,17 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .appartLibel {
-    background-image:linear-gradient(30deg, white, #908A8A);
+    background-image: linear-gradient(30deg, white, #908A8A);
     margin-left: 21px;
     width: 294px;
-    height: 42px;
+    height: 31px;
     position: absolute;
     color: black;
     box-shadow: 0 10px 6px -6px #777;
     border: 1px grey solid;
-    margin-top: 268px;
+    margin-top: 271px;
     text-align: center;
+    padding-top: 7px;
 }
 
 .profileLogin {

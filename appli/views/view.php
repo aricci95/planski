@@ -12,29 +12,24 @@
     </head>
     <body>
         <div class="userMenu">
-            <div style="width:815px;margin-right:auto;margin-left:auto;">
+            <a href="home" style="position:absolute;top:5px;left:50px;">
+                <img src="planski/images/structure/planski.png" />
+            </a>
+            <div>
                 <?php if($this->context->get('user_id')) : ?>
-                    <div style="float:left;width:90px;text-align: left;">
-                        <a class="lienProfil" href="profile/edit">Mon profil</a>
-                        <a href="auth/disconnect" class="greyLink" style="text-align: left;">Deconnexion</a>
-                    </div>
-                    <span style="float: right;font-size: 25px;">
+                    <div style="position:absolute;top:25px;right:147px;">
                         <a class="menuIcone" href="mailbox"><img src="planski/images/icones/message.png" />
                             <b><?php echo $this->context->get('new_messages'); ?></b>
                         </a>
-                        <a class="menuIcone" href="">
-                            <img src="planski/images/icones/team.png" />
-                            <b><?php echo $this->context->get('links_count_received'); ?></b>
+                        <a class="menuIcone" href="mailbox"><img src="planski/images/icones/alert.png" />
+                            <b><?php echo $this->context->get('new_messages'); ?></b>
                         </a>
-                        <a class="menuIcone" href="">
-                            <img src="planski/images/icones/linked.png" />
-                            <b><?php echo $this->context->get('links_count_accepted'); ?></b>
-                        </a>
-                        <a class="menuIcone" href="views">
-                            <img src="planski/images/icones/views.gif" />
-                            <b><?php echo $this->context->get('views'); ?></b>
-                        </a>
-                    </span>
+                    </div>
+                    <?php $photo = empty($this->context->get('user_photo_url')) ? 'unknowUser.jpg' : $this->context->get('user_photo_url'); ?>
+                    <img style="position:absolute;top:16px;right:103px;" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
+                    <a style="position:absolute;top:25px;right:47px;" class="menuIcone"  href="#">
+                        <?php echo $this->context->get('user_login'); ?>
+                    </a>
                 <?php else : ?>
                     <div class="greyLink" style="color: white;">
                         <form action="auth/login" method="post">
@@ -50,11 +45,7 @@
                 <?php endif; ?>
             </div>
         </div>
-        <div class="pancarte">
-            <a href="home">
-                <img src="planski/images/structure/planski.png" />
-            </a>
-        </div>
+        <div class="pancarte"></div>
         <div class="site">
             <div class="menu">
                 <a class="menuLien" <?php echo ($this->page == 'member') ? 'style="color:white;"' : ''; ?> href="user">Membres</a>
