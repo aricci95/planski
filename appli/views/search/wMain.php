@@ -14,5 +14,5 @@
     <div align="center" class="results">
         <?php $this->render('search/wItems'); ?>
     </div>
-    <img class="loading" src="planski/appli/js/loading.gif" style="display:none;" data-show="false" data-end="false" data-offset="0" data-href="<?php echo $this->type; ?>" />
+    <img class="loading" src="planski/appli/images/icones/loading.gif" style="display:none;" data-show="false" data-end="false" data-offset="0" data-href="<?php echo $this->type; ?>" />
 <?php endif; ?>

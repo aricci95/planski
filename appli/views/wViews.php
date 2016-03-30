@@ -6,6 +6,6 @@
 <?php else : ?>
     <div align="center" class="results">
         <?php $this->render('user/wItems', array('elements' => $this->elements)); ?>
-        <img class="loading" src="planski/appli/js/loading.gif" style="display:none;" data-show="false" data-end="false" data-offset="0" data-href="views" />
+        <img class="loading" src="planski/appli/images/icones/loading.gif" style="display:none;" data-show="false" data-end="false" data-offset="0" data-href="views" />
     </div>
 <?php endif; ?>
