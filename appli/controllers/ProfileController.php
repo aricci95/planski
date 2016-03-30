@@ -11,7 +11,6 @@ class ProfileController extends AppController
             $this->redirect('user', array('msg' => ERR_BLACKLISTED));
         }
 
-        // Récupération des informations de l'utilisateur
         $user = $this->model->User->getUserByIdDetails($this->context->params['value']);
 
         if (empty($user)) {
@@ -102,11 +101,16 @@ class ProfileController extends AppController
                 unset($user_data['user_id']);
                 unset($user_data['user_profession']);
 
-                if ($this->model->user->updateById($user_data, $this->context->get('user_id'))) {
-                    $ville = $this->model->city->findOne(array('ville_longitude_deg', 'ville_latitude_deg'), array('ville_id' => $this->context->getParam('ville_id')));
+                if ($this->query('user')->updateById($this->context->get('user_id'), $user_data)) {
+                    if (!empty($this->context->getParam('ville_id'))) {
+                        $ville = $this->query('city')
+                                      ->single()
+                                      ->where(array('ville_id' => $this->context->getParam('ville_id')))
+                                      ->select(array('ville_longitude_deg', 'ville_latitude_deg'));
 
-                    $this->context->set('ville_longitude_deg', $ville['ville_longitude_deg']);
-                    $this->context->set('ville_latitude_deg', $ville['ville_latitude_deg']);
+                        $this->context->set('ville_longitude_deg', $ville['ville_longitude_deg']);
+                        $this->context->set('ville_latitude_deg', $ville['ville_latitude_deg']);
+                    }
 
                     $this->view->growler('Modifications enregistrées', GROWLER_OK);
                 } else {

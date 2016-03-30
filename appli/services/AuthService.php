@@ -36,12 +36,18 @@ class AuthService extends Service
                     $localization = $this->get('geoloc')->localize();
 
                     if (!empty($localization->postal_code)) {
-                        $ville = $this->model->city->findOne(array('ville_longitude_deg', 'ville_latitude_deg', 'ville_id'), array('%ville_code_postal' => $localization->postal_code));
+                        $ville = $this->query('city')
+                                      ->single()
+                                      ->where(array('%ville_code_postal' => $localization->postal_code))
+                                      ->select(array('ville_longitude_deg', 'ville_latitude_deg', 'ville_id'));
 
-                        $this->model->user->updateById(array('ville_id' => $ville['ville_id']), $user['user_id']);
+                        $this->query('user')->updateById($user['user_id'], array('ville_id' => $ville['ville_id']));
                     }
                 } else {
-                    $ville = $this->model->city->findOne(array('ville_longitude_deg', 'ville_latitude_deg'), array('ville_id' => $user['ville_id']));
+                    $ville = $this->query('city')
+                                  ->single()
+                                  ->where(array('ville_id' => $user['ville_id']))
+                                  ->select(array('ville_longitude_deg', 'ville_latitude_deg'));
                 }
 
                 $this->model->user->updateLastConnexion();
@@ -79,7 +85,6 @@ class AuthService extends Service
         return true;
     }
 
-    // Renvoi le mdp
     public function sendPwd($login = null, $email = null)
     {
         if (empty($login) && empty($email)) {
@@ -89,15 +94,10 @@ class AuthService extends Service
         $param = empty($login) ? 'user_mail' : 'user_login';
         $value = empty($login) ? $email : $login;
 
-        $result = $this->model->user->find(array(
-            'user_id',
-            'user_login',
-            'user_mail'
-            ),
-            array($param => $value)
-        );
-
-        $user = $result[0];
+        $user = $this->query('user')
+                     ->single()
+                     ->where(array($param => $value))
+                     ->select(array('user_id', 'user_login', 'user_mail'));
 
         if (!empty($user['user_login'])) {
             $pwd_valid = $this->model->auth->resetPwd($user['user_id']);

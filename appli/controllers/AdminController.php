@@ -14,14 +14,10 @@ class AdminController extends AppController
 
     public function renderSwitch()
     {
-        $this->view->users = $this->model->user->find(
-            array(),
-            array(
-                '!user_id' => $this->context->get('user_id'),
-                'user_valid' => 1
-            ),
-            array('user_login')
-        );
+        $this->view->users = $this->query('user')
+                                  ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
+                                  ->orderBy(array('user_login'))
+                                  ->select();
 
         $this->view->action = 'setSwitch';
         $this->view->setTitle('User switch');
@@ -32,7 +28,8 @@ class AdminController extends AppController
     public function renderSetSwitch()
     {
         if (!empty($this->context->params['user_id'])) {
-            $user = $this->model->user->findById($this->context->params['user_id']);
+
+            $user = $this->query('user')->selectById($this->context->params['user_id']);
 
             if (!empty($user)) {
                 if ($user['user_valid'] != 1) {
@@ -95,7 +92,9 @@ class AdminController extends AppController
     {
         if (!empty($this->context->params['content'])) {
             $from    = $this->context->get('user_id');
-            $users   = $this->model->user->find(array('user_id'), array('!user_id' => $this->context->get('user_id')));
+            $users   = $this->query('user')
+                            ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
+                            ->select();
 
             $sentMessages = 0;
             foreach ($users as $user) {

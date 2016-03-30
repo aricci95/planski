@@ -5,16 +5,9 @@ class PhotoService extends Service
 
     public function deleteFromUser($userId)
     {
-        $photo_ids = $this->model->photo->find(
-            array(
-                'photo_id',
-                'photo_url',
-            ),
-            array(
-                'key_id' => $userId,
-                'type_id' => PHOTO_TYPE_USER,
-            )
-        );
+        $photo_ids = $this->query('photo')
+                          ->where(array('key_id' => $userId, 'type_id' => PHOTO_TYPE_USER))
+                          ->select(array('photo_id', 'photo_url'));
 
         foreach ($photo_ids as $photo) {
             $this->delete($photo['photo_id'], $photo['photo_url']);

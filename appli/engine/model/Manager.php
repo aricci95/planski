@@ -1,11 +1,19 @@
 <?php
 
-class Model_Manager extends Model
+class Model_Manager
 {
-
     private static $_instance = null;
 
     private $_models = array();
+
+    protected $db;
+    protected $context;
+
+    public function __construct(Db $db)
+    {
+        $this->db      = $db;
+        $this->context = Context::getInstance();
+    }
 
     public static function getInstance()
     {
@@ -17,6 +25,11 @@ class Model_Manager extends Model
         }
 
         return self::$_instance;
+    }
+
+    public function getConn()
+    {
+        return $this->db;
     }
 
     public function __get($model)
@@ -45,24 +58,5 @@ class Model_Manager extends Model
         $this->_models[$model] = new $model($this->db);
 
         return $this->_models[$model];
-    }
-
-    public function find($table, array $attributes = array(), array $where = array(), array $orderBy = array(), $limit = null)
-    {
-        $attributes_string = empty($attributes) ? '*' : implode(',', $attributes);
-
-        return $this->_selectBuilder($table, $attributes_string, $where, $orderBy, $limit);
-    }
-
-    public function findOne($table, array $attributes = array(), array $where = array(), array $orderBy = array(), $limit = null)
-    {
-        $fetch = $this->find($table, $attributes, $where, $orderBy);
-
-        return empty($fetch) ? null : $fetch[0];
-    }
-
-    public function updateById($table, $attributes, $id)
-    {
-        return $this->_updateBuilder($table, $attributes, $id);
     }
 }

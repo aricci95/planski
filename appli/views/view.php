@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="userMenu">
-            <a href="home" style="position:absolute;top:5px;left:50px;">
+            <a href="plans" style="position:absolute;top:5px;left:50px;">
                 <img src="planski/images/structure/planski.png" />
             </a>
             <div>
@@ -58,6 +58,7 @@
         </div>
         <div class="site">
             <div class="menu">
+                <a class="menuLien" <?php echo ($this->page == 'plan') ? 'style="color:white;"' : ''; ?> href="plan">Plans</a>
                 <a class="menuLien" <?php echo ($this->page == 'member') ? 'style="color:white;"' : ''; ?> href="user">Membres</a>
                 <a class="menuLien" <?php echo ($this->page == 'crew') ? 'style="color:white;"' : ''; ?> href="crew">Crews</a>
                 <a class="menuLien" <?php echo ($this->page == 'appart') ? 'style="color:white;"' : ''; ?> href="appart">Apparts</a>

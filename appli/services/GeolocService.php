@@ -28,7 +28,7 @@ class GeolocService extends Service
     {
         $closeDepartments = array();
 
-        $departments = $this->model->city->find(array(
+        $departments = $this->query('city')->select(array(
             'DISTINCT ville_departement',
             'ville_longitude_deg',
             'ville_latitude_deg',

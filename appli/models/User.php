@@ -1,6 +1,6 @@
 <?php
 
-class User extends AppModel
+class User extends Model
 {
     const RIDE_SKI       = 1;
     const RIDE_SNOWBOARD = 2;

@@ -1,6 +1,6 @@
 <?php
 
-class Appart extends AppModel
+class Appart extends Model
 {
 
     public function getSearch($criterias, $offset = 0)

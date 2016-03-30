@@ -18,18 +18,18 @@ require ROOT_DIR . '/appli/constants.php';
 
 // APPLICATION BOOTSTRAP
 // CONTROLLER
-if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Home') {
+if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Plan') {
     $page = ucfirst($_GET['page']).'Controller';
     if(!file_exists(ROOT_DIR.'/appli/controllers/'.$page.'.php')) {
-        $page = 'HomeController';
+        $page = 'PlanController';
     }
 } else {
-    $page = 'HomeController';
+    $page = 'PlanController';
 }
 
 // ACTION
 $action = 'render';
-if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'Home') {
+if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'Plan') {
     $action .= ucfirst($_GET['action']);
 }
 
@@ -50,8 +50,8 @@ require ROOT_DIR . '/appli/engine/view/AppView.php';
 // Models
 require ROOT_DIR . '/appli/engine/model/Db.php';
 require ROOT_DIR . '/appli/engine/model/Model.php';
-require ROOT_DIR . '/appli/engine/model/AppModel.php';
 require ROOT_DIR . '/appli/engine/model/Manager.php';
+require ROOT_DIR . '/appli/engine/model/QueryBuilder.php';
 
 // Services
 require ROOT_DIR . '/appli/engine/service/Service.php';
@@ -77,12 +77,12 @@ try {
 } catch (Exception $e) {
     Service_Container::getInstance()->get('Mailer')->sendError($e);
 
-    if ($page == 'HomeController') {
+    if ($page == 'PlanController') {
         include ROOT_DIR . '/appli/views/maintenance.htm';
         die;
     } else {
-        require_once ROOT_DIR . '/appli/controllers/HomeController.php';
-        $controller = new HomeController();
+        require_once ROOT_DIR . '/appli/controllers/PlanController.php';
+        $controller = new PlanController();
 
         $controller->view->growlerError();
         $controller->render();

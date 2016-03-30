@@ -1,12 +1,8 @@
 <?php
 
-/*
- *  Classe d'accès aux données des messages
- */
-class Message extends AppModel
+class Message extends Model
 {
 
-     // Compter le nombre de nouveaux messages reçus
     public function countNewMessages()
     {
         $sql = "SELECT count(*) as nbr
@@ -27,13 +23,17 @@ class Message extends AppModel
         return $resultat['nbr'];
     }
 
-    // Change l'état d'un message
     public function updateMessageState($messageId, $messageStateId)
     {
-        $sql = "UPDATE message SET state_id = '".$this->securize($messageStateId)."'
-                WHERE message_id = '".$this->securize($messageId)."'";
+        $sql = "UPDATE message SET state_id = :message_state_id
+                WHERE message_id = :message_id";
 
-        return $this->execute($sql);
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue('message_state_id', $messageStateId, PDO::PARAM_INT);
+        $stmt->bindValue('message_id', $messageId, PDO::PARAM_INT);
+
+        return $this->db->executeStmt($stmt);
     }
 
     // Récupère l'ensemble de la conversation

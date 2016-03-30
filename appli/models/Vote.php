@@ -1,6 +1,6 @@
 <?php
 
-class Vote extends AppModel
+class Vote extends Model
 {
     const TYPE_USER   = 1;
     const TYPE_APPART = 2;

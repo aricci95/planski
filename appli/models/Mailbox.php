@@ -1,6 +1,6 @@
 <?php
 
-class Mailbox extends AppModel
+class Mailbox extends Model
 {
 
     // Liste les types de mailbox

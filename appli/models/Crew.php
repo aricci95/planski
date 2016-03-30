@@ -1,6 +1,6 @@
 <?php
 
-class Crew extends AppModel
+class Crew extends Model
 {
     public function getSearch($criterias, $offset = 0)
     {
@@ -69,8 +69,10 @@ class Crew extends AppModel
 
         $crews = $this->db->executeStmt($stmt)->fetchAll();
 
+        var_dump($crews);die;
+
         foreach ($crews as $key => $crew) {
-            $users = $this->getUsers($crew['crew_id']);
+            $users = $this->getMembers($crew['crew_id']);
 
             if (!empty($users)) {
                 $crews[$key]['users'] = $users;
@@ -80,7 +82,7 @@ class Crew extends AppModel
         return $crews;
     }
 
-    public function getUsers($crewId)
+    public function getMembers($crewId)
     {
         $sql = 'SELECT
                     user.user_id as user_id,

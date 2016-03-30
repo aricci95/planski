@@ -1,6 +1,6 @@
 <?php
 
-class City extends AppModel
+class City extends Model
 {
 
     public function suggest($string)

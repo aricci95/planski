@@ -31,8 +31,8 @@ require ROOT_DIR . '/appli/engine/Log.php';
 require ROOT_DIR . '/appli/engine/cron/Cron.php';
 require ROOT_DIR . '/appli/engine/model/Db.php';
 require ROOT_DIR . '/appli/engine/model/Model.php';
-require ROOT_DIR . '/appli/engine/model/AppModel.php';
 require ROOT_DIR . '/appli/engine/model/Manager.php';
+require ROOT_DIR . '/appli/engine/model/QueryBuilder.php';
 
 // Services
 require ROOT_DIR . '/appli/engine/service/Service.php';

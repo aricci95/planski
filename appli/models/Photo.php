@@ -1,6 +1,6 @@
 <?php
 
-class Photo extends AppModel
+class Photo extends Model
 {
 
     public function getPhotosByKey($photoKey, $photoType)
