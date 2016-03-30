@@ -1,19 +1,10 @@
 <?php
 
-class Model_Manager
+class Model_Manager extends Model
 {
     private static $_instance = null;
 
     private $_models = array();
-
-    protected $db;
-    protected $context;
-
-    public function __construct(Db $db)
-    {
-        $this->db      = $db;
-        $this->context = Context::getInstance();
-    }
 
     public static function getInstance()
     {

@@ -24,24 +24,24 @@ spl_autoload_register('autoLoader');
 
 
 // Loading application files
-require ROOT_DIR . '/appli/engine/Context.php';
-require ROOT_DIR . '/appli/engine/Log.php';
+require ROOT_DIR . '/engine/Context.php';
+require ROOT_DIR . '/engine/Log.php';
 
 // Models
-require ROOT_DIR . '/appli/engine/cron/Cron.php';
-require ROOT_DIR . '/appli/engine/model/Db.php';
-require ROOT_DIR . '/appli/engine/model/Model.php';
-require ROOT_DIR . '/appli/engine/model/Manager.php';
-require ROOT_DIR . '/appli/engine/model/QueryBuilder.php';
+require ROOT_DIR . '/engine/cron/Cron.php';
+require ROOT_DIR . '/engine/model/Db.php';
+require ROOT_DIR . '/engine/model/Model.php';
+require ROOT_DIR . '/engine/model/Manager.php';
+require ROOT_DIR . '/engine/model/QueryBuilder.php';
 
 // Services
-require ROOT_DIR . '/appli/engine/service/Service.php';
-require ROOT_DIR . '/appli/engine/service/Container.php';
+require ROOT_DIR . '/engine/service/Service.php';
+require ROOT_DIR . '/engine/service/Container.php';
 
 // Classes propres au site
 require ROOT_DIR . '/appli/models/User.php';
 require ROOT_DIR . '/appli/models/Link.php';
 
 // gestionnaire d'erreurs
-include ROOT_DIR . '/appli/engine/ErrorHandler.php';
+include ROOT_DIR . '/engine/ErrorHandler.php';
 set_error_handler("ErrorHandler");

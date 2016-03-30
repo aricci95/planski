@@ -26,7 +26,7 @@
                         </a>
                     </div>
                     <?php $photo = empty($this->context->get('user_photo_url')) ? 'unknowUser.jpg' : $this->context->get('user_photo_url'); ?>
-                    <img style="position:absolute;top: 20px;right:103px;" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
+                    <img style="position:absolute;top: 20px;right:120px;" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
                     <a style="position:absolute;top:25px;right:47px;" class="dropdown menuIcone"  href="#">
                         <?php echo $this->context->get('user_login'); ?>
                         <i class="caret" aria-hidden="true"></i>

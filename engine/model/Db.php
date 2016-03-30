@@ -26,9 +26,6 @@ class Db
         return $this->_PDO->lastInsertId();
     }
 
-    /**
-    * Assure la déconnection à la base de données
-    */
     public function close()
     {
         $this->_PDO->close();

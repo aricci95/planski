@@ -69,8 +69,6 @@ class Crew extends Model
 
         $crews = $this->db->executeStmt($stmt)->fetchAll();
 
-        var_dump($crews);die;
-
         foreach ($crews as $key => $crew) {
             $users = $this->getMembers($crew['crew_id']);
 
