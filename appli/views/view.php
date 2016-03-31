@@ -17,19 +17,19 @@
             </a>
             <div>
                 <?php if($this->context->get('user_id')) : ?>
-                    <div style="position:absolute;top:25px;right:147px;">
-                        <a class="menuIcone" href="mailbox"><img src="planski/images/icones/message.png" />
-                            <b><?php echo $this->context->get('new_messages'); ?></b>
-                        </a>
-                        <a class="menuIcone" href="mailbox"><img src="planski/images/icones/alert.png" />
-                            <b><?php echo $this->context->get('new_messages'); ?></b>
-                        </a>
-                    </div>
-                    <?php $photo = empty($this->context->get('user_photo_url')) ? 'unknowUser.jpg' : $this->context->get('user_photo_url'); ?>
-                    <img style="position:absolute;top: 20px;right:120px;" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
-                    <a style="position:absolute;top:25px;right:47px;" class="dropdown menuIcone"  href="#">
-                        <?php echo $this->context->get('user_login'); ?>
-                        <i class="caret" aria-hidden="true"></i>
+                    <a href="mailbox" style="position:absolute;right: 195px;top: 32px;"><img src="planski/images/icones/message.png" /></a>
+                    <a href="mailbox" style="position:absolute;right: 268px;top: 29px;"><img src="planski/images/icones/alert.png" /></a>
+                    <?php if (!empty($this->context->get('new_messages'))) : ?>
+                        <div class="counter" style="right:177px;top:13px;"><?php echo $this->context->get('new_messages'); ?></div>
+                    <?php endif; ?>
+                    <?php if (!empty($this->context->get('new_messages'))) : ?>
+                        <div class="counter" style="right:250px;top:13px;"><?php echo $this->context->get('new_notification'); ?></div>
+                    <?php endif; ?>
+                    <?php $photo = empty($this->context->get('user_photo_url')) ? 'unknown.png' : $this->context->get('user_photo_url'); ?>
+                    <img style="position:absolute;top: 20px;left:88%" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
+                    <img class="onglet" style="top: 44px;left: 94%;" src="planski/images/icones/onglet.png" />
+                    <a style="position:absolute;top:25px;left:92%;" class="dropdown" href="#">
+                        <?php echo $this->context->get('user_login'); ?><i class="caret" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -45,14 +45,14 @@
                 <?php else : ?>
                     <span class="greyLink" style="text-align:center; color: white;">
                         <form action="auth/login" method="post">
-                            Login : <input style="padding-top:-10px;margin-left:5px;margin-right:5px;" name="user_login" size="8" />
+                            Login : <input style="margin-top: 11px;margin-left:5px;margin-right:5px;" name="user_login" size="8" />
                             Password : <input style="margin-left:5px;" name="user_pwd" type="password" size="8" />
                             <input type="submit" value="Connexion" />
                             <input type="button" onclick="window.location.href = 'planski/libraries/socialauth/station.php';" class="facebookButton" value="Via Facebook" />
                             <label style="margin-left:5px;" for="savepwd">Enregistrer</label><input id="savepwd" name="savepwd" type="checkbox" />
                         </form>
                     </span>
-                    <span style="position:absolute;right:20;top:20;">
+                    <span style="position:absolute;right:20;top:25;">
                         <a class="menuLien" style="margin-left:5px;" href="lostpwd">Mot de passe oublie</a>
                         <a class="menuLien" style="margin:0;" href="subscribe">S'inscrire !</a>
                     </span>

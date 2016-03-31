@@ -39,6 +39,19 @@ h2 {
     position: absolute;
 }
 
+.counter {
+    z-index: 1000;
+    text-align: left;
+    position: absolute;
+    width: 17px;
+    height: 23px;
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(245, 23, 23);
+    text-shadow: 2px 2px grey;
+    padding-left: 6px;
+}
+
 .selected {
     border:2px rgb(167, 167, 167) dotted;
 }
@@ -71,7 +84,7 @@ h2 {
     display:none;
     font-size: 14px;
     position: absolute;
-    top: 46px;
+    top: 51px;
     right: 12px;
     z-index: 1000;
     float: left;
@@ -271,11 +284,6 @@ a:link {color: #808080;text-decoration: none ;}
     margin: 10px;
 }
 
-.menuIcone {
-    font-family: Calibri;
-    margin-right: 15px;
-}
-
 .caret {
     top: 10px;
     right: -10px;
@@ -298,6 +306,12 @@ a:link {color: #808080;text-decoration: none ;}
     border-radius:50%;
 }
 
+.onglet {
+    position: absolute;
+    z-index: 1007;
+    display:none;
+}
+
 .profilePortrait {
     margin:20px;
     border-radius:50%;
@@ -311,8 +325,8 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .connectedPhoto {
-    width:30px;
-    height:30px;
+    width:35px;
+    height:35px;
     border-radius: 50%;
     background-size: cover;
     background-repeat: no-repeat;

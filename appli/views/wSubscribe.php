@@ -1,8 +1,8 @@
 <div class="title topShadow">INSCRIPTION</div>
 <div class="shadow"></div>
     <form action="subscribe/save" method="post">
-        <div style="margin-left:140px;">
-            <table>
+        <div align="center" style="margin-top: 5%;">
+            <table >
                 <tr>
                     <td>Pseudo :</td>
                     <td><input name="user_login" value="<?php echo $this->context->getParam('user_login'); ?>" /></td>

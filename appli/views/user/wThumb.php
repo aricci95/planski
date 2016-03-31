@@ -14,7 +14,7 @@
           });
       });
   </script>
-<?php $photo = empty($this->user['user_photo_url']) ? 'unknowUser.jpg' : $this->user['user_photo_url']; ?>
+<?php $photo = empty($this->user['user_photo_url']) ? 'unknown.png' : $this->user['user_photo_url']; ?>
 <div id="popup_<?php echo $this->user['user_id']; ?>" class="profilePortrait shade" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);"></div>
 <div class="profileLogin">
     <?php echo strtoupper($this->user['user_login']); ?><?php echo Tools::status($this->user['user_last_connexion']); ?>

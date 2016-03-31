@@ -30,7 +30,7 @@ $(function() {
 </div>
 <div style="margin:25px;text-align: left;width: 775px;">
     <div class="grey" style="height: 294px;margin-left: -25px;margin-top: -25px;">
-        <?php $photo = empty($this->user['user_photo_url']) ? 'unknowUser.jpg' : $this->user['user_photo_url']; ?>
+        <?php $photo = empty($this->user['user_photo_url']) ? 'unknown.png' : $this->user['user_photo_url']; ?>
         <a class="test-popup-link" href="planski/photos/profile/<?php echo $photo; ?>">
             <div class="profilePortrait" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);">
                 <?php if ($this->context->get('user_id') == $this->user['user_id']) : ?>

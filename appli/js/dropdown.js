@@ -11,8 +11,10 @@ $(document).ready(function() {
 
         if ($(".dropdown-menu").css('display') === 'none') {
             $(".dropdown-menu").show();
+            $(".onglet").show();
         } else {
             $(".dropdown-menu").hide();
+            $(".onglet").hide();
             $(".dropdownIndex").removeClass('dropdownIndex');
         }
     });

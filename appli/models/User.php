@@ -221,40 +221,17 @@ class User extends Model
 
     public function createUser($items)
     {
-        $userValidationId = uniqid();
+        $items['user_valid'] = uniqid();
+        $items['user_subscribe_date'] = 'NOW()';
+        $items['role_id'] = AUTH_LEVEL_USER;
 
-        $sql = '
-            INSERT INTO user (
-                user_login,
-                user_pwd,
-                user_mail,
-                user_gender,
-                user_subscribe_date,
-                role_id,
-                user_valid
-              ) VALUES (
-                :user_login,
-                :user_pwd,
-                :user_mail,
-                :user_gender,
-                NOW(),
-                :role_id,
-                :user_valid
-            );
-        ';
+        $userId = $this->query()->insert($items);
 
-        $stmt = $this->db->prepare($sql);
+        if ($userId) {
+            $this->query('user_data')->insert(array('user_id' => $userId));
+        }
 
-        $stmt->bindValue('user_login', $items['user_login']);
-        $stmt->bindValue('user_pwd', $items['user_pwd']);
-        $stmt->bindValue('user_mail', $items['user_mail']);
-        $stmt->bindValue('user_gender', $items['user_gender']);
-        $stmt->bindValue('role_id', AUTH_LEVEL_USER);
-        $stmt->bindValue('user_valid', $userValidationId);
-
-        $this->db->executeStmt($stmt);
-
-        return $userValidationId;
+        return $items['user_valid'];
     }
 
     public function findByLoginPwd($login, $pwd)

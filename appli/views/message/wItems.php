@@ -5,7 +5,7 @@
 				<tr>
 					<td style="vertical-align: top;">
 						<a href="profile/<?php echo $message['expediteur_id']; ?>">
-							<?php $photo = empty($message['user_photo_url']) ? 'unknowUser.jpg' : $message['user_photo_url']; ?>
+							<?php $photo = empty($message['user_photo_url']) ? 'unknown.png' : $message['user_photo_url']; ?>
 							<div class="smallPortrait" style="height: 120px;float:left;background-image:url(planski/photos/small/<?php echo $photo; ?>);"></div>
 						</a>
 					</td>

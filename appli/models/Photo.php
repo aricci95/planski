@@ -99,7 +99,7 @@ class Photo extends Model
             $photosDelete = array();
         while ($file = readdir($profileDir)) {
             if ($file != '.' && $file != '..' && !is_dir($profileDirname.$file)) {
-                if (!array_key_exists($file, $photoBdd) && strtoupper($file) != 'UNKNOWUSER.JPG') {
+                if (!array_key_exists($file, $photoBdd) && strtoupper($file) != 'unknown.png') {
                     if (file_exists(ROOT_DIR.'/photos/profile/'.$file)) {
                         unlink(ROOT_DIR.'/photos/profile/'.$file);
                         echo $file.' supprimé<br>';
@@ -110,7 +110,7 @@ class Photo extends Model
         }
         while ($file = readdir($smallDir)) {
             if ($file != '.' && $file != '..' && !is_dir($smallDirname.$file)) {
-                if (!array_key_exists($file, $photoBdd) && strtoupper($file) != 'UNKNOWUSER.JPG') {
+                if (!array_key_exists($file, $photoBdd) && strtoupper($file) != 'unknown.png') {
                     if (file_exists(ROOT_DIR.'/photos/small/'.$file)) {
                         unlink(ROOT_DIR.'/photos/small/'.$file);
                         echo $file.' supprimé<br>';
