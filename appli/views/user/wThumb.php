@@ -1,23 +1,19 @@
-<?php if (!empty($this->user['photos'])) : ?>
-    <script>
-        $(function() {
-            $('#popup_<?php echo $this->user["user_id"]; ?>').magnificPopup({
-              items: [
-              <?php foreach($this->user['photos'] as $photo) : ?>
-                  <?php echo " {
-                    src: 'planski/photos/profile/" . $photo['photo_url'] . "'
-                  }, ";
-                  ?>
-              <?php endforeach; ?>
-            ],
-            gallery: {
-              enabled: true
-            },
-            type: 'image'
-            });
-        });
-    </script>
-<?php endif ;?>
+  <script>
+      $(function() {
+          $('#popup_<?php echo $this->user["user_id"]; ?>').magnificPopup({
+            items: [
+                <?php echo " {
+                  src: 'planski/photos/profile/" . $this->user['user_photo_url'] . "'
+                }, ";
+                ?>
+          ],
+          gallery: {
+            enabled: true
+          },
+          type: 'image'
+          });
+      });
+  </script>
 <?php $photo = empty($this->user['user_photo_url']) ? 'unknowUser.jpg' : $this->user['user_photo_url']; ?>
 <div id="popup_<?php echo $this->user['user_id']; ?>" class="profilePortrait shade" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);"></div>
 <div class="profileLogin">

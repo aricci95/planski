@@ -1,5 +1,5 @@
 <?php $photo = empty($this->user['user_photo_url']) ? 'unknowUser.jpg' : $this->user['user_photo_url']; ?>
-<div class="smallProfilePortrait shade" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);">
+<div class="popup smallProfilePortrait shade" href="profile/<?php echo $this->user['user_id']; ?>" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);">
     <div class="smallProfileLogin">
         <?php echo strtoupper($this->user['user_login']); ?><?php echo Tools::status($this->user['user_last_connexion']); ?>
     </div>

@@ -1,5 +1,3 @@
-<?php var_dump($this->plan); ?>
-
 <div class="grey" style="height:270px;margin:10px;width:98%;display:inline-block;">
     <h1>
         <?php echo ucfirst($this->plan['crew_name']); ?>

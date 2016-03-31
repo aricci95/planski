@@ -11,7 +11,7 @@
                         <?php echo (!empty($this->user['ville_nom_reel'])) ?  ', ' . $this->user['ville_nom_reel'] . ' (' . $this->user['ville_code_postal'] . ')' : ''; ?>
                 <?php endif; ?>
             </p>
-            <p>
+            <p style="width: 80%;">
                 <?php if(!empty($this->user['user_description'])) : ?>
                         <?php echo nl2br(stripcslashes($this->user['user_description'])); ?>
                 <?php endif; ?>

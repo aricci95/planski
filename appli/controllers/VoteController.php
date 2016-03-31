@@ -10,7 +10,7 @@ class VoteController extends AppController
         $type = $this->context->getParam('value');
         $id   = $this->context->getParam('option');
 
-        $this->view->user = $this->query('user')
+        $this->view->user = $this->model->query('user')
                                  ->single()
                                  ->where(array('user_id' => $id))
                                  ->select(array('user_login'));

@@ -7,7 +7,6 @@ abstract class Controller
     public $model;
     public $container;
     public $context;
-    public $query;
 
     protected $_JS = array();
 
@@ -30,17 +29,6 @@ abstract class Controller
 
         if (!empty($_GET['msg'])) {
             $this->showMessage();
-        }
-    }
-
-    public function query($table)
-    {
-        if (empty($this->query)) {
-            $this->query = new QueryBuilder($table);
-
-            return $this->query;
-        } else {
-            return $this->query->table($table);
         }
     }
 

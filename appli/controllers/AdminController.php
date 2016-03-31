@@ -14,7 +14,7 @@ class AdminController extends AppController
 
     public function renderSwitch()
     {
-        $this->view->users = $this->query('user')
+        $this->view->users = $this->model->query('user')
                                   ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
                                   ->orderBy(array('user_login'))
                                   ->select();
@@ -29,7 +29,7 @@ class AdminController extends AppController
     {
         if (!empty($this->context->params['user_id'])) {
 
-            $user = $this->query('user')->selectById($this->context->params['user_id']);
+            $user = $this->model->query('user')->selectById($this->context->params['user_id']);
 
             if (!empty($user)) {
                 if ($user['user_valid'] != 1) {
@@ -92,7 +92,7 @@ class AdminController extends AppController
     {
         if (!empty($this->context->params['content'])) {
             $from    = $this->context->get('user_id');
-            $users   = $this->query('user')
+            $users   = $this->model->query('user')
                             ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
                             ->select();
 

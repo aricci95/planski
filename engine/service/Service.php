@@ -7,23 +7,11 @@ Abstract Class Service extends Model
     public $name;
     public $model;
     public $context;
-    public $query;
 
     public function __construct()
     {
         $this->context = Context::getInstance();
         $this->model   = Model_Manager::getInstance();
-    }
-
-    public function query($table)
-    {
-        if (empty($this->query)) {
-            $this->query = new QueryBuilder($table);
-
-            return $this->query;
-        } else {
-            return $this->query->table($table);
-        }
     }
 
     public function get($service)

@@ -7,15 +7,25 @@ class QueryBuilder
     public $sql;
     public $stmt;
     public $table;
-    public $where;
-    public $orderBy;
-    public $limit;
-    public $single;
+    public $begin;
+    public $offset;
+    public $where = array();
+    public $orderBy = array();
+    public $single = false;
+    public $join = array();
+    public $leftJoin = array();
+    public $between = array();
+    public $lowerThan = array();
 
-    public function __construct($table)
+    public function __construct(Db $db,$table)
     {
-        $this->db = Model_Manager::getInstance()->getConn();
+        $this->db = $db;
         $this->table($table);
+    }
+
+    public function getQuery()
+    {
+        return nl2br($this->sql);
     }
 
     private function _cleanIndex($results)
@@ -33,14 +43,15 @@ class QueryBuilder
 
     public function table($table)
     {
-        $this->table   = trim(strtolower($table));
+        $this->table = trim(strtolower($table));
 
         return $this;
     }
 
     public function select(array $attributes = array())
     {
-        $attributes_string = empty($attributes) ? '*' : implode(',', $attributes);
+        $attributes_string = empty($attributes) ? '*' : implode(',
+            ', $attributes);
 
         $this->sql = '
             SELECT
@@ -50,11 +61,50 @@ class QueryBuilder
             ';
 
         if (!empty($this->join)) {
+            $index = 0;
+
             foreach ($this->join as $key => $value) {
                 if (is_int($key)) {
-                    $this->sql .= ' JOIN ' . $value . ' ON (' . $this->table . '.' . $this->table . '_id = ' . $value . '.' . $value . '_id) ';
+                    $this->sql .= ' JOIN ' . $value . ' ON (' . $this->table . '.' . $this->table . '_id = ' . $value . '.' . $value . '_id)
+                    ';
                 } else {
-                    $this->sql .= ' JOIN ' . $key . ' ON (' . $this->table . '.' . $this->table . '_id = ' . $key . '.' . $value . ') ';
+                    $arrayKeys = array_keys($this->join);
+
+                    $prevTable = empty($arrayKeys[$index - 1]) ? $this->table : $arrayKeys[$index - 1];
+
+                    $this->sql .= ' JOIN ' . $key . ' ON (' . $prevTable . '.' . $value . ' = ' . $key . '.' . $value . ')
+                    ';
+
+                    $index++;
+                }
+            }
+        }
+
+        if (!empty($this->leftJoin)) {
+            $index = 0;
+
+            foreach ($this->leftJoin as $key => $value) {
+                if (is_int($key)) {
+                    $this->sql .= ' LEFT JOIN ' . $value . ' ON (' . $this->table . '.' . $this->table . '_id = ' . $value . '.' . $value . '_id)
+                    ';
+                } else {
+                    $arrayKeys = array_keys($this->leftJoin);
+
+                    if (empty($arrayKeys[$index - 1])) {
+                        if (empty($this->join)) {
+                            $prevTable = $this->table;
+                        } else {
+                            $keys = array_reverse(array_keys($this->join));
+                            $prevTable = $keys[0];
+                        }
+                    } else {
+                        $prevTable = $arrayKeys[$index - 1];
+                    }
+
+                    $this->sql .= ' LEFT JOIN ' . $key . ' ON (' . $prevTable . '.' . $value . ' = ' . $key . '.' . $value . ')
+                    ';
+
+                    $index++;
                 }
             }
         }
@@ -63,36 +113,89 @@ class QueryBuilder
             $this->sql .= ' WHERE TRUE ';
 
             foreach ($this->where as $key => $value) {
-                if (strpos($key, '!') === 0) {
-                    $key = str_replace('!', '', $key);
-                    $this->sql .= " AND $key != :$key ";
-                } else if (strpos($key, '%') === 0) {
-                    $key = str_replace('%', '', $key);
-                    $this->sql .= " AND $key LIKE :$key ";
+                if (strpos($key, '.')) {
+                    $explode = explode('.', $key);
+                    $index = $explode[1];
                 } else {
-                    $this->sql .= " AND $key = :$key ";
+                    $index = $key;
+                }
+
+                if (strpos($index, '!') === 0) {
+                    $key = str_replace('!', '', $key);
+                    $index = str_replace('!', '', $index);
+
+                    $this->sql .= " AND $key != :$index
+                    ";
+                } else if (strpos($index, '%') === 0) {
+                    $key = str_replace('%', '', $key);
+                    $index = str_replace('%', '', $index);
+
+                    $this->sql .= " AND $key LIKE :$index
+                    ";
+                } else {
+                    $this->sql .= " AND $key = :$index
+                    ";
                 }
             }
         }
 
-        if (!empty($this->orderBy)) {
-            $this->sql .= ' ORDER BY ' . implode(',', $this->orderBy);
+        if (!empty($this->between)) {
+            foreach ($this->between as $key => $value) {
+                $this->sql .= ' AND ' . $key . ' BETWEEN :' . $key . '_begin AND :'  . $key . '_end
+                ';
+            }
         }
 
-        if (!empty($this->limit)) {
-            $this->sql .= ' LIMIT ' . $this->limit;
+        if (!empty($this->lowerThan)) {
+            foreach ($this->lowerThan as $key => $value) {
+                $this->sql .= " AND $key < :$key
+                ";
+            }
+        }
+
+        if (!empty($this->orderBy)) {
+            $this->sql .= ' ORDER BY ' . implode(', ', $this->orderBy);
+        }
+
+        if (!empty($this->begin) && !empty($this->offset)) {
+            $this->sql .= ' LIMIT :begin, :offset ';
         }
 
         $this->stmt = $this->db->prepare($this->sql);
 
         if (!empty($this->where)) {
             foreach ($this->where as $key => $value) {
-                if (strpos($key, '%') === 0) {
-                    $this->stmt->bindValue(str_replace('%', '', $key), '%' . $value . '%');
+                if (strpos($key, '.')) {
+                    $explode = explode('.', $key);
+                    $index = $explode[1];
                 } else {
-                    $this->stmt->bindValue(str_replace('!', '', $key), $value);
+                    $index = $key;
+                }
+
+                if (strpos($index, '%') === 0) {
+                    $this->stmt->bindValue(str_replace('%', '', $index), '%' . $value . '%');
+                } else {
+                    $this->stmt->bindValue(str_replace('!', '', $index), $value);
                 }
             }
+        }
+
+        if (!empty($this->lowerThan)) {
+            foreach ($this->lowerThan as $key => $value) {
+                $this->stmt->bindValue($key, $value);
+            }
+        }
+
+        if (!empty($this->between)) {
+            foreach ($this->between as $key => $value) {
+                $this->stmt->bindValue($key . '_begin', $value['begin']);
+                $this->stmt->bindValue($key . '_end', $value['end']);
+            }
+        }
+
+        if (!empty($this->begin) && !empty($this->offset)) {
+            $this->stmt->bindValue('begin', $this->begin, PDO::PARAM_INT);
+            $this->stmt->bindValue('offset', $this->offset, PDO::PARAM_INT);
         }
 
         $results =  $this->_cleanIndex($this->db->executeStmt($this->stmt)->fetchAll());
@@ -165,7 +268,21 @@ class QueryBuilder
 
     public function where(array $params = array())
     {
-        $this->where = $params;
+        $this->where = array_merge($params, $this->where);
+
+        return $this;
+    }
+
+    public function between(array $params = array())
+    {
+        $this->between = array_merge($params, $this->between);
+
+        return $this;
+    }
+
+    public function lowerThan(array $params = array())
+    {
+        $this->lowerThan = array_merge($params, $this->lowerThan);
 
         return $this;
     }
@@ -177,23 +294,31 @@ class QueryBuilder
         return $this;
     }
 
-    public function join(array $values = array())
+    public function join(array $params = array())
     {
-        $this->join = $values;
+        $this->join = array_merge($params, $this->join);
 
         return $this;
     }
 
-    public function orderBy(array $values = array())
+    public function leftJoin(array $params = array())
     {
-        $this->orderBy = $values;
+        $this->leftJoin = array_merge($params, $this->leftJoin);
 
         return $this;
     }
 
-    public function limit(array $values = array())
+    public function orderBy(array $params = array())
     {
-        $this->limit = $values;
+        $this->orderBy = array_merge($params, $this->orderBy);
+
+        return $this;
+    }
+
+    public function limit($begin, $offset)
+    {
+        $this->begin = $begin;
+        $this->offset = $offset;
 
         return $this;
     }

@@ -84,12 +84,12 @@ body {
 }
 
 .modal {
-    background-color: white;
-    width:600px;
+    background-image:url(/planski/images/structure/texture.png);
+    width:80%;
     border-left: 1px black solid;
     border-right: 1px black solid;
-    margin:0 auto;
-    height:120%;
+    margin:10% auto;
+
 }
 
 form {

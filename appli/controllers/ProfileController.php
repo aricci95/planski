@@ -5,40 +5,12 @@ class ProfileController extends AppController
 
     public function render()
     {
-        $this->view->addJS(JS_MODAL);
+        $userId = $this->context->getParam('value');
 
-        if (empty($this->context->params['value'])) {
-            $this->redirect('user', array('msg' => ERR_BLACKLISTED));
-        }
+        $this->view->user = $this->model->user->getUserByIdDetails($userId);
 
-        $user = $this->model->User->getUserByIdDetails($this->context->params['value']);
-
-        if (empty($user)) {
-            $this->redirect('user', array('msg' => ERR_BLACKLISTED));
-        }
-
-        if ($this->context->get('user_id') != $this->context->params['value']) {
-            $this->model->views->addView($this->context->params['value']);
-        }
-
-        $user['user_description'] = Tools::toSmiles($user['user_description']);
-
-        if (empty($user['user_photo_url'])) {
-            $user['user_photo_url'] = 'unknowUser.jpg';
-        }
-
-        $this->view->user = $user;
-
-        $photos = $this->model->Photo->getPhotosByKey($this->context->params['value'], PHOTO_TYPE_USER);
-
-        if (empty($photos)) {
-            $photos = array(array('photo_url' => $user['user_photo_url']));
-        }
-
-        $this->view->photos = $photos;
-
-        $this->view->setViewName('user/wMain');
-        $this->view->render();
+        $this->view->setViewName('user/wItem');
+        $this->view->render('modalView');
     }
 
     public function renderEdit()
@@ -101,9 +73,9 @@ class ProfileController extends AppController
                 unset($user_data['user_id']);
                 unset($user_data['user_profession']);
 
-                if ($this->query('user')->updateById($this->context->get('user_id'), $user_data)) {
+                if ($this->model->query('user')->updateById($this->context->get('user_id'), $user_data)) {
                     if (!empty($this->context->getParam('ville_id'))) {
-                        $ville = $this->query('city')
+                        $ville = $this->model->query('city')
                                       ->single()
                                       ->where(array('ville_id' => $this->context->getParam('ville_id')))
                                       ->select(array('ville_longitude_deg', 'ville_latitude_deg'));

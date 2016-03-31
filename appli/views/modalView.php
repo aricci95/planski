@@ -4,6 +4,9 @@
     </head>
     <body>
         <div class="modal">
+            <span style="float:right;margin-right:10px;font-weight:bold">
+                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+            </span>
             <?php include($this->getViewFileName()); ?>
         </div>
     </body>
