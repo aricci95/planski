@@ -308,6 +308,18 @@ a:link {color: #808080;text-decoration: none ;}
     border: 2px outset;
 }
 
+.smallAppartPortrait {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin-right: 50px;
+    margin-top:-18px;
+    border: 2px outset;
+}
+
 .shade {
     position: relative;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
@@ -325,6 +337,19 @@ a:link {color: #808080;text-decoration: none ;}
     margin-top: 271px;
     text-align: center;
     padding-top: 7px;
+}
+
+.smallAppartLibel {
+    background-image: linear-gradient(30deg, white, #908A8A);
+    margin-left: -24px;
+    width: 188px;
+    height: 31px;
+    font-size: 13px;
+    color: black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 132px;
+    text-align: center;
 }
 
 .profileLogin {

@@ -4,15 +4,23 @@ class Plan extends Model
 {
     public function getSearch($criterias, $offset = 0)
     {
-        $plans = $this->query()->join(array('crew'))->orderBy(array('plan_date_debut DESC'))->select();
+        $plans = $this->query('crew')
+                      ->join('plan')
+                      ->select();
 
         foreach ($plans as $key => $plan) {
-            $users = $this->query('user')
-                ->join(array('user_crew' => 'user_id', 'user_data' => 'user_id'))
-                ->select();
+            $users = Model_Manager::getInstance()->crew->getMembers($plan['crew_id']);
 
             if (!empty($users)) {
                 $plans[$key]['users'] = $users;
+            }
+
+            $apparts = $this->query('plan_appart')
+                            ->join(array('appart' => 'appart_id'))
+                            ->select();
+
+            if (!empty($apparts)) {
+                $plans[$key]['apparts'] = $apparts;
             }
         }
 

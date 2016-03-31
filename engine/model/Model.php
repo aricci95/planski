@@ -20,13 +20,14 @@ abstract class Model
             $table = strtolower(get_class($this));
         }
 
-        if (empty($this->_queryBuilder)) {
-            $this->_queryBuilder = new QueryBuilder($this->db, $table);
-        } else {
-            $this->_queryBuilder->table($table);
-        }
+        $this->_queryBuilder = new QueryBuilder($this->db, $table);
 
         return $this->_queryBuilder;
+    }
+
+    public function getBuilder()
+    {
+        $this->_queryBuilder;
     }
 
 }

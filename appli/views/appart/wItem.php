@@ -25,19 +25,13 @@
         <?php echo ucfirst($this->appart['appart_libel']); ?>
         <div class="popup" href="vote/<?php echo Vote::TYPE_APPART . '/' . $this->appart['appart_id']; ?>" style="margin-top:30px;">
             <?php for ($i= 1 ; $i <= 4; $i++) : ?>
-                <?php if ($this->appart['rate'] >= $i) : ?>
+                <?php if (!empty($this->appart['rate']) && $this->appart['rate'] >= $i) : ?>
                     <img src="/planski/images/icones/star.png" />
                 <?php else : ?>
                     <img src="/planski/images/icones/star_off.png"/>
                 <?php endif; ?>
             <?php endfor; ?>
         </div>
-        <?php if (!empty($this->appart['appart_ride'])) : ?>
-            <img src="/planski/images/icones/<?php echo appart::$rides[$this->appart['appart_ride']]; ?>.png" style="left: -20px;position: absolute;top: -13px;" />
-        <?php endif; ?>
-        <?php if (!empty($this->appart['appart_level'])) : ?>
-                <img src="/planski/images/icones/<?php echo appart::$medals[$this->appart['appart_level']]; ?>.png" style="position: absolute;top:-4px;right:-21px;" />
-        <?php endif; ?>
     </div>
     <div style="margin-left: 350px;margin-top: 20px;position: absolute;width:70%;text-align: left;">
         <p>

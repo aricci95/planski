@@ -280,7 +280,7 @@ class QueryBuilder
         return $this;
     }
 
-    public function lowerThan(array $params = array())
+    public function lowerThan($params)
     {
         $this->lowerThan = array_merge($params, $this->lowerThan);
 
@@ -294,22 +294,34 @@ class QueryBuilder
         return $this;
     }
 
-    public function join(array $params = array())
+    public function join($params)
     {
+        if (!is_array($params)) {
+            $params = array($params);
+        }
+
         $this->join = array_merge($params, $this->join);
 
         return $this;
     }
 
-    public function leftJoin(array $params = array())
+    public function leftJoin($params)
     {
+        if (!is_array($params)) {
+            $params = array($params);
+        }
+
         $this->leftJoin = array_merge($params, $this->leftJoin);
 
         return $this;
     }
 
-    public function orderBy(array $params = array())
+    public function orderBy($params)
     {
+        if (!is_array($params)) {
+            $params = array($params);
+        }
+
         $this->orderBy = array_merge($params, $this->orderBy);
 
         return $this;

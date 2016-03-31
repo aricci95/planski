@@ -14,4 +14,11 @@ class PlanController extends SearchController
         'search_age',
     );
 
+    public function render()
+    {
+        $this->view->addJS(JS_CREW);
+
+        parent::render();
+    }
+
 }
