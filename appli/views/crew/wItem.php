@@ -8,7 +8,7 @@
         <?php endforeach; ?>
     </div>
     <a href="crew/join/<?php echo $this->crew['crew_id']; ?>">
-        <div class="smallProfilePortrait shade join" style="opacity:0.5;display:none;float:right;margin-top:-17px;margin-right:25px;background-image:url(planski/images/icones/join_us.png);">
+        <div class="smallProfilePortrait shade join" style="opacity:0.5;display:none;float:right;margin-top:-17px;margin-right:25px;background-image:url(planski/images/icones/joinus2.png);">
             <div class="smallProfileLogin">Rejoindre !</div>
         </div>
     </a>

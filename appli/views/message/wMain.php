@@ -1,7 +1,7 @@
 <div class="title topShadow" style="font-size: 20px;"><?php echo ucfirst($this->destinataire['user_login']); ?></div>
 <?php $this->render('message/wNew'); ?>
 <?php if(!empty($this->parentMessages)) : ?>
-    <table class="results" style="padding-right:2px;" cellspacing="0">
+    <table class="results" cellspacing="0" align="center" style="width:80%;">
         <?php $this->render('message/wItems'); ?>
         <tr>
             <td>

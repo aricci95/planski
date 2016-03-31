@@ -2,6 +2,7 @@ $(document).ready(function() {
     $("body").click(function (e) {
         if (!$(e.target).hasClass('dropdown')) {
             $(".dropdown-menu").hide();
+            $(".onglet").hide();
             $(".dropdownIndex").removeClass('dropdownIndex');
         }
     });

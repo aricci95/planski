@@ -84,8 +84,8 @@ h2 {
     display:none;
     font-size: 14px;
     position: absolute;
-    top: 51px;
-    right: 12px;
+    top: 53px;
+    right: 6%;
     z-index: 1000;
     float: left;
     min-width: 100px;
@@ -113,6 +113,10 @@ h2 {
     border-right: 1px black solid;
     margin:10% auto;
 
+}
+
+.cyan {
+    background-color: rgba(146, 217, 243, 0.34);
 }
 
 form {

@@ -3,7 +3,8 @@
     <div class="smallProfileLogin">
         <?php echo strtoupper($this->user['user_login']); ?><?php echo Tools::status($this->user['user_last_connexion']); ?>
     </div>
-    <div class="popup" href="vote/<?php echo Vote::TYPE_USER . '/' . $this->user['user_id']; ?>" style="margin-top: 166px;">
+    <?php if (isset($this->user['rate'])) : ?>
+        <div class="popup" href="vote/<?php echo Vote::TYPE_USER . '/' . $this->user['user_id']; ?>" style="margin-top: 166px;">
         <?php for ($i= 1 ; $i <= 4; $i++) : ?>
             <?php if ($this->user['rate'] >= $i) : ?>
                 <img src="/planski/images/icones/star.png" style="width:20px;" />
@@ -12,6 +13,7 @@
             <?php endif; ?>
         <?php endfor; ?>
     </div>
+    <?php endif; ?>
     <?php if (!empty($this->user['user_ride'])) : ?>
         <img src="/planski/images/icones/<?php echo User::$rides[$this->user['user_ride']]; ?>.png" style="width: 30px;left: -3px;position: absolute;top: 164px;" />
     <?php endif; ?>

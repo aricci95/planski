@@ -1,6 +1,6 @@
 <div class="heading topShadow">MESSAGES</div>
 <div class="shadow"></div>
-<table style="width:100%;border-collapse: collapse;" class="results maxWidth">
+<table class="results" align="center">
     <?php if (empty($this->userMessages)) : ?>
         <tr>
             <td style='text-align:center;padding-top:20px;' colspan='4'>Aucun message</td>
