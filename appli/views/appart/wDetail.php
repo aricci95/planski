@@ -1,4 +1,4 @@
-<div style="margin-left: 350px;margin-top: 20px;position: absolute;width:70%;text-align: left;">
+<div style="margin-left: 350px;margin-top: 20px;position: absolute;width:66%;text-align: left;">
     <p style="width:87%;">
         <?php if(!empty($this->appart['appart_description'])) : ?>
             <?php echo nl2br($this->appart['appart_description']); ?>

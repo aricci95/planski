@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="userMenu">
-            <a href="plans" style="position:absolute;top: 10px;left: 29px;;">
+            <a href="plans" style="position:absolute;top: 10px;left: 7%;">
                 <img src="planski/images/structure/planski.png" />
             </a>
             <div>
