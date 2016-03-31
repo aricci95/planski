@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="userMenu">
-            <a href="plans" style="position:absolute;top:5px;left:50px;">
+            <a href="plans" style="position:absolute;top: 10px;left: 29px;;">
                 <img src="planski/images/structure/planski.png" />
             </a>
             <div>
@@ -34,6 +34,9 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdownOption" href="profile/edit">Profil</a>
+                        </li>
+                        <li>
+                            <a class="dropdownOption" href="plan/feed/1">Mes plans</a>
                         </li>
                         <li>
                             <a class="dropdownOption" href="auth/disconnect">Déconnexion</a>

@@ -25,6 +25,7 @@ DEFINE('JS_DATEPICKER', 'datepicker');
 DEFINE('JS_SEARCH', 'search');
 DEFINE('JS_EDIT', 'edit');
 DEFINE('JS_CREW', 'crew');
+DEFINE('JS_FEED', 'feed');
 
 // Dimensions des photos
 DEFINE("MAX_SIZE", 1000);

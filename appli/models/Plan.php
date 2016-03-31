@@ -26,4 +26,29 @@ class Plan extends Model
 
         return $plans;
     }
+
+    public function getById($id)
+    {
+        $plan = $this->query('crew')
+                      ->join('plan')
+                      ->where(array('plan_id' => $id))
+                      ->single()
+                      ->select();
+
+        $users = Model_Manager::getInstance()->crew->getMembers($plan['crew_id']);
+
+        if (!empty($users)) {
+            $plan['users'] = $users;
+        }
+
+        $apparts = $this->query('plan_appart')
+                        ->join(array('appart' => 'appart_id'))
+                        ->select();
+
+        if (!empty($apparts)) {
+            $plan['apparts'] = $apparts;
+        }
+
+        return $plan;
+    }
 }

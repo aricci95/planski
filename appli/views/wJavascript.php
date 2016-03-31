@@ -39,6 +39,33 @@ if($this->isJSActivated(JS_SEARCH)) : ?>
 if($this->isJSActivated(JS_CREW)) : ?>
     <script type="text/javascript" src="planski/appli/js/crew.js"></script>
 <?php endif;
+if($this->isJSActivated(JS_FEED)) : ?>
+    <link rel="stylesheet" type="text/css" href="planski/libraries/jquery-comments/css/jquery-comments.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="planski/libraries/jquery-comments/js/jquery-comments.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#comments-container').comments({
+                profilePictureURL: 'planski/photos/profile/<?php echo $this->context->get('user_photo_url'); ?>',
+                postCommentOnEnter: true,
+                enableAttachments: true,
+                enableNavigation: false,
+                getComments: function(success, error) {
+                    var commentsArray = [{
+                        id: 1,
+                        created: '2015-10-01',
+                        content: 'Lorem ipsum dolort sit amet',
+                        fullname: 'Simon Powell',
+                        upvote_count: 2,
+                        user_has_upvoted: false
+                    }];
+                    success(commentsArray);
+                }
+            });
+        });
+    </script>
+<?php endif;
 if($this->isJSActivated(JS_EDIT)) : ?>
     <script type="text/javascript" src="planski/appli/js/edit.js"></script>
 <?php endif; ?>

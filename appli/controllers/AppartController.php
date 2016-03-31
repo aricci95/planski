@@ -7,10 +7,8 @@ class AppartController extends SearchController
     protected $_type = SEARCH_TYPE_APPART;
 
     protected $_searchParams = array(
-        'search_login',
+        'search_libel',
         'search_distance',
-        'search_gender',
-        'search_age',
     );
 
 }
