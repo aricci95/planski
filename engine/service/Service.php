@@ -1,6 +1,6 @@
 <?php
 
-Abstract Class Service extends Model
+Abstract Class Service
 {
     protected $_dependencies = array();
 
@@ -33,5 +33,21 @@ Abstract Class Service extends Model
         $this->_dependencies[$dependenceService->getName()] = $dependenceService;
 
         return $this;
+    }
+
+    public function query($table = null)
+    {
+        if (empty($table)) {
+            $table = strtolower(get_class($this));
+        }
+
+        $this->_queryBuilder = new QueryBuilder($this->model->getConn(), $table);
+
+        return $this->_queryBuilder;
+    }
+
+    public function getBuilder()
+    {
+        $this->_queryBuilder;
     }
 }

@@ -113,6 +113,10 @@ form {
     margin: 5%;
 }
 
+.results {
+    margin-top: -15px;
+}
+
 .lienProfil {
     text-align: left;
     font-color:white;

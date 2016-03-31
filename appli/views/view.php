@@ -66,7 +66,7 @@
                     <a class="menuLien" <?php echo ($this->page == 'admin') ? 'style="color:white;"' : ''; ?> href="admin">Admin</a></td>
                 <?php endif; ?>
             </div>
-            <div style="min-height: 550px;">
+            <div style="margin-left: -1px;min-height: 550px;">
                 <?php include($this->getViewFileName()); ?>
             </div>
         </div>
