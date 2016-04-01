@@ -25,7 +25,7 @@ class AuthController extends AppController
     public function renderDisconnect()
     {
         if ($this->get('auth')->disconnect()) {
-            $this->redirect('user');
+            $this->redirect('subscribe');
         } else {
             $this->view->growlerError();
         }

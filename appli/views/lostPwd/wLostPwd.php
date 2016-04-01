@@ -1,20 +1,11 @@
-<div class="title topShadow">RECUPERATION DU MOT DE PASSE</div>
-<div class="shadow"></div>
 <form action="lostpwd/submit" method="post">
-    <div align="center">
-        <p>
-            Login :<br/>
-            <input name="user_prenom" style="margin:5px;" />
-        </p>
-        <p>
-            OU
-        </p>
+    <div align="center" class="subscribeForm">
         <p>
             Adresse e-mail :<br/>
-            <input name="user_mail" style="margin:5px;" />
+            <input class="roundedInput" name="user_mail" style="text-align: center;" />
         </p>
         <p>
-            <input size="20" type="submit" value="Valider" style="margin:5px;" />
+            <input class="submitButton" size="20" type="submit" value="Retrouver" />
         </p>
     </div>
 </form>

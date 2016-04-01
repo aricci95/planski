@@ -81,9 +81,6 @@
                     <?php endif; ?>
                 </table>
             </div>
-            <div style="text-align: right;margin-right: 60px;">
-                <?php $this->render('user/wAction', array('user' => $this->user)); ?>
-            </div>
         </div>
     </div>
 </div>

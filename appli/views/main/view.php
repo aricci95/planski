@@ -10,9 +10,9 @@
     <body>
         <div class="header">
             <div class="userMenu">
-                <div style="float:left;">
+                <div class="planski">
                     <a href="<?php echo ($this->context->get('user_id')) ? 'plan' : 'subscribe'; ?>">
-                        <img src="planski/images/structure/planski.png" style="margin-top: 25px;" />
+                        Planski
                     </a>
                 </div>
                 <?php if($this->context->get('user_id')) : ?>
@@ -25,7 +25,7 @@
         <div class="site">
             <?php $this->render('main/wMenu'); ?>
             <?php $this->render('main/wTitle'); ?>
-            <div class="content">
+            <div class="content" align="center">
                 <?php include($this->getViewFileName()); ?>
             </div>
         </div>

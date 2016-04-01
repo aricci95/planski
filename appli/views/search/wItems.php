@@ -1,5 +1,5 @@
 <?php if (!empty($this->elements)) : ?>
-    <div style="margin-left: 5%;margin-right: 5%;">
+    <div style="margin: 0 auto;width: 1028px;">
         <?php foreach($this->elements as $element) :
             $this->render($this->type . '/wItem', array($this->type => $element));
         endforeach; ?>

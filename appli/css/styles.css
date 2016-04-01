@@ -158,7 +158,6 @@ h3 {
 
 .content {
     min-height: 550px;
-    padding:40px;
 }
 
 .editTable input {
@@ -239,18 +238,16 @@ form {
     font-size: 17px;
 }
 
-.menuLien:link {color: #E8E8E8;}
-.menuLien:hover {color: white;}
-.menuLien:visited {color: #E8E8E8;}
-.menuLien:visited:hover {color: white;}
-.menuLien:active {color: #E8E8E8;}
+.menuLien:link, .menuLien:visited, .menuLien:active {color: #E8E8E8;}
+.menuLien:hover, .menuLien:visited:hover {color: white;}
 
-a:visited {color: #808080;text-decoration: none ;}
-a:hover {color: white;text-decoration: none ;}
-a:visited:hover {color: white;text-decoration: none ;}
-a:link {color: #808080;text-decoration: none ;}
+.planski a:link, .planski a:hover, .planski a:visited, .planski a:visited:hover, .planski a:active {color: #EFEEEE;}
+
+a:visited, a:link, a:active {color: #808080;text-decoration: none ;}
+a:hover, a:visited:hover {color: white;text-decoration: none ;}
 
 .form {
+    background-position: bottom;
     text-shadow: 2px 2px white;
     font-family:Winter;
     border-radius: 8px;
@@ -258,37 +255,46 @@ a:link {color: #808080;text-decoration: none ;}
     background-image:url(/planski/images/structure/pancarte.jpg);
     font-size: 35px;
     height: 60px;
-    width:80%;
+    width:1008px;
     background-color: rgba(206, 206, 206, 0.34);
     color: black;
 }
 
 .formShadow {
-    margin-left:5px;
-    width:78%;
+    border-radius: 6px;
+    width:1008px;
     height: 18px;
     -webkit-box-shadow: inset 2px 22px -20px 20px rgb(26, 26, 26);
     -moz-box-shadow: inset 2px 22px -20px 20px rgb(26, 26, 26);
     box-shadow: inset 2px 22px 20px -20px rgb(26, 26, 26);
-    margin-bottom:5px;
 }
 
 .formTopShadow {
-    padding-top: 20px;
     -webkit-box-shadow: inset 2px 23px -20px 20px white;
     -moz-box-shadow: inset 2px 23px -20px 20px white;
     box-shadow: inset 2px 23px 20px -20px white;
 }
 
+.planski {
+    text-shadow: 2px 2px black;
+    float:left;
+    font-family: Planski;
+    font-size:48px;
+    margin-top:5px;
+}
+
 .title {
-    white-space:nowrap;
+    text-shadow: 2px 2px black;
+    font-family: Winter;
+    white-space: nowrap;
     overflow: hidden;
     font-size: 18px;
     padding: 20px;
-    padding-top: 13px;
-    height: 16px;
+    padding-top: 5px;
+    height: 28px;
     background-color: rgb(29, 39, 35);
-    color: rgb(170, 229, 247);
+    color: rgb(200, 223, 230);
+    font-size: 32px;
 }
 
 .noMargin {
@@ -304,7 +310,6 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .topShadow {
-    padding-top: 20px;
     -webkit-box-shadow: inset 2px 23px -20px 20px rgb(81, 141, 203);
     -moz-box-shadow: inset 2px 23px -20px 20px rgb(81, 141, 203);
     box-shadow: inset 2px 23px 20px -20px rgb(81, 141, 203);

@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td style="height:60px;width:80px;font-size: 12px;">
-                        En validant l'inscription, vous acceptez et vous avez lu nos <a href="subscribe/terms" target="_blank">mentions légales</a> ainsi que notre <a href="">usage des cookies</a>
+                        En validant l'inscription, vous acceptez et vous avez lu nos <a href="subscribe/terms" target="_blank">mentions légales</a> ainsi que notre <a href="">usage des cookies</a>.
                     </td>
                 </tr>
                 <tr>
