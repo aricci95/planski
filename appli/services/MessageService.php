@@ -29,9 +29,9 @@ Class MessageService extends Service
             'mailbox_id' => 1,
         );
 
-        if ($this->model->message->insert($message_data)) {
-            $destinataire = $this->model->user->findById($destinataire_id);
-            $message      = $this->context->get('user_login').' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
+        if ($this->query('message')->insert($message_data)) {
+            $destinataire = $this->query('user')->selectById($destinataire_id);
+            $message      = $this->context->get('user_prenom').' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
 
             return $this->get('mailer')->send($destinataire['user_mail'], 'Nouveau message sur PlanSki !', $message);
         }
@@ -56,7 +56,7 @@ Class MessageService extends Service
             'content' => $message,
             'user_id' => $this->context->get('user_id'),
             'date' => date('Y-m-d H:i:s'),
-            'user_login' => $this->context->get('user_login'),
+            'user_prenom' => $this->context->get('user_prenom'),
         );
 
         return $this->model->Forum->insert($message_data);

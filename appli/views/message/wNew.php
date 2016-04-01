@@ -6,6 +6,6 @@
         <input type="hidden" value="<?php echo $this->destinataire['user_id']; ?>" name="destinataire_id" />
         <textarea name="content" cols="95" rows="8"></textarea>
     </div>
-    <?php $this->_helper->formFooter('mailbox'); ?>
+    <input type="submit" value="Envoyer" style="width:200px;">
 </form>
-<div style="margin-bottom: 10px;"></div>
+<div style="margin-bottom: 30px;"></div>

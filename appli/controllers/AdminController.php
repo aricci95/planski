@@ -14,14 +14,10 @@ class AdminController extends AppController
 
     public function renderSwitch()
     {
-        $this->view->users = $this->model->user->find(
-            array(),
-            array(
-                '!user_id' => $this->context->get('user_id'),
-                'user_valid' => 1
-            ),
-            array('user_login')
-        );
+        $this->view->users = $this->model->query('user')
+                                  ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
+                                  ->orderBy(array('user_prenom', 'user_nom'))
+                                  ->select();
 
         $this->view->action = 'setSwitch';
         $this->view->setTitle('User switch');
@@ -32,14 +28,15 @@ class AdminController extends AppController
     public function renderSetSwitch()
     {
         if (!empty($this->context->params['user_id'])) {
-            $user = $this->model->user->findById($this->context->params['user_id']);
+
+            $user = $this->model->query('user')->selectById($this->context->params['user_id']);
 
             if (!empty($user)) {
                 if ($user['user_valid'] != 1) {
                     $this->view->growler('Utilistateur non validé.', GROWLER_ERR);
                 } else {
                     $this->context->set('user_id', $user['user_id'])
-                                  ->set('user_login', $user['user_login'])
+                                  ->set('user_prenom', $user['user_prenom'])
                                   ->set('role_id', $user['role_id'])
                                   ->set('user_photo_url', $user['user_photo_url'])
                                   ->set('user_valid', $user['user_valid'])
@@ -58,14 +55,10 @@ class AdminController extends AppController
 
     public function renderDeleteUser()
     {
-        $this->view->users = $this->model->user->find(
-            array(),
-            array(
-                '!user_id' => $this->context->get('user_id'),
-                'user_valid' => 1
-            ),
-            array('user_login')
-        );
+        $this->view->users = $this->model->query('user')
+                                  ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
+                                  ->orderBy(array('user_prenom', 'user_nom'))
+                                  ->select();
 
         $this->view->action = 'removeUser';
         $this->view->setTitle('Supprimer un utilisateur');
@@ -95,7 +88,9 @@ class AdminController extends AppController
     {
         if (!empty($this->context->params['content'])) {
             $from    = $this->context->get('user_id');
-            $users   = $this->model->user->find(array('user_id'), array('!user_id' => $this->context->get('user_id')));
+            $users   = $this->model->query('user')
+                            ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
+                            ->select();
 
             $sentMessages = 0;
             foreach ($users as $user) {

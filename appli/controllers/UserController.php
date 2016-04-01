@@ -7,7 +7,7 @@ class UserController extends SearchController
     protected $_type = SEARCH_TYPE_USER;
 
     protected $_searchParams = array(
-        'search_login',
+        'search_name',
         'search_distance',
         'search_gender',
         'search_age',

@@ -4,7 +4,7 @@
  *  Classe d'accès aux données des authentifications
  */
 
-class Auth extends AppModel
+class Auth extends Model
 {
 
     // Lance une session pour OVH

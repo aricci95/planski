@@ -1,0 +1,648 @@
+@CHARSET "utf-8";
+
+@font-face {
+    font-family: PlanSki;
+    src: url(/planski/libraries/fonts/planski.ttf), url(/planski/libraries/fonts/planski.eot);
+}
+
+.submitButton {
+    font-size: 19px;
+    font-family: 'Freight Sans Bold', helvetica, arial, sans-serif !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-width: 194px;
+    padding: 7px 20px;
+    text-align: center;
+    line-height: 126%;
+    background: linear-gradient(#67ae55, #578843);
+    background-color: #69a74e;
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    border: 1px solid;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    letter-spacing: 1px;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+
+.i-large,
+.i-medium,
+.i-small {
+    position : absolute;
+    top: 82px;
+    right: 0;
+    width: 100%;
+    height: 97px;
+}
+
+.i-large {
+    background: url("/planski/images/div/particules_large.png") repeat 0px 0px;
+    -webkit-animation: dropFlowParticles 2s linear infinite;
+         -o-animation: dropFlowParticles 2s linear infinite;
+            animation: dropFlowParticles 2s linear infinite;
+}
+.i-medium {
+    background: url("/planski/images/div/particules_medium.png") repeat 0px 0px;
+    -webkit-animation: dropFlowParticles 12s linear infinite;
+         -o-animation: dropFlowParticles 12s linear infinite;
+            animation: dropFlowParticles 12s linear infinite;
+}
+.i-small {
+    background:url("/planski/images/div/particules_small.png") repeat 0px 0px;
+    -webkit-animation: dropFlowParticles 27s linear infinite;
+         -o-animation: dropFlowParticles 27s linear infinite;
+            animation: dropFlowParticles 27s linear infinite;
+}
+
+@-webkit-keyframes dropFlowParticles {
+    from { background-position: 0 0; }
+    to { background-position: 0 413px; }
+}
+
+@keyframes dropFlowParticles {
+    from { background-position: 0 0; }
+    to { background-position: 0 413px; }
+}
+
+img {
+    border: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+textarea {
+    border:1px grey solid;
+    background-color:#D8D8D8;
+}
+
+body {
+    font-size:16px;
+    color:rgb(84, 65, 70);
+    font-family: Calibri;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+h2, h1 {
+    margin:5px;
+}
+
+h3 {
+    margin-top: 3px;
+    z-index: 1000;
+    font-size: 61px;
+    font-family: PlanSki;
+    float: left;
+    padding-left: 44px;
+    position: absolute;
+}
+
+.roundedInput {
+    margin:5px;
+    width:399px;
+    height:39px;
+    padding:8px;
+    border-radius: 8px;
+}
+
+.subscribeForm input {
+    border: 1px black solid;
+    border-color: #bdc7d8;
+}
+
+.counter {
+    z-index: 1000;
+    text-align: left;
+    position: absolute;
+    width: 17px;
+    height: 23px;
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(245, 23, 23);
+    text-shadow: 2px 2px grey;
+    padding-left: 6px;
+}
+
+.selected {
+    border:2px rgb(167, 167, 167) dotted;
+}
+
+.opacity {
+    opacity: 0.4;
+}
+
+.editTable {
+    float:left;
+    text-align: left;
+    margin:10px;
+    margin-left: 30px;
+}
+
+.editTable th {
+    width:190px;
+    text-align: left;
+}
+
+.content {
+    min-height: 550px;
+    padding:40px;
+}
+
+.editTable input {
+    width:300px;
+}
+
+.dropdownIndex {
+    background-color:rgb(170, 229, 247);
+}
+
+.dropdown-menu {
+    display:none;
+    font-size: 14px;
+    position: absolute;
+    top: 53px;
+    right: 6%;
+    z-index: 1000;
+    float: left;
+    min-width: 100px;
+    padding: 5px 10px;
+    margin: 2px 0 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.modal {
+    background-image:url(/planski/images/structure/texture.png);
+    width:80%;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+    margin:10% auto;
+
+}
+
+.cyan {
+    background-color: rgba(146, 217, 243, 0.34);
+}
+
+form {
+    margin: 0;
+}
+
+.pancarte {
+    background-image:url('/planski/images/structure/montagnes.jpg');
+    padding-top: 12px;
+    margin: 0 auto;
+    height: 110px;
+    text-align: center;
+}
+
+.intitule {
+    font-style: italic;
+    color:black;
+}
+
+.noresults {
+    margin: 5%;
+}
+
+.results {
+    margin-top: -15px;
+}
+
+.lienProfil {
+    text-align: left;
+    font-color:white;
+    font-size: 17px;
+}
+
+.menuLien:link {color: #E8E8E8;}
+.menuLien:hover {color: white;}
+.menuLien:visited {color: #E8E8E8;}
+.menuLien:visited:hover {color: white;}
+.menuLien:active {color: #E8E8E8;}
+
+a:visited {color: #808080;text-decoration: none ;}
+a:hover {color: white;text-decoration: none ;}
+a:visited:hover {color: white;text-decoration: none ;}
+a:link {color: #808080;text-decoration: none ;}
+
+.form {
+    padding-top: 19px;
+    font-size: 16px;
+    height: 60px;
+    background-color: rgb(29, 39, 35);
+    color: rgb(170, 229, 247);
+}
+
+.title {
+    white-space:nowrap;
+    overflow: hidden;
+    font-size: 18px;
+    padding: 20px;
+    padding-top: 13px;
+    height: 16px;
+    background-color: rgb(29, 39, 35);
+    color: rgb(170, 229, 247);
+}
+
+.noMargin {
+    margin-left: -25px;
+}
+
+.shadow {
+    height: 18px;
+    -webkit-box-shadow: inset 2px 22px -20px 20px rgb(26, 26, 26);
+    -moz-box-shadow: inset 2px 22px -20px 20px rgb(26, 26, 26);
+    box-shadow: inset 2px 22px 20px -20px rgb(26, 26, 26);
+    margin-bottom:5px;
+}
+
+.topShadow {
+    padding-top: 20px;
+    -webkit-box-shadow: inset 2px 23px -20px 20px rgb(81, 141, 203);
+    -moz-box-shadow: inset 2px 23px -20px 20px rgb(81, 141, 203);
+    box-shadow: inset 2px 23px 20px -20px rgb(81, 141, 203);
+}
+
+.allShadows {
+    -webkit-box-shadow: inset 0px 1px 6px 29px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0px 1px 6px 29px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0px 1px 29px 6px rgba(0, 0, 0, 0.5);
+}
+
+.auth {
+    font-size:13px;
+}
+
+.auth td {
+    padding: 0 0 4px 14px;
+}
+
+.grey {
+    background-color: rgba(206, 206, 206, 0.34);
+}
+
+.header {
+    background-color: rgb(29, 39, 35);
+    height: 82px;
+    border: none;
+    -webkit-box-shadow: inset -1px -1px 1px 18px rgb(81, 141, 203);
+    -moz-box-shadow: inset -1px -1px 1px 18px rgb(81, 141, 203);
+    box-shadow: inset -1px -1px 18px 1px rgb(81, 141, 203);
+}
+
+.userMenu {
+    width: 970px;
+    height: 98%;
+    margin:0 auto;
+}
+
+.footer {
+    font-size: 13px;
+    color: #CECECE;
+    background-color: rgb(29, 39, 35);
+    height: 33px;
+    padding: 12px;
+    bottom: 0;
+    border-left: 1px #808080 solid;
+    border-right: 1px #808080 solid;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.snow {
+    background-image: url(/planski/images/structure/montagnes.jpg);
+    border: none;
+    background-position: center;
+    margin-left: -17px;
+    padding-top: 35px;
+    font-family: PlanSki;
+    text-align: center;
+    font-size: 33px;
+    height: 62px;
+    text-shadow: 2px 2px black;
+}
+
+.menu {
+    width: 642px;
+    height: 98%;
+    margin-left:-321px;
+    left:50%;
+    position: absolute;
+    top: 112px;
+    font-family: PlanSki;
+    text-align: center;
+    font-size: 33px;
+    height: 62px;
+    text-shadow: 2px 2px black;
+}
+
+.menuLien {
+    text-align: center;
+    margin: 10px;
+}
+
+.caret {
+    top: 10px;
+    right: -10px;
+    position:absolute;
+    border-top: 4px solid white;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.smallPortrait {
+    width: 100px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    margin-right:9px;
+    background-size: cover;
+}
+
+.profile-picture {
+    border-radius:50%;
+}
+
+.onglet {
+    position: absolute;
+    z-index: 1007;
+    display:none;
+}
+
+.profilePortrait {
+    margin:20px;
+    border-radius:50%;
+    background-size: cover;
+    width:294px;
+    height:294px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin-right:9px;
+    border:2px outset;
+}
+
+.connectedPhoto {
+    width:35px;
+    height:35px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.smallProfilePortrait {
+    margin: 20px;
+    width:150px;
+    height:150px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin-right: 9px;
+    border: 2px outset;
+}
+
+.smallAppartPortrait {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin-right: 50px;
+    margin-top:-18px;
+    border: 2px outset;
+}
+
+.shade {
+    position: relative;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.appartLibel {
+    background-image: linear-gradient(30deg, white, #908A8A);
+    margin-left: 21px;
+    width: 294px;
+    height: 31px;
+    position: absolute;
+    color: black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 271px;
+    text-align: center;
+    padding-top: 7px;
+}
+
+.smallAppartLibel {
+    background-image: linear-gradient(30deg, white, #908A8A);
+    margin-left: -24px;
+    width: 188px;
+    height: 31px;
+    font-size: 13px;
+    color: black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 132px;
+    text-align: center;
+}
+
+.profileLogin {
+    background-image:linear-gradient(30deg, white, #908A8A);
+    margin-left: 21px;
+    width: 294px;
+    height: 42px;
+    position: absolute;
+    color: black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 268px;
+    text-align: center;
+    font-family: Calibri;
+    font-size: 35px;
+    letter-spacing: -2px;
+    font-weight: bold;
+}
+
+.smallProfileLogin {
+    background-image:linear-gradient(30deg, white, #908A8A);
+    margin-left: -2px;
+    width: 150px;
+    height: 26px;
+    position: absolute;
+    color: black;
+    box-shadow: 0 10px 6px -6px #777;
+    border: 1px grey solid;
+    margin-top: 133px;
+    text-align: center;
+    font-family: Calibri;
+    font-size: 21px;
+    letter-spacing: -2px;
+    font-weight: bold;
+}
+
+.editPhoto {
+    margin:0 auto;
+    position:relative;
+    z-index: 5;
+}
+
+.editPhotoHover {
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    position:absolute;
+    float:left;
+    z-index:10;
+}
+
+.site {
+    width:auto;
+    background-image:url(/planski/images/structure/texture.png);
+    background-color:rgb(247, 247, 248);
+    min-height: 90%;
+    text-align:center;
+    margin:0 auto;
+}
+
+.newPhoto:hover {
+    -moz-box-shadow: 0 0 10px #ccc;
+    -webkit-box-shadow: 0 0 10px #ccc;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.editPhoto:hover {
+    -moz-box-shadow: 0 0 10px #ccc;
+    -webkit-box-shadow: 0 0 10px #ccc;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.userFont {
+    padding-top:5px;
+    font-size:15px;
+}
+
+.divPhoto {
+    float:left;
+    width:100px;
+    height:100px;
+    background-size: cover;
+}
+
+.editPhoto:hover .removePhoto {
+    opacity: 0.9;
+}
+
+.editPhoto:hover .definePhoto {
+    opacity: 0.9;
+}
+
+.editPhoto .definePhoto {
+    width:294px;
+    height:294px;
+    background:url('/planski/images/div/defineprofile.png') no-repeat;
+    opacity:0;
+}
+
+.editPhoto .removePhoto {
+    width:50px;
+    height:50px;
+    background:url('/planski/images/div/remove.png') no-repeat;
+    opacity:0;
+}
+
+.profilePhoto {
+    width:294px;
+    height:294px;
+    background:url('/planski/images/div/profilephoto.png') no-repeat;
+}
+
+.smallPortrait {
+    width:100px;
+    height:100px;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.errorMessage {
+    color:white;
+    border:1px grey groove;
+    background:red url('/planski/images/icones/alert2.png') no-repeat 10px center;
+    height:50px;
+    padding-top:25px;
+    text-align:center;
+    margin:15px;
+}
+
+div.autocomplete {
+    font-size: 12px;
+    position:absolute;
+    display:none;
+    background-color:white;
+    border:1px black solid;
+    min-width: 172px;
+}
+
+div.debug {
+    position:absolute;
+    border:1px white solid;
+    background-color:white;
+}
+
+.facebookButton {
+    background: linear-gradient(#4c69ba, #3b55a0);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-shadow: 0 -1px 0 #354c8c;
+    white-space: nowrap;
+}
+
+#submit_button {
+    color: white;
+    background-color: black;
+    font-weight: bold;
+    border: 1px groove;
+    width: 100px;
+    height: 20px;
+}
+
+#submit_button:hover{
+    background-color: rgb(46, 41, 57);
+}
+
+.divModule {
+    margin:10px;
+}
+
+.divModuleProfil {
+    margin-top:20px;
+    margin-bottom:20px;
+}

@@ -1,6 +1,6 @@
 <?php
 
-class Views extends AppModel
+class Views extends Model
 {
 
     public function countViews()
@@ -8,10 +8,14 @@ class Views extends AppModel
         $sql = "SELECT count(*) as nbr
                 FROM
                     user_views
-                WHERE viewed_id = '".$this->context->get('user_id')."'
-                AND viewer_id != ".$this->context->get('user_id');
+                WHERE viewed_id = :user_id
+                AND viewer_id != :user_id";
 
-        $resultat = $this->fetchOnly($sql);
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue('user_id', $this->context->get('user_id'), PDO::PARAM_INT);
+
+        $resultat = $this->db->executeStmt($stmt)->fetch();
 
         return $resultat['nbr'];
     }
@@ -54,7 +58,7 @@ class Views extends AppModel
 				    user_gender,
     				user_id,
     				user_photo_url,
-    				user_login,
+    				user_prenom,
                     user_mail,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,

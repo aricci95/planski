@@ -8,7 +8,7 @@ class ViewsController extends AppController
         $this->view->addJS(JS_SCROLL_REFRESH);
         $this->view->elements = $this->model->views->getUserViews();
         $this->view->type = 'user';
-        $this->view->setViewName('wViews');
+        $this->view->setViewName('main/wViews');
         $this->view->render();
     }
 

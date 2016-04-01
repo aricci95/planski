@@ -151,6 +151,6 @@ class Tools
     {
         $delay = time() - $timestamp;
 
-        return ($delay < ONLINE_TIME_LIMIT) ? 'online.gif' : 'offline.png';
+        return ($delay < ONLINE_TIME_LIMIT) ? '<img src="planski/images/icones/online.gif" />' : '';
     }
 }

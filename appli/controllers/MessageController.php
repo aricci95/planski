@@ -65,14 +65,6 @@ class MessageController extends AppController
 
         $userId = $this->context->params['value'];
 
-        $isLinked = $this->get('link')->isLinked($userId);
-
-        if (!$isLinked) {
-            Log::err('destinataire sans link');
-            $this->redirect('mailbox', array('msg' => ERR_DEFAULT));
-        }
-
-        // On récupère les information du message
         $parentMessages = $this->model->message->getConversation($userId);
 
         if ($this->_checkMessages($parentMessages, $userId)) {
@@ -97,13 +89,6 @@ class MessageController extends AppController
             $this->redirect('mailbox', array('msg' => ERR_DEFAULT));
         }
 
-        $isLinked = $this->get('link')->isLinked($this->context->params['destinataire_id']);
-
-        if (!$isLinked) {
-            Log::err('destinataire sans link');
-            $this->redirect('mailbox', array('msg' => ERR_DEFAULT));
-        }
-
         $from = $this->context->get('user_id');
         $to   = $this->context->params['destinataire_id'];
 
@@ -115,7 +100,7 @@ class MessageController extends AppController
 
 
         if ($this->get('message')->send($from, $to, $this->context->params['content'])) {
-            $message = $this->context->get('user_login') . ' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
+            $message = $this->context->get('user_prenom') . ' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
             $this->redirect('message', array($this->context->params['value'], 'msg' => MSG_SENT_OK));
         } else {
             Log::err('impossible d\'enregistrer le message.');

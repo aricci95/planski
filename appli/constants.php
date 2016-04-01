@@ -23,6 +23,9 @@ DEFINE('JS_SCROLL_REFRESH', 'scroll_refresh');
 DEFINE('JS_AUTOCOMPLETE', 'autocomplete');
 DEFINE('JS_DATEPICKER', 'datepicker');
 DEFINE('JS_SEARCH', 'search');
+DEFINE('JS_EDIT', 'edit');
+DEFINE('JS_CREW', 'crew');
+DEFINE('JS_FEED', 'feed');
 
 // Dimensions des photos
 DEFINE("MAX_SIZE", 1000);
@@ -35,6 +38,9 @@ DEFINE('PHOTO_TYPE_USER', 1);
 
 // Search types
 DEFINE('SEARCH_TYPE_USER', 'user');
+DEFINE('SEARCH_TYPE_CREW', 'crew');
+DEFINE('SEARCH_TYPE_APPART', 'appart');
+DEFINE('SEARCH_TYPE_PLAN', 'plan');
 
 // REFRESH RESULTS
 DEFINE('NB_SEARCH_RESULTS', 21);
@@ -70,7 +76,7 @@ DEFINE('MESSAGE_400', 'Une erreur est survenue.');
 DEFINE('ERR_AUTH', 401);
 DEFINE('MESSAGE_401', 'Authentification requise.');
 DEFINE('ERR_LOGIN', 402);
-DEFINE('MESSAGE_402', 'Mauvais login / mot de passe.');
+DEFINE('MESSAGE_402', 'Mauvais email / mot de passe.');
 DEFINE('ERR_MAIL_NOT_VALIDATED', 403);
 DEFINE('MESSAGE_403', "Votre email n\'a pas été validé, vous devez cliquer sur le lien qui vous a été envoyé par email.");
 DEFINE('ERR_VALIDATION_FAILURE', 405);

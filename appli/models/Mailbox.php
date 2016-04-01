@@ -1,6 +1,6 @@
 <?php
 
-class Mailbox extends AppModel
+class Mailbox extends Model
 {
 
     // Liste les types de mailbox
@@ -18,7 +18,7 @@ class Mailbox extends AppModel
         $sql = "SELECT
                     user.user_id as user_id,
                     message.message_id as message_id,
-                    user_login,
+                    user_prenom,
                     user_gender,
                     expediteur_id,
                     state_libel,
@@ -32,11 +32,6 @@ class Mailbox extends AppModel
                             JOIN ref_state ON (ref_state.state_id = message.state_id)
                 WHERE
                      destinataire_id = '". $this->context->get('user_id') ."'
-                     AND user_id NOT IN (
-                            SELECT destinataire_id FROM link
-                            WHERE expediteur_id = '".$this->context->get('user_id')."'
-                            AND status = ".LINK_STATUS_BLACKLIST."
-                        )
                 ORDER BY date DESC
                 LIMIT ".($offset * NB_MAILBOX_RESULTS).", ".NB_MAILBOX_RESULTS.";";
 
@@ -70,7 +65,7 @@ class Mailbox extends AppModel
 					destinataire_id,
 					LEFT(content, 50) as content,
 					message.state_id as state_id,
-					user_login,
+					user_prenom,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
 					user_photo_url
 					FROM

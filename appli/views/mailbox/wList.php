@@ -1,6 +1,6 @@
 <div class="heading topShadow">MESSAGES</div>
 <div class="shadow"></div>
-<table style="width:100%;border-collapse: collapse;" class="results maxWidth">
+<table class="results" align="center">
     <?php if (empty($this->userMessages)) : ?>
         <tr>
             <td style='text-align:center;padding-top:20px;' colspan='4'>Aucun message</td>
@@ -10,7 +10,7 @@
     <?php endif; ?>
     <tr>
         <td>
-            <img class="loading" src="planski/appli/js/loading.gif" style="display:none;" data-show="false" data-offset="0" data-href="mailbox" data-end="false" />
+            <img class="loading" src="planski/images/icones/loading.gif" style="display:none;" data-show="false" data-offset="0" data-href="mailbox" data-end="false" />
         </td>
     </tr>
 </table>

@@ -18,18 +18,18 @@ require ROOT_DIR . '/appli/constants.php';
 
 // APPLICATION BOOTSTRAP
 // CONTROLLER
-if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Home') {
+if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Plan') {
     $page = ucfirst($_GET['page']).'Controller';
     if(!file_exists(ROOT_DIR.'/appli/controllers/'.$page.'.php')) {
-        $page = 'HomeController';
+        $page = 'PlanController';
     }
 } else {
-    $page = 'HomeController';
+    $page = 'PlanController';
 }
 
 // ACTION
 $action = 'render';
-if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'Home') {
+if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'Plan') {
     $action .= ucfirst($_GET['action']);
 }
 
@@ -43,30 +43,30 @@ spl_autoload_register('autoLoader');
 
 
 // Loading application files
-require ROOT_DIR . '/appli/engine/Context.php';
-require ROOT_DIR . '/appli/engine/Log.php';
-require ROOT_DIR . '/appli/engine/view/AppView.php';
+require ROOT_DIR . '/engine/Context.php';
+require ROOT_DIR . '/engine/Log.php';
+require ROOT_DIR . '/engine/view/AppView.php';
 
 // Models
-require ROOT_DIR . '/appli/engine/model/Db.php';
-require ROOT_DIR . '/appli/engine/model/Model.php';
-require ROOT_DIR . '/appli/engine/model/AppModel.php';
-require ROOT_DIR . '/appli/engine/model/Manager.php';
+require ROOT_DIR . '/engine/model/Db.php';
+require ROOT_DIR . '/engine/model/Model.php';
+require ROOT_DIR . '/engine/model/Manager.php';
+require ROOT_DIR . '/engine/model/QueryBuilder.php';
 
 // Services
-require ROOT_DIR . '/appli/engine/service/Service.php';
-require ROOT_DIR . '/appli/engine/service/Container.php';
+require ROOT_DIR . '/engine/service/Service.php';
+require ROOT_DIR . '/engine/service/Container.php';
 
 // Controllers
-require ROOT_DIR . '/appli/engine/controller/Controller.php';
-require ROOT_DIR . '/appli/engine/controller/AppController.php';
+require ROOT_DIR . '/engine/controller/Controller.php';
+require ROOT_DIR . '/engine/controller/AppController.php';
 
 // Classes propres au site
 require ROOT_DIR . '/appli/models/User.php';
 require ROOT_DIR . '/appli/views/ViewHelper.php';
 
 // gestionnaire d'erreurs
-include ROOT_DIR . '/appli/engine/ErrorHandler.php';
+include ROOT_DIR . '/engine/ErrorHandler.php';
 set_error_handler("ErrorHandler");
 
 try {
@@ -77,12 +77,12 @@ try {
 } catch (Exception $e) {
     Service_Container::getInstance()->get('Mailer')->sendError($e);
 
-    if ($page == 'HomeController') {
-        include ROOT_DIR . '/appli/views/maintenance.htm';
+    if ($page == 'PlanController') {
+        include ROOT_DIR . '/appli/views/main/maintenance.htm';
         die;
     } else {
-        require_once ROOT_DIR . '/appli/controllers/HomeController.php';
-        $controller = new HomeController();
+        require_once ROOT_DIR . '/appli/controllers/PlanController.php';
+        $controller = new PlanController();
 
         $controller->view->growlerError();
         $controller->render();

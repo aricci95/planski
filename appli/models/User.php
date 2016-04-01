@@ -1,30 +1,25 @@
 <?php
 
-class User extends AppModel
+class User extends Model
 {
+    const RIDE_SKI       = 1;
+    const RIDE_SNOWBOARD = 2;
 
-    private $_attributes = array(
-        'user_login',
-        'user_pwd',
-        'user_mail',
-        'user_gender',
-        'user_birth',
-        'style_id',
-        'ville_id',
-        'user_description',
-        'user_data',
+    const MEDAL_BRONZE = 1;
+    const MEDAL_SILVER = 2;
+    const MEDAL_GOLD   = 3;
+    const MEDAL_EXPERT = 4;
+
+    public static $rides = array(
+        self::RIDE_SKI       => 'ski',
+        self::RIDE_SNOWBOARD => 'snowboard',
     );
 
-    private $_serialized = array(
-        'user_profession',
-        'user_poids',
-        'user_taille',
-        'user_tattoo',
-        'user_piercing',
-        'look_id',
-        'user_smoke',
-        'user_alcohol',
-        'user_drugs',
+    public static $medals = array(
+        self::MEDAL_BRONZE => 'bronze',
+        self::MEDAL_SILVER => 'silver',
+        self::MEDAL_GOLD   => 'gold',
+        self::MEDAL_EXPERT => 'expert',
     );
 
     public function updateLastConnexion($userId = null)
@@ -44,167 +39,126 @@ class User extends AppModel
         return true;
     }
 
+    public function updateUserData(array $data = array())
+    {
+        $sql = 'UPDATE user_data SET ';
+
+        foreach ($data as $key => $value) {
+            $sql .= $key . ' = :'. $key;
+        }
+
+        $sql .= ' WHERE user_id = :user_id;';
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue('user_id', $this->context->get('user_id'), PDO::PARAM_INT);
+
+        foreach ($data as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+
+        return $this->db->executeStmt($stmt);
+    }
+
     public function getSearch($criterias, $offset = 0)
     {
-        $sql = 'SELECT user_id,
-                    user_login,
-                    ville_nom_reel,
-                    user_mail,
-                    user_gender,
-                    user_photo_url,
-                    UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
-                    FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age
-                FROM user
-                LEFT JOIN city ON user.ville_id = city.ville_id
-                WHERE  user_valid = 1
-                AND user_id != :context_user_id
-            ';
+        $queryBuilder = $this->query('user_data')
+                             ->Join(array('user' => 'user_id'))
+                             ->leftJoin(array('city' => 'ville_id'));
 
-        if (!empty($criterias['search_login'])) {
-            $sql .= " AND user_login LIKE :search_login ";
+        if (!empty($criterias['search_name'])) {
+            $queryBuilder->where(array('%user_prenom' => $criterias['search_name']));
         }
 
         if (!empty($criterias['search_gender'])) {
-            $sql .= " AND user_gender = :user_gender ";
+            $queryBuilder->where(array('user_gender' => $criterias['search_gender']));
         }
 
         if (!empty($criterias['search_age'])) {
-            $sql .= " AND FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) <= :search_age ";
+            $queryBuilder->lowerThan(array('search_age' => 'FLOOR((DATEDIFF( CURDATE(), (user_birth))/365))'));
         }
 
         if (!empty($criterias['search_distance'])) {
             $longitude = $this->context->get('ville_longitude_deg');
             $latitude = $this->context->get('ville_latitude_deg');
 
-            $sql .= ' AND ville_longitude_deg BETWEEN :longitude_begin AND :longitude_end
-                      AND ville_latitude_deg BETWEEN :latitude_begin AND :latitude_end ';
-        }
-
-        $sql .= ' ORDER BY user_last_connexion DESC
-                  LIMIT :limit_begin, :limit_end;';
-
-        $sql = str_replace(',)', ')', $sql);
-        $sql = str_replace(', )', ')', $sql);
-
-        $stmt = $this->db->prepare($sql);
-
-        $stmt->bindValue('context_user_id', $this->context->get('user_id'), PDO::PARAM_INT);
-
-        if (!empty($criterias['search_login'])) {
-            $stmt->bindValue('search_login', '%'. $criterias['search_login'] .'%', PDO::PARAM_STR);
-        }
-
-        if (!empty($criterias['search_gender'])) {
-            $stmt->bindValue('user_gender', $criterias['search_gender'], PDO::PARAM_INT);
-        }
-
-        if (!empty($criterias['search_age'])) {
-            $stmt->bindValue('search_age', $criterias['search_age'], PDO::PARAM_INT);
-        }
-
-        if (!empty($criterias['search_distance'])) {
             $ratio = COEF_DISTANCE * $criterias['search_distance'];
 
-            $stmt->bindValue('longitude_begin', ($longitude - $ratio), PDO::PARAM_INT);
-            $stmt->bindValue('longitude_end', ($longitude + $ratio), PDO::PARAM_INT);
-
-            $stmt->bindValue('latitude_begin', ($latitude - $ratio), PDO::PARAM_INT);
-            $stmt->bindValue('latitude_end', ($latitude + $ratio), PDO::PARAM_INT);
+            $queryBuilder->between(array(
+                'ville_longitude_deg' => array(
+                    'begin' => ($longitude - $ratio),
+                    'end' => ($longitude + $ratio)
+                ),
+                'ville_latitude_deg' => array(
+                    'begin' => ($latitude - $ratio),
+                    'end' => ($latitude + $ratio)
+                ),
+            ));
         }
 
-        $stmt->bindValue('limit_begin', $offset * NB_SEARCH_RESULTS, PDO::PARAM_INT);
-        $stmt->bindValue('limit_end', NB_SEARCH_RESULTS, PDO::PARAM_INT);
+        $queryBuilder->orderBy(array('user_last_connexion DESC'));
 
-        return $this->db->executeStmt($stmt)->fetchAll();
+        $queryBuilder->limit($offset * NB_SEARCH_RESULTS, NB_SEARCH_RESULTS);
+
+        return $queryBuilder->select(array('user.user_id',
+            'user_prenom',
+            'FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age',
+            'UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion',
+            'user_photo_url',
+            'user_description',
+            'ville_nom_reel',
+            'user_ride',
+            'user_level',
+            'user_profession',
+            'user_cuisine',
+            'user_vehicule',
+            'user_hygiene',
+            'user_fun',
+            'user_cash',
+            'LEFT(ville_code_postal, 2) as ville_code_postal',
+            '(SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = ' . Vote::TYPE_USER . ') AS rate'
+        ));
     }
 
-    public function convertBinaries($user)
-    {
-        $liste = array('tattoo', 'piercing');
-        foreach ($liste as $key => $value) {
-            if ($user['user_'.$value] == 1) {
-                $resultat[$value] = 'oui';
-            } else {
-                $resultat[$value] = 'non';
-            }
-        }
-        return $resultat;
-    }
-
-    public function convertQuantities($user)
-    {
-        $liste = array('drugs', 'alcohol', 'smoke');
-        $quantities = array('', 'jamais', 'pas beaucoup', 'modérément', 'souvent', 'très souvent');
-        foreach ($liste as $key => $value) {
-            if (isset($quantities[$user['user_'.$value]])) {
-                $resultat[$value] = $quantities[$user['user_'.$value]];
-            }
-        }
-        if (isset($resultat)) {
-            return $resultat;
-        }
-    }
-
-    public function countUsers()
-    {
-        $sql = "SELECT count(*) as number
-                FROM user
-                GROUP BY user_gender;";
-
-        $resultat = $this->fetch($sql);
-        return $resultat;
-    }
-
-    // Récupére un utilisateur
     public function getUserByIdDetails($userId)
     {
         $sql = "SELECT
                     user.user_id as user_id,
-                    user_login,
-                    user_pwd,
+                    user_cash,
                     user_mail,
+                    user_gender,
+                    user_prenom,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
                     user_birth,
                     user_photo_url,
-                    user_gender,
-                    user_light_description,
                     user_description,
-                    style_id,
-                    user_data,
                     ville_nom_reel,
-                    user.ville_id as ville_id,
-                    LEFT(ville_code_postal, 2) as ville_code_postal
+                    user_ride,
+                    user_level,
+                    user_profession,
+                    user_cuisine,
+                    user_vehicule,
+                    user_hygiene,
+                    user_fun,
+                    user_poids,
+                    user_taille,
+                    user_adresse,
+                    LEFT(ville_code_postal, 2) as ville_code_postal,
+                    (SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = :type_id) AS rate
                 FROM
                     user
+                LEFT JOIN user_data ON (user.user_id = user_data.user_id)
                 LEFT JOIN city ON (user.ville_id = city.ville_id)
-                WHERE user_id = :user_id
+                WHERE user.user_id = :user_id
             ;";
 
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue('user_id', (int) $userId);
+        $stmt->bindValue('type_id', Vote::TYPE_USER);
 
-        $user = $this->db->executeStmt($stmt)->fetch();
-
-        if (!empty($user)) {
-            return $this->_injectUserData($user);
-        } else {
-            return false;
-        }
-    }
-
-    private function _injectUserData($user)
-    {
-        $data = unserialize($user['user_data']);
-
-        foreach ($this->_serialized as $key) {
-            $user[$key] = empty($data[$key]) ? 0 : $data[$key];
-        }
-
-        unset($user['user_data']);
-
-        return $user;
+        return $this->db->executeStmt($stmt)->fetch();
     }
 
     public function deleteById($id)
@@ -212,45 +166,13 @@ class User extends AppModel
         $sql = "DELETE FROM user WHERE user_id = :id;
                 DELETE FROM user_views WHERE viewer_id = :id OR viewed_id = :id;
                 DELETE FROM message WHERE destinataire_id = :id OR expediteur_id = :id;
-                DELETE FROM link WHERE destinataire_id = :id OR expediteur_id = :id;
-                DELETE FROM chat WHERE `from` = :user_login OR `to` = :user_login;
+                DELETE FROM chat WHERE `from` = :id OR `to` = :id;
             ";
-
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue('id', $id, PDO::PARAM_INT);
-        $stmt->bindValue('user_login', $id, PDO::PARAM_STR);
 
         return $this->db->executeStmt($stmt);
-    }
-
-    // Modifie un utilisateur
-    public function updateUserById(array $data = array())
-    {
-        if (!empty($data)) {
-            // Update serialized data
-            $serialize = array();
-
-            foreach ($data as $attribute => $value) {
-                if (in_array($attribute, $this->_serialized) && $value > 0) {
-                    $serialize[$attribute] = $value;
-                }
-            }
-
-            $data['user_data'] = serialize($serialize);
-
-            $sql = 'UPDATE user SET ';
-            foreach ($this->_attributes as $attribute) {
-                if (!empty($data[$attribute])) {
-                    $sql .= " ".$attribute." = '".$data[$attribute]."',";
-                }
-            }
-            $sql .= ' WHERE user_id = '.$this->securize($this->context->get('user_id'));
-            $sql = str_replace(', WHERE', ' WHERE', $sql);
-
-            return $this->execute($sql);
-        }
-
     }
 
     public function setValid($code)
@@ -269,19 +191,6 @@ class User extends AppModel
         return $this->db->executeStmt($stmt);
     }
 
-    public function isUsedLogin($login)
-    {
-        $sql = 'SELECT user_id
-                FROM   user
-                WHERE  user_login = :login';
-
-        $stmt = $this->db->prepare($sql);
-
-        $stmt->bindValue('login', $login, PDO::PARAM_STR);
-
-        return $this->db->executeStmt($stmt)->fetch();
-    }
-
     public function isUsedEmail($email)
     {
         $sql = 'SELECT user_id
@@ -297,71 +206,27 @@ class User extends AppModel
 
     public function createUser($items)
     {
-        $userValidationId = uniqid();
+        $items['user_valid'] = uniqid();
+        $items['user_subscribe_date'] = 'NOW()';
+        $items['role_id'] = AUTH_LEVEL_USER;
 
-        $sql = '
-            INSERT INTO user (
-                user_login,
-                user_pwd,
-                user_mail,
-                user_gender,
-                user_subscribe_date,
-                role_id,
-                user_valid
-              ) VALUES (
-                :user_login,
-                :user_pwd,
-                :user_mail,
-                :user_gender,
-                NOW(),
-                :role_id,
-                :user_valid
-            );
-        ';
+        $userId = $this->query()->insert($items);
 
-        $stmt = $this->db->prepare($sql);
+        if ($userId) {
+            $this->query('user_data')->insert(array('user_id' => $userId));
+        }
 
-        $stmt->bindValue('user_login', $items['user_login']);
-        $stmt->bindValue('user_pwd', $items['user_pwd']);
-        $stmt->bindValue('user_mail', $items['user_mail']);
-        $stmt->bindValue('user_gender', $items['user_gender']);
-        $stmt->bindValue('role_id', AUTH_LEVEL_USER);
-        $stmt->bindValue('user_valid', $userValidationId);
-
-        $this->db->executeStmt($stmt);
-
-        $sql = '
-            REPLACE INTO link (
-                expediteur_id,
-                destinataire_id,
-                status,
-                modification_date
-            ) VALUES (
-                :expediteur_id,
-                :destinataire_id,
-                :status,
-                NOW()
-            );
-        ';
-
-        $stmt = $this->db->prepare($sql);
-
-        $stmt->bindValue('expediteur_id', 1, PDO::PARAM_INT);
-        $stmt->bindValue('destinataire_id', $this->db->lastInsertId(), PDO::PARAM_INT);
-        $stmt->bindValue('status', LINK_STATUS_ACCEPTED, PDO::PARAM_INT);
-
-        $this->db->executeStmt($stmt);
-
-        return $userValidationId;
+        return $items['user_valid'];
     }
 
-    public function findByLoginPwd($login, $pwd)
+    public function findByEmailPwd($email, $pwd)
     {
         $sql = '
                 SELECT
                     user_id,
                     user_pwd,
-                    user_login,
+                    user_prenom,
+                    user_mail,
                     role_id,
                     user_photo_url,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
@@ -373,13 +238,13 @@ class User extends AppModel
                     user.ville_id as ville_id
                 FROM user
                 LEFT JOIN city ON user.ville_id = city.ville_id
-                WHERE LOWER(user_login) = LOWER(:user_login)
+                WHERE LOWER(user_mail) = LOWER(:user_mail)
                 AND user_pwd = :pwd
             ;';
 
             $stmt = $this->db->prepare($sql);
 
-            $stmt->bindValue('user_login', $login);
+            $stmt->bindValue('user_mail', $email);
             $stmt->bindValue('pwd', $pwd);
 
             return $this->db->executeStmt($stmt)->fetch();
@@ -391,7 +256,7 @@ class User extends AppModel
                 SELECT
                     user_id,
                     user_pwd,
-                    user_login,
+                    user_prenom,
                     role_id,
                     user_photo_url,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
@@ -401,8 +266,7 @@ class User extends AppModel
                     user_mail,
                     ville_longitude_deg,
                     ville_latitude_deg,
-                    user.ville_id as ville_id,
-                    forum_notification
+                    user.ville_id as ville_id
                 FROM user
                 LEFT JOIN city ON (user.ville_id = city.ville_id)
                 WHERE LOWER(user_mail) = LOWER(:email)
