@@ -1,12 +1,12 @@
 <form id="search_form" action="#" method="post">
-    <div class="form topShadow" id="search_form_table" align="center">
+    <div class="form formTopShadow" id="search_form_table" align="center">
         <span id="search_criterias">
             <?php $this->render($this->type . '/wForm'); ?>
         </span>
         <input id="submit_button" type="submit" src="planski/images/boutons/bnt_search.png" ALT="Rechercher" value="Chercher" />
     </div>
 </form>
-<div class="shadow"></div>
+<div class="formShadow"></div>
  <?php if (empty($this->elements)) : ?>
         <div align="center" class="noresults">
             Aucun résultat pour les critères choisis.

@@ -5,6 +5,11 @@
     src: url(/planski/libraries/fonts/planski.ttf), url(/planski/libraries/fonts/planski.eot);
 }
 
+@font-face {
+    font-family: Winter;
+    src: url(/planski/libraries/fonts/winter.otf);
+}
+
 .submitButton {
     font-size: 19px;
     font-family: 'Freight Sans Bold', helvetica, arial, sans-serif !important;
@@ -246,11 +251,33 @@ a:visited:hover {color: white;text-decoration: none ;}
 a:link {color: #808080;text-decoration: none ;}
 
 .form {
-    padding-top: 19px;
-    font-size: 16px;
+    text-shadow: 2px 2px white;
+    font-family:Winter;
+    border-radius: 8px;
+    background-size: cover;
+    background-image:url(/planski/images/structure/pancarte.jpg);
+    font-size: 35px;
     height: 60px;
-    background-color: rgb(29, 39, 35);
-    color: rgb(170, 229, 247);
+    width:80%;
+    background-color: rgba(206, 206, 206, 0.34);
+    color: black;
+}
+
+.formShadow {
+    margin-left:5px;
+    width:78%;
+    height: 18px;
+    -webkit-box-shadow: inset 2px 22px -20px 20px rgb(26, 26, 26);
+    -moz-box-shadow: inset 2px 22px -20px 20px rgb(26, 26, 26);
+    box-shadow: inset 2px 22px 20px -20px rgb(26, 26, 26);
+    margin-bottom:5px;
+}
+
+.formTopShadow {
+    padding-top: 20px;
+    -webkit-box-shadow: inset 2px 23px -20px 20px white;
+    -moz-box-shadow: inset 2px 23px -20px 20px white;
+    box-shadow: inset 2px 23px 20px -20px white;
 }
 
 .title {
