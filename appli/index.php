@@ -78,7 +78,7 @@ try {
     Service_Container::getInstance()->get('Mailer')->sendError($e);
 
     if ($page == 'PlanController') {
-        include ROOT_DIR . '/appli/views/maintenance.htm';
+        include ROOT_DIR . '/appli/views/main/maintenance.htm';
         die;
     } else {
         require_once ROOT_DIR . '/appli/controllers/PlanController.php';

@@ -24,7 +24,7 @@ class SubscribeController extends AppController
             $this->context->params['user_gender'] = ($socialAppsData['gender'] == 'male') ? '1' : '2';
         }
 
-        $this->view->setViewName('wSubscribe');
+        $this->view->setViewName('main/wSubscribe');
         $this->view->setTitle('Inscription');
         $this->view->render();
     }
@@ -130,7 +130,7 @@ class SubscribeController extends AppController
     public function renderTerms()
     {
         $this->view->setTitle('Mentions Légales');
-        $this->view->setViewName('wTerms');
+        $this->view->setViewName('main/wTerms');
         $this->view->render();
     }
 }

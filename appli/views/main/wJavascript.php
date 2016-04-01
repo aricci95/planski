@@ -3,7 +3,6 @@
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="planski/libraries/growler/js/gritter.js"></script>
 <script type="text/javascript" src="planski/appli/js/dropdown.js"></script>
-<link rel="stylesheet" type="text/css" href="planski/libraries/modal/css/magnific-popup.css" />
 <script type="text/javascript" src="planski/libraries/modal/js/jquery.magnific-popup.js"></script>
 <script type="text/javascript" src="planski/appli/js/modal.js"></script>
 <script>
@@ -18,12 +17,10 @@
 endif;
 
 if($this->isJSActivated(JS_DATEPICKER)) : ?>
-    <link rel="stylesheet" type="text/css" href="planski/libraries/datepicker/jquery.datetimepicker.css"/ >
     <script type="text/javascript" src="planski/libraries/datepicker/jquery.datetimepicker.js"></script>
     <script type="text/javascript" src="planski/libraries/datepicker/datepicker.js"></script>
 <?php endif;
 if($this->isJSActivated(JS_AUTOCOMPLETE)) : ?>
-    <link rel="stylesheet" href="planski/libraries/jquery-ui/jquery-ui.css">
     <script src="planski/libraries/jquery-ui/jquery-ui.js"></script>
     <script src="planski/appli/js/autocomplete.js"></script>
 <?php endif;
@@ -40,8 +37,6 @@ if($this->isJSActivated(JS_CREW)) : ?>
     <script type="text/javascript" src="planski/appli/js/crew.js"></script>
 <?php endif;
 if($this->isJSActivated(JS_FEED)) : ?>
-    <link rel="stylesheet" type="text/css" href="planski/libraries/jquery-comments/css/jquery-comments.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script type="text/javascript" src="planski/libraries/jquery-comments/js/jquery-comments.js"></script>
     <script>

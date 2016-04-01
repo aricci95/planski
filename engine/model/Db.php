@@ -9,7 +9,7 @@ class Db
         $this->_PDO = new PDO('mysql:host=' . _HOST . ';dbname=' . _BASE_DE_DONNEES . ';charset=utf8', _USER, _PASS);
 
         if (mysqli_connect_error()) {
-            echo "<meta http-equiv='REFRESH' content='0;URL=../views/maintenance.htm'>";
+            echo "<meta http-equiv='REFRESH' content='0;URL=../views/main/maintenance.htm'>";
             printf("Echec de la connexion : %s\n", mysqli_connect_error());
             exit();
         }

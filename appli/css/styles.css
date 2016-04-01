@@ -187,17 +187,6 @@ a:link {color: #808080;text-decoration: none ;}
     color: rgb(170, 229, 247);
 }
 
-.heading {
-    white-space:nowrap;
-    overflow: hidden;
-    font-size: 18px;
-    padding: 20px;
-    padding-top: 13px;
-    height: 16px;
-    background-color: rgb(29, 39, 35);
-    color: rgb(170, 229, 247);
-}
-
 .title {
     white-space:nowrap;
     overflow: hidden;
@@ -234,6 +223,14 @@ a:link {color: #808080;text-decoration: none ;}
     box-shadow: inset 0px 1px 29px 6px rgba(0, 0, 0, 0.5);
 }
 
+.auth {
+    font-size:13px;
+}
+
+.auth td {
+    padding: 0 0 4px 14px;
+}
+
 .grey {
     background-color: rgba(206, 206, 206, 0.34);
 }
@@ -242,18 +239,19 @@ a:link {color: #808080;text-decoration: none ;}
     min-height: 60%;
 }
 
-.userMenu {
-    font-size: 17px;
-    color: white;
+.header {
     background-color: rgb(29, 39, 35);
-    height: 42px;
-    padding: 20px;
+    height: 82px;
     border: none;
-    padding-top: 17px;
-
     -webkit-box-shadow: inset -1px -1px 1px 18px rgb(81, 141, 203);
     -moz-box-shadow: inset -1px -1px 1px 18px rgb(81, 141, 203);
     box-shadow: inset -1px -1px 18px 1px rgb(81, 141, 203);
+}
+
+.userMenu {
+    width: 970px;
+    height: 98%;
+    margin:0 auto;
 }
 
 .footer {

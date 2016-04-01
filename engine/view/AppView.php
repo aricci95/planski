@@ -97,7 +97,7 @@ class AppView
         ob_start();
 
         if (empty($view)) {
-            include('views/view.php');
+            include('views/main/view.php');
         } else {
             $view = trim($view);
             $view = str_replace("../","protect", $view);
