@@ -4,7 +4,7 @@
             <tbody>
                 <tr style="color:white;">
                     <td>
-                        <label for="user_email">Email ou Login</label>
+                        <label for="user_mail">Email</label>
                     </td>
                     <td>
                         <label for="user_pwd">Mot de passe</label>
@@ -12,10 +12,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="user_email" name="user_email" tabindex="1" style="width:150px;height:23px;">
+                        <input name="user_mail" tabindex="1" style="width:150px;height:23px;border: 1px black solid;padding:3px">
                     </td>
                     <td>
-                        <input type="user_pwd" name="user_pwd" tabindex="2" style="width:150px;height:23px;">
+                        <input name="user_pwd" tabindex="2" style="width:150px;height:23px;border: 1px black solid;padding:3px" type="password">
                     </td>
                     <td>
                         <input value="Go !" tabindex="4" type="submit">
@@ -37,20 +37,4 @@
             </tbody>
         </table>
     </form>
-<!--
-<span class="greyLink" style="text-align:center; color: white;">
-    <form action="auth/login" method="post">
-        Login : <input style="margin-top: 11px;margin-left:5px;margin-right:5px;" name="user_login" size="8" />
-        Password : <input style="margin-left:5px;" name="user_pwd" type="password" size="8" />
-        <input type="submit" value="Connexion" />
-        <input type="button" onclick="window.location.href = 'planski/libraries/socialauth/station.php';" class="facebookButton" value="Via Facebook" />
-        <label style="margin-left:5px;" for="savepwd">Enregistrer</label><input id="savepwd" name="savepwd" type="checkbox" />
-    </form>
-</span>
-<!--
-<span style="position:absolute;right:20;top:25;">
-    <a class="menuLien" style="margin-left:5px;" href="lostpwd">Mot de passe oublie</a>
-    <a class="menuLien" style="margin:0;" href="subscribe">S'inscrire !</a>
-</span>
--->
 </div>

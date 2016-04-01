@@ -3,18 +3,18 @@
 class AuthService extends Service
 {
 
-    public function login($login, $pwd)
+    public function login($email, $pwd)
     {
-        $login = trim($this->context->params['user_login']);
+        $email = trim($this->context->params['user_mail']);
 
-        $logResult = $this->checkLogin($login, md5($this->context->params['user_pwd']));
+        $logResult = $this->checkLogin($email, md5($this->context->params['user_pwd']));
 
         if ($logResult) {
             if ($this->context->getParam('savepwd') == 'on') {
-                setcookie('planskiLogin', $this->context->getParam('user_login'), time() + 365*24*3600, '/', null, false, true);
+                setcookie('planskiEmail', $this->context->getParam('user_prenom'), time() + 365*24*3600, '/', null, false, true);
                 setcookie('planskiPwd', md5($this->context->getParam('user_pwd')), time() + 365*24*3600, '/', null, false, true);
             } else {
-                setcookie('planskiLogin', 0, time(), '/', false, true);
+                setcookie('planskiEmail', 0, time(), '/', false, true);
                 setcookie('planskiPwd', 0, time(), '/', false, true);
             }
 
@@ -24,11 +24,11 @@ class AuthService extends Service
         return false;
     }
 
-    public function checkLogin($login, $pwd)
+    public function checkLogin($email, $pwd)
     {
-        $user = $this->model->user->findByLoginPwd($login, $pwd);
+        $user = $this->model->user->findByEmailPwd($email, $pwd);
 
-        if (!empty($user['user_login']) && !empty($user['user_id']) && strtolower($user['user_login']) == strtolower($login) && $login != '') {
+        if (!empty($user['user_mail']) && !empty($user['user_id']) && strtolower($user['user_mail']) == strtolower($email) && $email != '') {
             if ($user['user_valid'] != 1) {
                 throw new Exception("Email non validé", ERR_MAIL_NOT_VALIDATED);
             } elseif ($user['role_id'] > 0) {
@@ -60,7 +60,7 @@ class AuthService extends Service
                 return $this->authenticateUser($user);
             }
         } else {
-            throw new Exception("Mauvais login / mot de passe", ERR_LOGIN);
+            throw new Exception("Mauvais email / mot de passe", ERR_LOGIN);
         }
 
         return false;
@@ -69,7 +69,7 @@ class AuthService extends Service
     public function authenticateUser(array $user)
     {
         $this->context->set('user_id', (int) $user['user_id'])
-                      ->set('user_login', $user['user_login'])
+                      ->set('user_prenom', $user['user_prenom'])
                       ->set('user_pwd', $user['user_pwd'])
                       ->set('user_last_connexion', time())
                       ->set('role_id', (int) $user['role_id'])
@@ -91,15 +91,15 @@ class AuthService extends Service
             return false;
         }
 
-        $param = empty($login) ? 'user_mail' : 'user_login';
+        $param = empty($login) ? 'user_mail' : 'user_prenom';
         $value = empty($login) ? $email : $login;
 
         $user = $this->query('user')
                      ->single()
                      ->where(array($param => $value))
-                     ->select(array('user_id', 'user_login', 'user_mail'));
+                     ->select(array('user_id', 'user_prenom', 'user_mail'));
 
-        if (!empty($user['user_login'])) {
+        if (!empty($user['user_prenom'])) {
             $pwd_valid = $this->model->auth->resetPwd($user['user_id']);
 
             $message = 'Pour modifier ton mot de passe clique sur le lien suivant : <a href="http://www.planski.fr/lostpwd/new/' . $pwd_valid . '">modifier mon mot de passe</a>';
@@ -112,7 +112,7 @@ class AuthService extends Service
 
     public function disconnect()
     {
-        setcookie('planskiLogin', 0, time(), '/', false, true);
+        setcookie('planskiEmail', 0, time(), '/', false, true);
         setcookie('planskiPwd', 0, time(), '/', false, true);
 
         $this->context->destroy();

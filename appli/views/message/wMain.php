@@ -1,4 +1,4 @@
-<div class="title topShadow" style="font-size: 20px;"><?php echo ucfirst($this->destinataire['user_login']); ?></div>
+<div class="title topShadow" style="font-size: 20px;"><?php echo ucfirst($this->destinataire['user_prenom']); ?></div>
 <?php $this->render('message/wNew'); ?>
 <?php if(!empty($this->parentMessages)) : ?>
     <table class="results" cellspacing="0" align="center" style="width:80%;">

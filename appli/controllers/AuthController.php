@@ -6,9 +6,9 @@ class AuthController extends AppController
 
     public function renderLogin()
     {
-        if (!empty($this->context->params['user_login']) && !empty($this->context->params['user_pwd'])) {
+        if (!empty($this->context->params['user_mail']) && !empty($this->context->params['user_pwd'])) {
             try {
-                $authentResult = $this->get('auth')->login($this->context->params['user_login'], $this->context->params['user_pwd']);
+                $authentResult = $this->get('auth')->login($this->context->params['user_mail'], $this->context->params['user_pwd']);
 
                 if ($authentResult) {
                     $this->redirect('user');

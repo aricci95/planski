@@ -66,8 +66,8 @@ class User extends Model
                              ->Join(array('user' => 'user_id'))
                              ->leftJoin(array('city' => 'ville_id'));
 
-        if (!empty($criterias['search_login'])) {
-            $queryBuilder->where(array('%user_login' => $criterias['search_login']));
+        if (!empty($criterias['search_name'])) {
+            $queryBuilder->where(array('%user_prenom' => $criterias['search_name']));
         }
 
         if (!empty($criterias['search_gender'])) {
@@ -101,7 +101,7 @@ class User extends Model
         $queryBuilder->limit($offset * NB_SEARCH_RESULTS, NB_SEARCH_RESULTS);
 
         return $queryBuilder->select(array('user.user_id',
-            'user_login',
+            'user_prenom',
             'FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age',
             'UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion',
             'user_photo_url',
@@ -127,7 +127,7 @@ class User extends Model
                     user_cash,
                     user_mail,
                     user_gender,
-                    user_login,
+                    user_prenom,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
                     user_birth,
@@ -166,13 +166,11 @@ class User extends Model
         $sql = "DELETE FROM user WHERE user_id = :id;
                 DELETE FROM user_views WHERE viewer_id = :id OR viewed_id = :id;
                 DELETE FROM message WHERE destinataire_id = :id OR expediteur_id = :id;
-                DELETE FROM chat WHERE `from` = :user_login OR `to` = :user_login;
+                DELETE FROM chat WHERE `from` = :id OR `to` = :id;
             ";
-
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue('id', $id, PDO::PARAM_INT);
-        $stmt->bindValue('user_login', $id, PDO::PARAM_STR);
 
         return $this->db->executeStmt($stmt);
     }
@@ -191,19 +189,6 @@ class User extends Model
         $stmt->bindValue(':code', $code, PDO::PARAM_STR);
 
         return $this->db->executeStmt($stmt);
-    }
-
-    public function isUsedLogin($login)
-    {
-        $sql = 'SELECT user_id
-                FROM   user
-                WHERE  user_login = :login';
-
-        $stmt = $this->db->prepare($sql);
-
-        $stmt->bindValue('login', $login, PDO::PARAM_STR);
-
-        return $this->db->executeStmt($stmt)->fetch();
     }
 
     public function isUsedEmail($email)
@@ -234,13 +219,14 @@ class User extends Model
         return $items['user_valid'];
     }
 
-    public function findByLoginPwd($login, $pwd)
+    public function findByEmailPwd($email, $pwd)
     {
         $sql = '
                 SELECT
                     user_id,
                     user_pwd,
-                    user_login,
+                    user_prenom,
+                    user_mail,
                     role_id,
                     user_photo_url,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
@@ -252,13 +238,13 @@ class User extends Model
                     user.ville_id as ville_id
                 FROM user
                 LEFT JOIN city ON user.ville_id = city.ville_id
-                WHERE LOWER(user_login) = LOWER(:user_login)
+                WHERE LOWER(user_mail) = LOWER(:user_mail)
                 AND user_pwd = :pwd
             ;';
 
             $stmt = $this->db->prepare($sql);
 
-            $stmt->bindValue('user_login', $login);
+            $stmt->bindValue('user_mail', $email);
             $stmt->bindValue('pwd', $pwd);
 
             return $this->db->executeStmt($stmt)->fetch();
@@ -270,7 +256,7 @@ class User extends Model
                 SELECT
                     user_id,
                     user_pwd,
-                    user_login,
+                    user_prenom,
                     role_id,
                     user_photo_url,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,

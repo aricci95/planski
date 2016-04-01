@@ -1,7 +1,7 @@
 <?php $photo = empty($this->user['user_photo_url']) ? 'unknown.png' : $this->user['user_photo_url']; ?>
 <div class="popup smallProfilePortrait shade" href="profile/<?php echo $this->user['user_id']; ?>" style="float:left;background-image:url(planski/photos/profile/<?php echo $photo; ?>);">
     <div class="smallProfileLogin">
-        <?php echo strtoupper($this->user['user_login']); ?><?php echo Tools::status($this->user['user_last_connexion']); ?>
+        <?php echo strtoupper($this->user['user_prenom']); ?><?php echo Tools::status($this->user['user_last_connexion']); ?>
     </div>
     <?php if (isset($this->user['rate'])) : ?>
         <div class="popup" href="vote/<?php echo Vote::TYPE_USER . '/' . $this->user['user_id']; ?>" style="margin-top: 166px;">

@@ -57,7 +57,7 @@ class Crew extends Model
         }
 
         return $queryBuilder->select(array('user.user_id',
-            'user_login',
+            'user_prenom',
             'FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age',
             'UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion',
             'user_photo_url',

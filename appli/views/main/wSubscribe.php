@@ -1,36 +1,50 @@
-<div class="title topShadow">INSCRIPTION</div>
-<div class="shadow"></div>
-    <form action="subscribe/save" method="post">
-        <div align="center" style="margin-top: 5%;">
-            <table >
-                <tr>
-                    <td>Pseudo :</td>
-                    <td><input name="user_login" value="<?php echo $this->context->getParam('user_login'); ?>" /></td>
-                </tr>
-                <tr>
-                    <td>Sexe :</td>
-                    <td><select name="user_gender">
-                        <option value="1" <?php if($this->context->getParam('user_gender') == "1") : ?> selected="selected" <?php endif; ?>>Homme</option>
-                        <option value="2" <?php if($this->context->getParam('user_gender') == "2") : ?> selected="selected" <?php endif; ?>>Femme</option>
-                    </select></td>
-                </tr>
-                <tr>
-                    <td>Mot de passe :</td>
-                    <td><input name="user_pwd" type="password" <?php if(!empty($this->context->params['user_pwd'])) : ?> value="<?php echo $this->context->params['user_pwd']; ?>"<?php endif; ?> /></td>
-                </tr>
-                <tr>
-                    <td>Répéter mot de passe :</td>
-                    <td><input name="verif_pwd" type="password" <?php if(!empty($this->context->params['verif_pwd'])) : ?> value="<?php echo $this->context->params['verif_pwd']; ?>"<?php endif; ?> /></td>
-                </tr>
-                <tr>
-                    <td>Adresse email :</td>
-                    <td><input name="user_mail" type="text" <?php if(!empty($this->context->params['user_mail'])) : ?> value="<?php echo $this->context->params['user_mail']; ?>"<?php endif; ?> /></td>
-                </tr>
-            </table>
-            <table>
+<form action="subscribe/save" method="post">
+    <div style="margin: 0 auto;width: 942px;">
+        <div style="float:left">
+            <img src="planski/images/structure/planskilike.png" />
+            <h1>Bienvenue !</h1>
+            <h2>Vous ne skierez plus jamais seul.</h2>
+        </div>
+        <div style="float:right;text-align: left;">
+            <h1>S'inscrire !</h1>
+            <h2>Et en plus c'est gratos.</h2>
+            <table class="subscribeForm">
                 <tr>
                     <td>
-                        <label><input type="checkbox" name="agreements" />&nbsp;J'ai lu et j'accepte les mentions légales du site PlanSki.fr <a href="subscribe/terms" target="_blank"><u>disponibles ICI</u></a></label>
+                        <input class="roundedInput" style="width:194px;" name="user_prenom" value="<?php echo $this->context->getParam('user_prenom'); ?>" placeholder="Prénom" />
+                        <input class="roundedInput" style="width:194px;" name="user_nom" value="<?php echo $this->context->getParam('user_nom'); ?>" placeholder="Nom" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="roundedInput" placeholder="Email" name="user_mail" type="text" <?php if(!empty($this->context->params['user_mail'])) : ?> value="<?php echo $this->context->params['user_mail']; ?>"<?php endif; ?> />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="roundedInput" placeholder="Mot de passe" name="user_pwd" type="password" <?php if(!empty($this->context->params['user_pwd'])) : ?> value="<?php echo $this->context->params['user_pwd']; ?>"<?php endif; ?> />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="roundedInput" placeholder="Vérification mot de passe" name="verif_pwd" type="password" <?php if(!empty($this->context->params['verif_pwd'])) : ?> value="<?php echo $this->context->params['verif_pwd']; ?>"<?php endif; ?> />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="user_gender_1">
+                            <input style="border:none;" id="user_gender_1" type="radio" name="user_gender" value="1" <?php if($this->context->getParam('user_gender') == "1") : ?> checked="checked" <?php endif; ?> />
+                            Homme
+                        </label>
+                        <label for="user_gender_2">
+                            <input style="border:none;" id="user_gender_2" type="radio" name="user_gender" value="2" <?php if($this->context->getParam('user_gender') == "2") : ?> checked="checked" <?php endif; ?> />
+                            Femme
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:60px;width:80px;font-size: 12px;">
+                        En validant l'inscription, vous acceptez et vous avez lu nos <a href="subscribe/terms" target="_blank">mentions légales</a> ainsi que notre <a href="">usage des cookies</a>
                     </td>
                 </tr>
                 <tr>
@@ -42,9 +56,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <input style="margin-left:170px;" size="20" type="submit" value="S'inscrire !" />
+                        <input class="submitButton" size="20" type="submit" value="S'inscrire !" />
                     </td>
                 </tr>
             </table>
         </div>
-    </form>
+    </div>
+</form>

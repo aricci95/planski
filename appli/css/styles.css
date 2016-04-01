@@ -5,6 +5,68 @@
     src: url(/planski/libraries/fonts/planski.ttf), url(/planski/libraries/fonts/planski.eot);
 }
 
+.submitButton {
+    font-size: 19px;
+    font-family: 'Freight Sans Bold', helvetica, arial, sans-serif !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-width: 194px;
+    padding: 7px 20px;
+    text-align: center;
+    line-height: 126%;
+    background: linear-gradient(#67ae55, #578843);
+    background-color: #69a74e;
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    border: 1px solid;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    letter-spacing: 1px;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+
+.i-large,
+.i-medium,
+.i-small {
+    position : absolute;
+    top: 82px;
+    right: 0;
+    width: 100%;
+    height: 97px;
+}
+
+.i-large {
+    background: url("/planski/images/div/particules_large.png") repeat 0px 0px;
+    -webkit-animation: dropFlowParticles 2s linear infinite;
+         -o-animation: dropFlowParticles 2s linear infinite;
+            animation: dropFlowParticles 2s linear infinite;
+}
+.i-medium {
+    background: url("/planski/images/div/particules_medium.png") repeat 0px 0px;
+    -webkit-animation: dropFlowParticles 12s linear infinite;
+         -o-animation: dropFlowParticles 12s linear infinite;
+            animation: dropFlowParticles 12s linear infinite;
+}
+.i-small {
+    background:url("/planski/images/div/particules_small.png") repeat 0px 0px;
+    -webkit-animation: dropFlowParticles 27s linear infinite;
+         -o-animation: dropFlowParticles 27s linear infinite;
+            animation: dropFlowParticles 27s linear infinite;
+}
+
+@-webkit-keyframes dropFlowParticles {
+    from { background-position: 0 0; }
+    to { background-position: 0 413px; }
+}
+
+@keyframes dropFlowParticles {
+    from { background-position: 0 0; }
+    to { background-position: 0 413px; }
+}
+
 img {
     border: none;
 }
@@ -29,7 +91,11 @@ body {
     margin-left:auto;
 }
 
-h2 {
+h2, h1 {
+    margin:5px;
+}
+
+h3 {
     margin-top: 3px;
     z-index: 1000;
     font-size: 61px;
@@ -37,6 +103,19 @@ h2 {
     float: left;
     padding-left: 44px;
     position: absolute;
+}
+
+.roundedInput {
+    margin:5px;
+    width:399px;
+    height:39px;
+    padding:8px;
+    border-radius: 8px;
+}
+
+.subscribeForm input {
+    border: 1px black solid;
+    border-color: #bdc7d8;
 }
 
 .counter {
@@ -70,6 +149,11 @@ h2 {
 .editTable th {
     width:190px;
     text-align: left;
+}
+
+.content {
+    min-height: 550px;
+    padding:40px;
 }
 
 .editTable input {
@@ -150,29 +234,11 @@ form {
     font-size: 17px;
 }
 
-.blackLink:link {color: #808080;}
-.blackLink:hover {color: black;}
-.blackLink:visited {color: #808080;}
-.blackLink:visited:hover {color: black;}
-.blackLink:active {color: #808080;}
-
-.userMenu:link {color: #E8E8E8;}
-.userMenu:hover {color: white;}
-.userMenu:visited {color: #E8E8E8;}
-.userMenu:visited:hover {color: white;}
-.userMenu:active {color: #E8E8E8;}
-
-.lienProfil:link {color: #E8E8E8;}
-.lienProfil:hover {color: white;}
-.lienProfil:visited {color: #E8E8E8;}
-.lienProfil:visited:hover {color: white;}
-.lienProfil:active {color: #E8E8E8;}
-
-.menuLien:link {color: white;}
-.menuLien:hover {color: #E8E8E8;}
-.menuLien:visited {color: white;}
-.menuLien:visited:hover {color: #E8E8E8;}
-.menuLien:active {color: white;}
+.menuLien:link {color: #E8E8E8;}
+.menuLien:hover {color: white;}
+.menuLien:visited {color: #E8E8E8;}
+.menuLien:visited:hover {color: white;}
+.menuLien:active {color: #E8E8E8;}
 
 a:visited {color: #808080;text-decoration: none ;}
 a:hover {color: white;text-decoration: none ;}
@@ -235,10 +301,6 @@ a:link {color: #808080;text-decoration: none ;}
     background-color: rgba(206, 206, 206, 0.34);
 }
 
-.minHeight {
-    min-height: 60%;
-}
-
 .header {
     background-color: rgb(29, 39, 35);
     height: 82px;
@@ -268,12 +330,26 @@ a:link {color: #808080;text-decoration: none ;}
     margin-right: auto;
 }
 
-.menu {
-    border: none;
+.snow {
     background-image: url(/planski/images/structure/montagnes.jpg);
+    border: none;
     background-position: center;
     margin-left: -17px;
     padding-top: 35px;
+    font-family: PlanSki;
+    text-align: center;
+    font-size: 33px;
+    height: 62px;
+    text-shadow: 2px 2px black;
+}
+
+.menu {
+    width: 642px;
+    height: 98%;
+    margin-left:-321px;
+    left:50%;
+    position: absolute;
+    top: 112px;
     font-family: PlanSki;
     text-align: center;
     font-size: 33px;
@@ -442,14 +518,12 @@ a:link {color: #808080;text-decoration: none ;}
 }
 
 .site {
+    width:auto;
     background-image:url(/planski/images/structure/texture.png);
-    border-left: 1px #808080 solid;
-    border-right: 1px #808080 solid;
     background-color:rgb(247, 247, 248);
     min-height: 90%;
     text-align:center;
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
 }
 
 .newPhoto:hover {
@@ -464,46 +538,9 @@ a:link {color: #808080;text-decoration: none ;}
     box-shadow: 0 0 10px #ccc;
 }
 
-.divElementSmall {
-    float:left;
-    position:relative;
-    overflow: hidden;
-    width:100px;
-    height:120px;
-    background-image:url('/planski/images/structure/backgrounduser.jpg');
-    border:1px grey solid;
-    margin:5px;
-    text-align:center;
-}
-
-.divElementSmall .pictoStatus {
-    position:absolute;
-    right:5;
-    bottom:25;
-}
-
 .userFont {
     padding-top:5px;
     font-size:15px;
-}
-
-.divElement .pictoStatus {
-    position:absolute;
-    left:80;
-    bottom:2;
-}
-
-.divElement {
-    float:left;
-    position:relative;
-    overflow: hidden;
-    width: 262px;
-    height:100px;
-    background-image:url('/planski/images/structure/backgrounduser.jpg');
-    background-position: right;
-    border:1px grey solid;
-    margin:1px;
-    text-align:left;
 }
 
 .divPhoto {
@@ -511,25 +548,6 @@ a:link {color: #808080;text-decoration: none ;}
     width:100px;
     height:100px;
     background-size: cover;
-}
-
-.divInfo {
-    float:left;
-    width: 138px;
-    height: 92px;
-    margin:5px;
-}
-
-.divElement:hover .controlPanel {
-    opacity: 1;
-}
-
-.divElement .controlPanel {
-    opacity:0;
-}
-
-.divElement:hover .actionPanel {
-    opacity: 1;
 }
 
 .editPhoto:hover .removePhoto {
@@ -560,20 +578,11 @@ a:link {color: #808080;text-decoration: none ;}
     background:url('/planski/images/div/profilephoto.png') no-repeat;
 }
 
-.controlPanel {
-    width:100px;
-    height:100px;
-}
-
 .smallPortrait {
     width:100px;
     height:100px;
     background-repeat: no-repeat;
     background-position: top center;
-}
-
-.userPseudo {
-    margin-top:10px;
 }
 
 .errorMessage {
@@ -586,10 +595,6 @@ a:link {color: #808080;text-decoration: none ;}
     margin:15px;
 }
 
-.maxWidth {
-    width: 100%;
-}
-
 div.autocomplete {
     font-size: 12px;
     position:absolute;
@@ -597,10 +602,6 @@ div.autocomplete {
     background-color:white;
     border:1px black solid;
     min-width: 172px;
-}
-
-.divElement  a:hover{
-    color:black;
 }
 
 div.debug {

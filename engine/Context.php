@@ -108,17 +108,4 @@ class Context
         return true;
     }
 
-    public function getCurrentMember()
-    {
-        return array(
-            'user_id' => $this->get('user_id'),
-            'user_valid' => $this->get('user_valid'),
-            'user_login' => $this->get('user_login'),
-            'user_last_connexion' => $this->get('user_last_connexion'),
-            'role_id' => $this->get('role_id'),
-            'user_photo_url' => $this->get('user_photo_url'),
-            'user_age' => $this->get('user_age'),
-            'user_gender' => $this->get('user_gender'),
-        );
-    }
 }

@@ -1,7 +1,7 @@
 <div class="title topShadow">MON PLAN SKI</div>
 <div class="shadow"></div>
 <div class="crew grey" style="height:270px;margin:10px;width:98%;display:inline-block;">
-    <h2>CREW</h2>
+    <h3>CREW</h3>
     <h1>
         <?php echo ucfirst($this->plan['crew_name']); ?>
     </h1>
@@ -33,7 +33,7 @@
 <?php endif ;?>
 <?php $photo = '1/1.jpg'; ?>
 <div class="grey" style="height: 500px;margin:10px;width:98%;display:inline-block;">
-    <h2>APPART</h2>
+    <h3>APPART</h3>
     <div id="popup_<?php echo $this->plan['apparts'][0]['appart_id']; ?>" class="profilePortrait shade" style="margin-top:90px;float:left;background-image:url(planski/photos/appart/<?php echo $photo; ?>);"></div>
     <div class="appartLibel" style="margin-top:360px;">
         <?php echo ucfirst($this->plan['apparts'][0]['appart_libel']); ?>

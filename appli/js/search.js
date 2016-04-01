@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     function refresh() {
         $.post($('.loading').attr('data-href') + '/getResults', {
-                search_login : $('#search_login').val(),
+                search_name : $('#search_name').val(),
                 search_distance : $('#search_distance').val(),
                 search_gender : $('#search_gender').val(),
                 search_age : $('#search_age').val(),

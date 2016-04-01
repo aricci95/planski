@@ -36,7 +36,8 @@ abstract class Controller
     {
         $init_vars = array(
             'user_id' => null,
-            'user_login' => null,
+            'user_prenom' => null,
+            'user_email' => null,
             'user_photo_url' => 'unknowUser.jpg',
         );
 

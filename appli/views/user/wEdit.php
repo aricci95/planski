@@ -11,7 +11,7 @@
                 <tr>
                     <th>Pseudo :</th>
                     <td>
-                        <input name="user_login" value="<?php echo $this->user['user_login']; ?>" />
+                        <input name="user_prenom" value="<?php echo $this->user['user_prenom']; ?>" />
                     </td>
                 </tr>
                 <tr>

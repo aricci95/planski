@@ -11,22 +11,21 @@
         <div class="header">
             <div class="userMenu">
                 <div style="float:left;">
-                    <a href="plan">
+                    <a href="<?php echo ($this->context->get('user_id')) ? 'plan' : 'subscribe'; ?>">
                         <img src="planski/images/structure/planski.png" style="margin-top: 25px;" />
                     </a>
                 </div>
-                <div>
-                    <?php if($this->context->get('user_id')) : ?>
-                        <?php $this->render('main/wUserMenu'); ?>
-                    <?php else : ?>
-                        <?php $this->render('main/wLogin'); ?>
-                    <?php endif; ?>
-                </div>
+                <?php if($this->context->get('user_id')) : ?>
+                    <?php $this->render('main/wUserMenu'); ?>
+                <?php else : ?>
+                    <?php $this->render('main/wLogin'); ?>
+                <?php endif; ?>
             </div>
         </div>
         <div class="site">
             <?php $this->render('main/wMenu'); ?>
-            <div style="margin-left: -1px;min-height: 550px;">
+            <?php $this->render('main/wTitle'); ?>
+            <div class="content">
                 <?php include($this->getViewFileName()); ?>
             </div>
         </div>

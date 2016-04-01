@@ -18,7 +18,7 @@ class Mailbox extends Model
         $sql = "SELECT
                     user.user_id as user_id,
                     message.message_id as message_id,
-                    user_login,
+                    user_prenom,
                     user_gender,
                     expediteur_id,
                     state_libel,
@@ -65,7 +65,7 @@ class Mailbox extends Model
 					destinataire_id,
 					LEFT(content, 50) as content,
 					message.state_id as state_id,
-					user_login,
+					user_prenom,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
 					user_photo_url
 					FROM

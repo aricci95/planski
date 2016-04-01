@@ -100,7 +100,7 @@ class MessageController extends AppController
 
 
         if ($this->get('message')->send($from, $to, $this->context->params['content'])) {
-            $message = $this->context->get('user_login') . ' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
+            $message = $this->context->get('user_prenom') . ' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
             $this->redirect('message', array($this->context->params['value'], 'msg' => MSG_SENT_OK));
         } else {
             Log::err('impossible d\'enregistrer le message.');

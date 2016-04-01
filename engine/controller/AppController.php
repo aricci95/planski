@@ -76,7 +76,7 @@ abstract class AppController extends Controller
         }
 
         // Cas user en session
-        if ($this->context->get('user_valid') && $this->context->get('user_id') && $this->context->get('user_login')) {
+        if ($this->context->get('user_valid') && $this->context->get('user_id') && $this->context->get('user_email')) {
             if ($this->context->get('user_valid') == 1) {
                 if ($this->context->get('role_id') >= $roleLimit) {
                     return true;
@@ -91,9 +91,9 @@ abstract class AppController extends Controller
                 $this->redirect('user', array('msg' => ERR_NOT_VALIDATED));
             }
         } // Cas pas d'user en session, vérification des cookies
-        elseif (!empty($_COOKIE['planskiLogin']) && !empty($_COOKIE['planskiPwd'])) {
+        elseif (!empty($_COOKIE['planskiEmail']) && !empty($_COOKIE['planskiPwd'])) {
             try {
-                $logResult = $this->get('auth')->checkLogin($_COOKIE['planskiLogin'], $_COOKIE['planskiPwd']);
+                $logResult = $this->get('auth')->checkLogin($_COOKIE['planskiEmail'], $_COOKIE['planskiPwd']);
             } catch (Exception $e) {
                 $this->redirect('user', array('msg' => $e->getCode()));
             }

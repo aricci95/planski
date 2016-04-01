@@ -13,7 +13,7 @@ class VoteController extends AppController
         $this->view->user = $this->model->query('user')
                                  ->single()
                                  ->where(array('user_id' => $id))
-                                 ->select(array('user_login'));
+                                 ->select(array('user_prenom'));
 
         $this->view->votes = $this->model->vote->get($type, $id);
 

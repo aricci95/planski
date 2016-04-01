@@ -57,7 +57,7 @@ class AppView
 
     public function getTitle()
     {
-        return $this->_title;
+        return strtoupper($this->_title);
     }
 
     public function setViewDatas($datas = array())

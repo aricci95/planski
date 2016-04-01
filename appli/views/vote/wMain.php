@@ -1,7 +1,7 @@
 <table class="comments" style="padding:10px;">
     <tr>
         <td colspan="2" style="text-align: center;">
-            Notez <b><?php echo $this->user['user_login']; ?></b> !
+            Notez <b><?php echo $this->user['user_prenom']; ?></b> !
         </td>
     </tr>
     <tr>

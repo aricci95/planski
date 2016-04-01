@@ -58,7 +58,7 @@ class Views extends Model
 				    user_gender,
     				user_id,
     				user_photo_url,
-    				user_login,
+    				user_prenom,
                     user_mail,
                     UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
                     FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,

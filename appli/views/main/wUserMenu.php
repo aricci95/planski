@@ -14,7 +14,7 @@
 <img style="position:absolute;top: 20px;left:86%" class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
 <img class="onglet" style="top: 46px;left: 90%;" src="planski/images/icones/onglet.png" />
 <a style="position:absolute;top:28px;left:89%;" class="dropdown" href="#">
-    <?php echo $this->context->get('user_login'); ?><i class="caret" aria-hidden="true"></i>
+    <?php echo $this->context->get('user_prenom'); ?><i class="caret" aria-hidden="true"></i>
 </a>
 <ul class="dropdown-menu">
     <li>

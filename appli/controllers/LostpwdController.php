@@ -34,22 +34,22 @@ class LostpwdController extends AppController
 
     public function renderSubmit()
     {
-        if (!empty($this->context->params['user_login'])) {
-            if ($this->get('auth')->sendPwd($this->context->params['user_login'])) {
+        if (!empty($this->context->params['user_mail'])) {
+            if ($this->get('auth')->sendPwd($this->context->params['user_mail'])) {
                 $this->redirect('user', array('msg' => MSG_PWD_SENT));
             } else {
-                $this->view->growler('Login / Email introuvable.', GROWLER_ERR);
+                $this->view->growler('Email introuvable.', GROWLER_ERR);
                 $this->render();
             }
         } elseif (!empty($this->context->params['user_mail'])) {
             if ($this->get('auth')->sendPwd(null, $this->context->params['user_mail'])) {
                 $this->redirect('user', array('msg' => MSG_PWD_SENT));
             } else {
-                $this->view->growler('Login / Email introuvable.', GROWLER_ERR);
+                $this->view->growler('Email introuvable.', GROWLER_ERR);
                 $this->render();
             }
         } else {
-            $this->view->growler('Login / Email introuvable.', GROWLER_ERR);
+            $this->view->growler('Email introuvable.', GROWLER_ERR);
             $this->render();
         }
     }

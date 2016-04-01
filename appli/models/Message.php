@@ -48,7 +48,7 @@ class Message extends Model
                 user.user_id as user_id,
                 expediteur_id,
                 destinataire_id,
-                user_login,
+                user_prenom,
                 user_gender,
                 content,
                 UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion,
@@ -112,7 +112,7 @@ class Message extends Model
         $sql = "SELECT
                     user.user_id as user_id,
                     message.message_id as message_id,
-                    user_login,
+                    user_prenom,
                     user_gender,
                     expediteur_id,
                     state_libel,

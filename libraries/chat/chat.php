@@ -36,7 +36,7 @@ if (!isset($_SESSION['openChatBoxes'])) {
 
 function chatHeartbeat() {
 	$mysqli = new mysqli(_HOST, _USER, _PASS, _BASE_DE_DONNEES);
-	$sql = "select * from chat where (chat.to = '".$_SESSION['user_login']."' AND recd = 0) order by id ASC";
+	$sql = "select * from chat where (chat.to = '" . $_SESSION['user_id'] . "' AND recd = 0) order by id ASC";
 	$query = mysqli_query($mysqli, $sql);
 	$items = '';
 
@@ -107,7 +107,7 @@ EOD;
 	}
 }
 
-	$sql = "update chat set recd = 1 where chat.to = '".$_SESSION['user_login']."' and recd = 0";
+	$sql = "update chat set recd = 1 where chat.to = '" . $_SESSION['user_id'] . "' and recd = 0";
 	$query = mysqli_query($mysqli, $sql);
 
 	if ($items != '') {
@@ -152,7 +152,7 @@ function startChatSession() {
 header('Content-type: application/json');
 ?>
 {
-		"username": "<?php echo (empty($_SESSION['user_login'])) ? '' : $_SESSION['user_login']; ?>",
+		"username": "<?php echo (empty($_SESSION['user_prenom'])) ? '' : $_SESSION['user_prenom']; ?>",
 		"items": [
 			<?php echo $items;?>
         ]
@@ -166,7 +166,7 @@ header('Content-type: application/json');
 
 function sendChat() {
 	$mysqli = new mysqli(_HOST, _USER, _PASS, _BASE_DE_DONNEES);
-	$from = $_SESSION['user_login'];
+	$from = $_SESSION['user_id'];
 	$to = $_POST['to'];
 	$message = $_POST['message'];
 

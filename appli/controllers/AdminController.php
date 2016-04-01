@@ -16,7 +16,7 @@ class AdminController extends AppController
     {
         $this->view->users = $this->model->query('user')
                                   ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
-                                  ->orderBy(array('user_login'))
+                                  ->orderBy(array('user_prenom', 'user_nom'))
                                   ->select();
 
         $this->view->action = 'setSwitch';
@@ -36,7 +36,7 @@ class AdminController extends AppController
                     $this->view->growler('Utilistateur non validé.', GROWLER_ERR);
                 } else {
                     $this->context->set('user_id', $user['user_id'])
-                                  ->set('user_login', $user['user_login'])
+                                  ->set('user_prenom', $user['user_prenom'])
                                   ->set('role_id', $user['role_id'])
                                   ->set('user_photo_url', $user['user_photo_url'])
                                   ->set('user_valid', $user['user_valid'])
@@ -57,7 +57,7 @@ class AdminController extends AppController
     {
         $this->view->users = $this->model->query('user')
                                   ->where(array('!user_id' => $this->context->get('user_id'), 'user_valid' => 1))
-                                  ->orderBy(array('user_login'))
+                                  ->orderBy(array('user_prenom', 'user_nom'))
                                   ->select();
 
         $this->view->action = 'removeUser';
