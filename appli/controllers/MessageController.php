@@ -67,9 +67,12 @@ class MessageController extends AppController
 
         $parentMessages = $this->model->message->getConversation($userId);
 
+
         if ($this->_checkMessages($parentMessages, $userId)) {
             $this->view->parentMessages  = $parentMessages;
             $this->view->destinataire = $this->_getDestinataire($parentMessages, $userId);
+
+            $this->view->setTitle(ucfirst($this->view->destinataire['user_prenom']));
             $this->view->setViewName('message/wMain');
             $this->view->render();
         } else {
