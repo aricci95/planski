@@ -7,7 +7,7 @@
 
 @font-face {
     font-family: Winter;
-    src: url(/planski/libraries/fonts/winter.otf);
+    src: url(/planski/libraries/fonts/winter.ttf), url(/planski/libraries/fonts/winter.eot);
 }
 
 .submitButton {
@@ -168,6 +168,7 @@ h3 {
 }
 
 .dropdown-menu {
+    z-index: 2000;
     display:none;
     position:absolute;
     font-size: 14px;
@@ -341,6 +342,7 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
 }
 
 .userMenu {
+    border:none;
     width: 970px;
     height: 98%;
     margin:0 auto;

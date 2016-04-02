@@ -1,5 +1,3 @@
-<div class="heading topShadow">MESSAGES</div>
-<div class="shadow"></div>
 <table class="results" align="center">
     <?php if (empty($this->userMessages)) : ?>
         <tr>
