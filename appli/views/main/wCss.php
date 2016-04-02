@@ -3,6 +3,7 @@
 <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/chat.css" />
 <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/screen.css" />
 <link rel="stylesheet" type="text/css" href="planski/libraries/growler/css/gritter.css" />
+<link rel="stylesheet" type="text/css" href="planski/libraries/tooltipmenu/css/component.css" />
 <?php if($this->isJSActivated(JS_DATEPICKER)) : ?>
     <link rel="stylesheet" type="text/css" href="planski/libraries/datepicker/jquery.datetimepicker.css"/ >
 <?php endif;

@@ -1,4 +1,5 @@
 <script type="text/javascript" src="planski/libraries/jquery-1.11.1.min.js"></script>
+<script src="planski/libraries/tooltipmenu/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="planski/libraries/chat/js/chat.js"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="planski/libraries/growler/js/gritter.js"></script>
@@ -64,6 +65,4 @@ if($this->isJSActivated(JS_FEED)) : ?>
 if($this->isJSActivated(JS_EDIT)) : ?>
     <script type="text/javascript" src="planski/appli/js/edit.js"></script>
 <?php endif; ?>
-<link rel="stylesheet" type="text/css" href="planski/libraries/tooltipmenu/css/component.css" />
-<script src="planski/libraries/tooltipmenu/js/modernizr.custom.js"></script>
 
