@@ -124,6 +124,7 @@ h3 {
 }
 
 .counter {
+    display: inline-block;
     padding: 2px;
     width: 18px;
     height: 20px;
@@ -397,7 +398,7 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
 .caret {
     float:right;
     margin-left:10px;
-    margin-top:10px;
+    margin-top:14px;
     border-top: 4px solid white;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
@@ -449,10 +450,6 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
 
 .menuLine {
     float:right;
-}
-
-.menuLine li {
-    display: inline-block;
 }
 
 .smallProfilePortrait {

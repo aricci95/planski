@@ -64,3 +64,6 @@ if($this->isJSActivated(JS_FEED)) : ?>
 if($this->isJSActivated(JS_EDIT)) : ?>
     <script type="text/javascript" src="planski/appli/js/edit.js"></script>
 <?php endif; ?>
+<link rel="stylesheet" type="text/css" href="planski/libraries/tooltipmenu/css/component.css" />
+<script src="planski/libraries/tooltipmenu/js/modernizr.custom.js"></script>
+
