@@ -43,7 +43,7 @@ class ProfileController extends AppController
 
     public function renderSave()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->context->params['user_description'] = htmlspecialchars($this->context->params['user_description'], ENT_QUOTES, 'utf-8');
             $this->context->params['user_profession']  = htmlspecialchars($this->context->params['user_profession'], ENT_QUOTES, 'utf-8');
 

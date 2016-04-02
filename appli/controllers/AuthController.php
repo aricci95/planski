@@ -11,15 +11,15 @@ class AuthController extends AppController
                 $authentResult = $this->get('auth')->login($this->context->params['user_mail'], $this->context->params['user_pwd']);
 
                 if ($authentResult) {
-                    $this->redirect('user');
+                    $this->redirect('plan');
                 }
             } catch (Exception $e) {
                 Log::err($e->getMessage());
-                $this->redirect('user', array('msg' => $e->getCode()));
+                $this->redirect('subscribe', array('msg' => $e->getCode()));
             }
         }
 
-        $this->redirect('user', array('msg' => ERR_LOGIN));
+        $this->redirect('subscribe', array('msg' => ERR_LOGIN));
     }
 
     public function renderDisconnect()

@@ -124,14 +124,12 @@ h3 {
 }
 
 .counter {
-    z-index: 1000;
     width: 17px;
-    height: 23px;
+    height: 20px;
     border-radius: 2px;
     color: white;
     background-color: rgb(245, 23, 23);
     text-shadow: 2px 2px grey;
-    padding-left: 6px;
 }
 
 .selected {
@@ -167,13 +165,15 @@ h3 {
 }
 
 .dropdown-menu {
-    display:none;
+    display:block;
+    position:absolute;
     font-size: 14px;
     z-index: 1000;
-    float: left;
     min-width: 100px;
     padding: 5px 10px;
     margin: 2px 0 0;
+    margin-left: 140px;
+    margin-top: 63px;
     list-style: none;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -390,9 +390,9 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
 }
 
 .caret {
-    top: 10px;
-    right: -10px;
-    position:absolute;
+    float:right;
+    margin-left:10px;
+    margin-top:10px;
     border-top: 4px solid white;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
@@ -412,8 +412,10 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
 }
 
 .onglet {
+    margin-left:55px;
+    position:absolute;
     z-index: 1007;
-    display:none;
+    display:block;
 }
 
 .profilePortrait {
@@ -435,6 +437,14 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
+}
+
+.menuLine {
+    float:right;
+}
+
+.menuLine li {
+    display: inline-block;
 }
 
 .smallProfilePortrait {

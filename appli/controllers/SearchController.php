@@ -2,7 +2,7 @@
 
 abstract class SearchController extends AppController
 {
-    protected $_authLevel = AUTH_LEVEL_NONE;
+    protected $_authLevel = AUTH_LEVEL_USER;
 
     protected $_type;
 

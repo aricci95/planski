@@ -76,32 +76,32 @@ abstract class AppController extends Controller
         }
 
         // Cas user en session
-        if ($this->context->get('user_valid') && $this->context->get('user_id') && $this->context->get('user_email')) {
+        if ($this->context->get('user_valid') && $this->context->get('user_id') && $this->context->get('user_mail')) {
             if ($this->context->get('user_valid') == 1) {
                 if ($this->context->get('role_id') >= $roleLimit) {
                     return true;
                 } else {
                     // Utilisateur valide mais droits insuffisants
-                    $this->redirect('user', array('msg' => ERR_AUTH));
+                    $this->redirect('subscribe', array('msg' => ERR_AUTH));
                     die;
                 }
             } else {
                 // Message non validé
                 session_destroy();
-                $this->redirect('user', array('msg' => ERR_NOT_VALIDATED));
+                $this->redirect('subscribe', array('msg' => ERR_NOT_VALIDATED));
             }
         } // Cas pas d'user en session, vérification des cookies
         elseif (!empty($_COOKIE['planskiEmail']) && !empty($_COOKIE['planskiPwd'])) {
             try {
                 $logResult = $this->get('auth')->checkLogin($_COOKIE['planskiEmail'], $_COOKIE['planskiPwd']);
             } catch (Exception $e) {
-                $this->redirect('user', array('msg' => $e->getCode()));
+                $this->redirect('subscribe', array('msg' => $e->getCode()));
             }
 
             return $logResult;
         } // Cas page accès sans autorisation
         elseif ($roleLimit != AUTH_LEVEL_NONE) {
-            $this->redirect('user', array('msg' => ERR_AUTH));
+            $this->redirect('subscribe', array('msg' => ERR_AUTH));
         }
 
         return false;

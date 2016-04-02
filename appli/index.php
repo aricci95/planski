@@ -23,8 +23,10 @@ if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Plan') {
     if(!file_exists(ROOT_DIR.'/appli/controllers/'.$page.'.php')) {
         $page = 'PlanController';
     }
-} else {
+} else if (!empty($_SESSION['user_id']) > 0 && $_SESSION['user_valid'] == 1) {
     $page = 'PlanController';
+} else {
+    $page = 'SubscribeController';
 }
 
 // ACTION
