@@ -1,9 +1,8 @@
-<script type="text/javascript" src="planski/libraries/jquery-1.11.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="planski/libraries/tooltipmenu/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="planski/libraries/chat/js/chat.js"></script>
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<!--<script type="text/javascript" src="http://www.google.com/jsapi"></script>-->
 <script type="text/javascript" src="planski/libraries/growler/js/gritter.js"></script>
-<script type="text/javascript" src="planski/appli/js/dropdown.js"></script>
 <script type="text/javascript" src="planski/libraries/modal/js/jquery.magnific-popup.js"></script>
 <script type="text/javascript" src="planski/appli/js/modal.js"></script>
 <script>

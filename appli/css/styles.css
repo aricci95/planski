@@ -163,37 +163,6 @@ h3 {
 .editTable input {
     width:300px;
 }
-
-.dropdownIndex {
-    background-color:rgb(170, 229, 247);
-}
-
-.dropdown-menu {
-    z-index: 2000;
-    display:none;
-    position:absolute;
-    font-size: 14px;
-    z-index: 1000;
-    min-width: 100px;
-    padding: 5px 10px;
-    margin: 2px 0 0;
-    margin-left: 140px;
-    margin-top: 63px;
-    list-style: none;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.2);
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-}
-
 .modal {
     background-image:url(/planski/images/structure/texture.png);
     width:80%;

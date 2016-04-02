@@ -12,7 +12,7 @@
             Aucun résultat pour les critères choisis.
         </div>
 <?php else : ?>
-    <div align="center" class="results">
+    <div align="center" class="results" style="overflow: hidden;">
         <?php $this->render('search/wItems'); ?>
     </div>
     <img class="loading" src="planski/images/icones/loading.gif" style="display:none;" data-show="false" data-end="false" data-offset="0" data-href="<?php echo $this->type; ?>" />
