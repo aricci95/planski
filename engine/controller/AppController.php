@@ -28,11 +28,6 @@ abstract class AppController extends Controller
 
     private function _getNotifications()
     {
-        // vues
-        $viewCount = $this->model->views->countViews($this->context->get('user_id'));
-
-        $this->context->set('views', (int) $viewCount);
-
         // Vérification des nouveaux messages
         $oldMessagesCount  = $this->context->get('new_messages');
 

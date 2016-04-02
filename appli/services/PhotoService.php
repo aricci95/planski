@@ -18,10 +18,6 @@ class PhotoService extends Service
 
     public function delete($id, $path)
     {
-        if (file_exists(ROOT_DIR . '/photos/small/' . $path)) {
-            unlink(ROOT_DIR . '/photos/small/' . $path);
-        }
-
         if (file_exists(ROOT_DIR . '/photos/profile/' . $path)) {
             unlink(ROOT_DIR . '/photos/profile/' . $path);
         }
@@ -84,34 +80,32 @@ class PhotoService extends Service
             $profileTmp = imagecreatetruecolor($profilewidth, $profileheight);
             imagecopyresampled($profileTmp, $src, 0, 0, 0, 0, $profilewidth, $profileheight, $width, $height);
 
-            // ICONE (qualibrage de la hauteur)
-            $smallTmp = null;
-            $smallheight = 150;
-            $smallwidth = ($width / $height) * $smallheight;
-            $smallTmp = imagecreatetruecolor($smallwidth, $smallheight);
-            imagecopyresampled($smallTmp, $src, 0, 0, 0, 0, $smallwidth, $smallheight, $width, $height);
-
             $photo_data['photo_url'] = uniqid().'.'. $extension;
             $photo_data['type_id']   = (int) $type_id;
             $photo_data['key_id']    = (int) $key_id;
 
-            if (!$this->model->photo->insert($photo_data)) {
-                throw new Exception('Impossible d\'enregistrer la photo, merci de réessayer.');
+            if ($type_id == PHOTO_TYPE_USER) {
+                if($this->query('user')->updateById($this->context->get('user_id'), array('user_photo_url' => $photo_data['photo_url']))) {
+                    $this->context->set('user_photo_url', $photo_data['photo_url']);
+                } else {
+                    throw new Exception('Impossible d\'enregistrer la photo, merci de réessayer.');
+                }
+            } else {
+                if (!$this->model->photo->insert($photo_data)) {
+                    throw new Exception('Impossible d\'enregistrer la photo, merci de réessayer.');
+                }
             }
 
             $filename  = ROOT_DIR . '/photos/profile/' . $photo_data['photo_url'];
-            $filename1 = ROOT_DIR . '/photos/small/' . $photo_data['photo_url'];
 
             // Creation
             imagejpeg($profileTmp, $filename, 100);
-            imagejpeg($smallTmp, $filename1, 100);
 
             // DESTRUCTION
             imagedestroy($src);
-            imagedestroy($smallTmp);
             imagedestroy($profileTmp);
 
-            return true;
+            return $photo_data['photo_url'];
 
         }
     }

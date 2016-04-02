@@ -20,7 +20,7 @@ class ProfileController extends AppController
         $this->view->addJS(JS_AUTOCOMPLETE);
 
         $this->view->user = $this->model->User->getUserByIdDetails($this->context->get('user_id'));
-
+        $this->view->setTitle('Informations');
         $this->view->setViewName('user/wEdit');
         $this->view->render();
     }
@@ -41,9 +41,28 @@ class ProfileController extends AppController
         $this->view->render();
     }
 
+    public function renderUploadPhoto()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['new_photo']) && !empty($_FILES['new_photo']['tmp_name'])) {
+            try {
+                $this->get('photo')->uploadImage($this->context->getParam('filename'), $this->context->getParam('filename'), PHOTO_TYPE_USER, $this->context->get('user_id'));
+            } catch (Exception $e) {
+                $this->view->growler($e->getMessage(), GROWLER_ERR);
+            }
+        }
+    }
+
     public function renderSave()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (!empty($_FILES['user_photo']) && !empty($_FILES['user_photo']['tmp_name'])) {
+                try {
+                    $this->get('photo')->uploadImage($_FILES['user_photo']['name'], $_FILES['user_photo']['tmp_name'], PHOTO_TYPE_USER, $this->context->get('user_id'));
+                } catch (Exception $e) {
+                    $this->view->growler($e->getMessage(), GROWLER_ERR);
+                }
+            }
+
             $this->context->params['user_description'] = htmlspecialchars($this->context->params['user_description'], ENT_QUOTES, 'utf-8');
             $this->context->params['user_profession']  = htmlspecialchars($this->context->params['user_profession'], ENT_QUOTES, 'utf-8');
 

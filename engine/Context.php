@@ -24,13 +24,7 @@ class Context
             'user_id' => 0,
             'role_id' => 0,
             'user_photo_url' => 'unknowUser.jpg',
-            'links' => array(),
-            'links_count_received' => 0,
-            'links_count_accepted' => 0,
-            'links_count_blacklist' => 0,
             'new_messages' => 0,
-            'forum_notification' => true,
-            'views' => 0,
         );
 
         $this->_sessionData = array_merge($init_vars, $_SESSION);

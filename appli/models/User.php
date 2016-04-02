@@ -164,7 +164,6 @@ class User extends Model
     public function deleteById($id)
     {
         $sql = "DELETE FROM user WHERE user_id = :id;
-                DELETE FROM user_views WHERE viewer_id = :id OR viewed_id = :id;
                 DELETE FROM message WHERE destinataire_id = :id OR expediteur_id = :id;
                 DELETE FROM chat WHERE `from` = :id OR `to` = :id;
             ";

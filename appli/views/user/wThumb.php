@@ -30,7 +30,5 @@
     <?php if (!empty($this->user['user_ride'])) : ?>
         <img src="/planski/images/icones/<?php echo User::$rides[$this->user['user_ride']]; ?>.png" style="left: 0px;position: absolute;top: 47px;" />
     <?php endif; ?>
-    <?php if (!empty($this->user['user_level'])) : ?>
-        <img src="/planski/images/medals/<?php echo $this->user['user_level'] . '.png'; ?>" style="position: absolute;top:46px;right:0px;" />
-    <?php endif; ?>
+    <img src="/planski/images/medals/<?php echo $this->user['user_level'] . '.png'; ?>" style="position: absolute;top:46px;right:0px;" />
 </div>

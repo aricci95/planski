@@ -1,4 +1,9 @@
 $(document).ready(function() {
+
+    $("input:file").change(function () {
+       $("form").submit();
+    });
+
     $(".radio_img").click(function (e) {
         e.preventDefault();
 

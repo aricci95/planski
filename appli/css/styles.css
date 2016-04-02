@@ -124,12 +124,15 @@ h3 {
 }
 
 .counter {
-    width: 17px;
+    padding: 2px;
+    width: 18px;
     height: 20px;
     border-radius: 2px;
     color: white;
     background-color: rgb(245, 23, 23);
     text-shadow: 2px 2px grey;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .selected {
@@ -165,7 +168,7 @@ h3 {
 }
 
 .dropdown-menu {
-    display:block;
+    display:none;
     position:absolute;
     font-size: 14px;
     z-index: 1000;
@@ -412,10 +415,11 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
 }
 
 .onglet {
+    top:55px;
     margin-left:55px;
     position:absolute;
     z-index: 1007;
-    display:block;
+    display:none;
 }
 
 .profilePortrait {
@@ -431,12 +435,14 @@ a:hover, a:visited:hover {color: white;text-decoration: none ;}
 }
 
 .connectedPhoto {
-    width:35px;
-    height:35px;
+    top: 21px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
+    position: absolute;
 }
 
 .menuLine {
