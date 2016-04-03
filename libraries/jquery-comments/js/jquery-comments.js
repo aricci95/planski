@@ -58,23 +58,23 @@
             noCommentsIconURL: '',
 
             // Strings to be formatted (for example localization)
-            textareaPlaceholderText: 'Add a comment',
+            textareaPlaceholderText: 'Ajouter un commentaire',
             newestText: 'Newest',
             oldestText: 'Oldest',
             popularText: 'Popular',
-            attachmentsText: 'Attachments',
-            sendText: 'Send',
-            replyText: 'Reply',
-            editText: 'Edit',
-            editedText: 'Edited',
-            youText: 'You',
-            saveText: 'Save',
-            deleteText: 'Delete',
+            attachmentsText: 'Fichiers joints',
+            sendText: 'Envoyer',
+            replyText: 'Répondre',
+            editText: 'Editer',
+            editedText: 'Edité',
+            youText: 'Vous',
+            saveText: 'Sauvegarder',
+            deleteText: 'Supprimer',
             viewAllRepliesText: 'View all __replyCount__ replies',
-            hideRepliesText: 'Hide replies',
-            noCommentsText: 'No comments',
-            noAttachmentsText: 'No attachments',
-            attachmentDropText: 'Drop files here',
+            hideRepliesText: 'Cacher les réponses',
+            noCommentsText: 'Aucun comments',
+            noAttachmentsText: 'No fichiers',
+            attachmentDropText: 'Glissez des fichiers ici',
             textFormatter: function(text) {
                 return text;
             },
@@ -345,7 +345,7 @@
             this.createComments();
 
             // Create attachments if enabled
-            if(this.options.enableAttachments) this.createAttachments(); 
+            if(this.options.enableAttachments) this.createAttachments();
 
             // Remove spinner
             this.$el.find('> .spinner').remove();
@@ -673,7 +673,7 @@
              } else {
                 var defaultDropdownEl = this.$el.find('.navigation ul.dropdown').children().first();
                 titleEl.find('header').html(defaultDropdownEl.html());
-             } 
+             }
 
             // Show active container
             this.showActiveContainer();
@@ -694,7 +694,7 @@
             // Save comment on cmd/ctrl + enter
             if(ev.keyCode == 13) {
                 var metaKey = ev.metaKey || ev.ctrlKey;
-                if(this.options.postCommentOnEnter || metaKey) {                
+                if(this.options.postCommentOnEnter || metaKey) {
                     var el = $(ev.currentTarget);
                     el.siblings('.control-row').find('.save').trigger('click');
                     ev.stopPropagation();
@@ -1047,7 +1047,7 @@
             count--;
             $(ev.currentTarget).data('dnd-count', count);
 
-            if(count == 0) {            
+            if(count == 0) {
                 $(ev.currentTarget).removeClass('drag-over');
                 if(callback) callback();
             }
@@ -1132,7 +1132,7 @@
                 noCommentsIcon.css('background-image', 'url("'+this.options.noCommentsIconURL+'")');
                 noCommentsIcon.addClass('image');
             }
-            noComments.prepend($('<br/>')).prepend(noCommentsIcon);            
+            noComments.prepend($('<br/>')).prepend(noCommentsIcon);
             commentsContainer.append(noComments);
 
             // Attachments
@@ -1559,7 +1559,7 @@
                     // Icon
                     var availableIcons = ['archive', 'audio', 'code', 'excel', 'image', 'movie', 'pdf', 'photo',
                         'picture', 'powerpoint', 'sound', 'video', 'word', 'zip'];
-                    
+
                     var iconClass = 'fa fa-file-o';
                     if(availableIcons.indexOf(format) > 0) {
                         iconClass = 'fa fa-file-' + format + '-o';
