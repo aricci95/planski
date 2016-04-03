@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $("div .crew").mouseenter(function (e) {
         $(e.target).find('.join').show();
     });

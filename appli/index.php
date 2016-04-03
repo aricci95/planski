@@ -1,5 +1,5 @@
 <?php
-session_name('planski');
+session_name('Crewski');
 session_start();
 
 // Récupération du chemin absolu
@@ -18,20 +18,20 @@ require ROOT_DIR . '/appli/constants.php';
 
 // APPLICATION BOOTSTRAP
 // CONTROLLER
-if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Plan') {
+if(!empty($_GET['page']) && ucfirst($_GET['page']) != 'Crew') {
     $page = ucfirst($_GET['page']).'Controller';
     if(!file_exists(ROOT_DIR.'/appli/controllers/'.$page.'.php')) {
-        $page = 'PlanController';
+        $page = 'CrewController';
     }
 } else if (!empty($_SESSION['user_id']) > 0 && $_SESSION['user_valid'] == 1) {
-    $page = 'PlanController';
+    $page = 'CrewController';
 } else {
     $page = 'SubscribeController';
 }
 
 // ACTION
 $action = 'render';
-if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'Plan') {
+if (!empty($_GET['action']) && ucfirst($_GET['action']) != 'Crew') {
     $action .= ucfirst($_GET['action']);
 }
 
@@ -79,12 +79,12 @@ try {
 } catch (Exception $e) {
     Service_Container::getInstance()->get('Mailer')->sendError($e);
 
-    if ($page == 'PlanController') {
+    if ($page == 'CrewController') {
         include ROOT_DIR . '/appli/views/main/maintenance.htm';
         die;
     } else {
-        require_once ROOT_DIR . '/appli/controllers/PlanController.php';
-        $controller = new PlanController();
+        require_once ROOT_DIR . '/appli/controllers/CrewController.php';
+        $controller = new CrewController();
 
         $controller->view->growlerError();
         $controller->render();

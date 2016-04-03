@@ -19,7 +19,7 @@
 <div class="profileLogin">
     <?php echo strtoupper($this->user['user_prenom']); ?><?php echo Tools::status($this->user['user_last_connexion']); ?>
     <?php if (!empty($this->user['user_ride'])) : ?>
-        <img src="/planski/images/icones/<?php echo User::$rides[$this->user['user_ride']]; ?>.png" style="left: 0px;position: absolute;top: 47px;" />
+        <img src="/planski/images/icones/<?php echo User::$rides[$this->user['user_ride']]; ?>.png" style="padding: 3px;left: 0px;position: absolute;width: 37px;" />
     <?php endif; ?>
-    <img src="/planski/images/medals/<?php echo $this->user['user_level'] . '.png'; ?>" style="position: absolute;top:46px;right:0px;" />
+    <img src="/planski/images/medals/<?php echo $this->user['user_level'] . '.png'; ?>" style="position: absolute;right: 0;padding: 1px;width: 49px;" />
 </div>

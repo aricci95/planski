@@ -2,6 +2,16 @@
 
 class City extends Model
 {
+    public static $attributes = array(
+        'primary' => array(
+            'ville_nom_reel',
+            'city.ville_id',
+            'LEFT(ville_code_postal, 2) as ville_code_postal',
+        ),
+        'details' => array(
+
+        ),
+    );
 
     public function suggest($string)
     {

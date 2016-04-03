@@ -20,6 +20,7 @@ class ProfileController extends AppController
         $this->view->addJS(JS_AUTOCOMPLETE);
 
         $this->view->user = $this->model->User->getUserByIdDetails($this->context->get('user_id'));
+
         $this->view->setTitle('Informations');
         $this->view->setViewName('user/wEdit');
         $this->view->render();

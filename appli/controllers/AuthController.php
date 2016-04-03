@@ -11,7 +11,7 @@ class AuthController extends AppController
                 $authentResult = $this->get('auth')->login($this->context->params['user_mail'], $this->context->params['user_pwd']);
 
                 if ($authentResult) {
-                    $this->redirect('plan');
+                    $this->redirect('crew');
                 }
             } catch (Exception $e) {
                 Log::err($e->getMessage());

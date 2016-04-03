@@ -10,10 +10,38 @@ class Crew extends Model
                       ->select(array('crew.crew_id', 'crew_name'));
 
         foreach ($crews as $key => $crew) {
+            $totals = array(
+                'rate' => 0,
+                // 'level' => 0,
+                'fun' => 0,
+                'cuisine' => 0,
+                'hygiene' => 0,
+                'cash' => 0,
+            );
+
             $users = $this->getMembers($crew['crew_id'], $criterias);
 
             if (!empty($users)) {
                 $crews[$key]['users'] = $users;
+            }
+
+            foreach($users as $user) {
+                foreach (User::$evals as $value) {
+                    $totals[$value] += $user['user_' . $value];
+                }
+            }
+
+            foreach ($totals as $index => $value) {
+                $crews[$key]['crew_' . $index] = round($value / count($users), 1);
+            }
+
+            $apparts = $this->query('plan')
+                        ->join(array('plan_appart' => 'plan_id', 'appart' => 'appart_id'))
+                        ->where(array('crew_id' => $crew['crew_id']))
+                        ->select();
+
+            if (!empty($apparts)) {
+                $crews[$key]['apparts'] = $apparts;
             }
         }
 
@@ -70,8 +98,9 @@ class Crew extends Model
             'user_vehicule',
             'user_hygiene',
             'user_fun',
+            'user_cash',
             'LEFT(ville_code_postal, 2) as ville_code_postal',
-            '(SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = ' . Vote::TYPE_USER . ') AS rate'
+            '(SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = ' . Vote::TYPE_USER . ') AS user_rate'
         ));
     }
 }

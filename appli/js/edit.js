@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $("input:file").change(function () {
        $("form").submit();
     });

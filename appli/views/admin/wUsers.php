@@ -1,5 +1,3 @@
-<div class="title topShadow">ADMINISTRATION</div>
-<div class="shadow"></div>
 <form action="admin/<?php echo $this->action; ?>" method="post">
     Utilisateur :
     <select name="user_id" align="center" style="margin:40px;">

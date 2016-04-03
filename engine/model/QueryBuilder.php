@@ -205,7 +205,7 @@ class QueryBuilder
 
     public function selectById($id, array $attributes = array())
     {
-        return $this->single()->where(array($this->table . '_id' => $id))->select($attributes);
+        return $this->single()->where(array($this->table . '.' . $this->table . '_id' => $id))->select($attributes);
     }
 
     public function updateById($id, array $attributes = array())

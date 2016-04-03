@@ -7,9 +7,15 @@
                 <td><?php echo $this->user['user_mail']; ?></td>
             </tr>
             <tr>
-                <th>Pseudo :</th>
+                <th>Prénom :</th>
                 <td>
                     <input name="user_prenom" value="<?php echo $this->user['user_prenom']; ?>" />
+                </td>
+            </tr>
+            <tr>
+                <th>Nom :</th>
+                <td>
+                    <input name="user_nom" value="<?php echo $this->user['user_nom']; ?>" />
                 </td>
             </tr>
             <tr>
@@ -133,7 +139,7 @@
             <td style="position: absolute;">
                 <?php for ($i = 1; $i <= 4; $i++) : ?>
                     <a class="cursor_img" href="#">
-                        <img data-name="user_cuisine" data-value="<?php echo $i; ?>" <?php echo ($this->user['user_cuisine'] >= $i) ? '' : 'class="opacity"'; ?> src="/planski/images/icones/food.png" />
+                        <img data-name="user_cuisine" data-value="<?php echo $i; ?>" <?php echo ($this->user['user_cuisine'] >= $i) ? '' : 'class="opacity"'; ?> src="/planski/images/icones/cuisine.png" />
                         <input style="display:none" type="radio" name="user_cuisine" value="<?php echo $i; ?>" <?php echo ($this->user['user_cuisine'] == $i) ? 'checked' : '' ; ?>>
                     </a>
                 <?php endfor; ?>

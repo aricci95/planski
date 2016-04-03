@@ -6,7 +6,6 @@
         <input id="submit_button" type="submit" src="planski/images/boutons/bnt_search.png" ALT="Rechercher" value="Chercher" />
     </div>
 </form>
-<div class="formShadow"></div>
  <?php if (empty($this->elements)) : ?>
         <div align="center" class="noresults">
             Aucun résultat pour les critères choisis.

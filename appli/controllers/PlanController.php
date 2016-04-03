@@ -24,6 +24,7 @@ class PlanController extends SearchController
 
         $this->view->plan = $this->model->plan->getById($this->context->getParam('value'));
 
+        $this->view->setTitle('Mon plan ski');
         $this->view->setViewName('plan/wMain');
         $this->view->render();
     }

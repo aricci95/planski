@@ -1,5 +1,3 @@
-<div class="title topShadow">MON PLAN SKI</div>
-<div class="shadow"></div>
 <div class="crew grey" style="height:270px;margin:10px;width:98%;display:inline-block;">
     <h3>CREW</h3>
     <h1>

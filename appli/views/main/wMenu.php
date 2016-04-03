@@ -5,7 +5,6 @@
 </div>
 <div class="menu">
     <?php if($this->context->get('user_id')) : ?>
-        <a class="menuLien" <?php echo ($this->page == 'plan') ? 'style="color:white;"' : ''; ?> href="plan">Plans</a>
         <a class="menuLien" <?php echo ($this->page == 'member') ? 'style="color:white;"' : ''; ?> href="user">Membres</a>
         <a class="menuLien" <?php echo ($this->page == 'crew') ? 'style="color:white;"' : ''; ?> href="crew">Crews</a>
         <a class="menuLien" <?php echo ($this->page == 'appart') ? 'style="color:white;"' : ''; ?> href="appart">Apparts</a>
