@@ -2,6 +2,7 @@
 
 class Plan extends Model
 {
+
     public function getSearch($criterias, $offset = 0)
     {
         $plans = $this->query('crew')

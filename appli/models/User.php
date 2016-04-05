@@ -18,7 +18,8 @@ class User extends Model
             'FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age',
             'UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion',
             'user_photo_url',
-            'user_description',
+        ),
+        'profile' => array(
             'user_ride',
             'user_level',
         ),
@@ -31,6 +32,10 @@ class User extends Model
             'user_fun',
             'user_cash',
             '(SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = ' . Vote::TYPE_USER . ') AS user_rate',
+        ),
+        'auth' => array(
+            'role_id',
+            'user_valid',
         ),
         'optional' => array(
             'user_birth',
@@ -140,7 +145,13 @@ class User extends Model
                     ->join(array('user' => 'user_id'))
                     ->leftJoin(array('city' => 'ville_id'))
                     ->where(array('user.user_id' => $userId))
-                    ->select(array_merge(self::$attributes['primary'], self::$attributes['details'], self::$attributes['optional'], City::$attributes['primary']));
+                    ->select(array_merge(
+                        self::$attributes['primary'],
+                        self::$attributes['profile'],
+                        self::$attributes['details'],
+                        self::$attributes['optional'],
+                        City::$attributes['primary']
+                    ));
     }
 
     public function deleteById($id)
@@ -202,33 +213,20 @@ class User extends Model
 
     public function findByEmailPwd($email, $pwd)
     {
-        $sql = '
-                SELECT
-                    user_id,
-                    user_pwd,
-                    user_prenom,
-                    user_mail,
-                    role_id,
-                    user_photo_url,
-                    FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age,
-                    user_gender,
-                    user_valid,
-                    ville_nom_reel,
-                    ville_code_postal,
-                    user_mail,
-                    user.ville_id as ville_id
-                FROM user
-                LEFT JOIN city ON user.ville_id = city.ville_id
-                WHERE LOWER(user_mail) = LOWER(:user_mail)
-                AND user_pwd = :pwd
-            ;';
-
-            $stmt = $this->db->prepare($sql);
-
-            $stmt->bindValue('user_mail', $email);
-            $stmt->bindValue('pwd', $pwd);
-
-            return $this->db->executeStmt($stmt)->fetch();
+        return $this->query('user')
+            ->join(array('city' => 'ville_id'))
+            ->single()
+            ->where(array(
+                'user_mail' => strtolower($email),
+                'user_pwd' => $pwd,
+                ))
+            ->select(
+                array_merge(
+                    self::$attributes['primary'],
+                    self::$attributes['auth'],
+                    City::$attributes['primary']
+                )
+            );
     }
 
     public function findByEmail($email)

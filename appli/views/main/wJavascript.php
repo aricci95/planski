@@ -45,7 +45,6 @@ if($this->isJSActivated(JS_FEED)) : ?>
                 profilePictureURL: 'planski/photos/profile/<?php echo $this->context->get('user_photo_url'); ?>',
                 postCommentOnEnter: true,
                 enableAttachments: true,
-                enableNavigation: false,
                 getComments: function(success, error) {
                     var commentsArray = [{
                         id: 1,
