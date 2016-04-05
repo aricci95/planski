@@ -5,8 +5,8 @@
 }
 
 	#timeline {
-		box-shadow: 0 0 65px #cdbe9f inset, 0 0 20px #beae8c inset, 0 0 5px #816f47;
-		width: 900px;
+		box-shadow: 0 0 65px rgba(150, 146, 141, 0.24) inset, 0 0 20px rgb(244, 242, 233) inset, 0 0 5px rgba(0, 0, 0, 0.46);
+    	height: 400px;
 		height: 400px;
 		overflow: hidden;
 		margin: 10px auto;
@@ -24,9 +24,6 @@
 				width: 200px;
 				height: 50px;
 				text-align: center;
-				//background-repeat: no-repeat;
-				//background-position: center bottom;
-				//background: url('/planski/libraries/timeline/images/biggerdot.png') center bottom no-repeat;
 				background-size: 50px 50px;
 			}
 				#dates a {
