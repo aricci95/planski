@@ -1,41 +1,15 @@
 * {
-	margin: 0;
+	//margin: 0;
 	padding: 0;
 }
 
 body {
 	background: #222;
 	font-family: Georgia, serif;
-	color: #fff;
 	font-size: 14px;
 }
 
-a {
-	color: #ffffcc;
-	text-decoration: none;
-	-webkit-transition: 0.5s;
-	-moz-transition: 0.5s;
-	-o-transition: 0.5s;
-	-ms-transition: 0.5s;
-	transition: 0.5s;
-}
-	a:hover,
-	a.selected {
-		color: #ffcc00;
-	}
 
-h1,h2,h4,h5,h6 {
-	text-align: center;
-	color: #ccc;
-	text-shadow: #000 1px 1px 2px;
-	margin-bottom: 5px;
-}
-	h1 {
-		font-size: 18px;
-	}
-	h2 {
-		font-size: 14px;
-	}
 .sociales {
 	text-align: center;
 	margin-bottom: 20px;
@@ -51,24 +25,24 @@ h1,h2,h4,h5,h6 {
 	}
 		#dates {
 			width: 800px;
-			height: 60px;
+			height: 100px;
 			overflow: hidden;
 		}
 			#dates li {
 				list-style: none;
 				float: left;
-				width: 100px;
+				width: 200px;
 				height: 50px;
-				font-size: 24px;
 				text-align: center;
-				background: url('/planski/libraries/timeline/images/biggerdot.png') center bottom no-repeat;
+				//background-repeat: no-repeat;
+				//background-position: center bottom;
+				//background: url('/planski/libraries/timeline/images/biggerdot.png') center bottom no-repeat;
+				background-size: 50px 50px;
 			}
 				#dates a {
-					line-height: 38px;
-					padding-bottom: 10px;
+					line-height: 120px;
 				}
 				#dates .selected {
-			        font-size: 38px;
 				}
 
 		#issues {
@@ -94,19 +68,6 @@ h1,h2,h4,h5,h6 {
 					float: left;
 					margin: 10px 30px 10px 50px;
 					background: transparent;
-					-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF)"; /* IE 8 */
-					filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);/* IE 6 & 7 */
-					zoom: 1;
-					-webkit-transition: all 2s ease-in-out;
-					-moz-transition: all 2s ease-in-out;
-					-o-transition: all 2s ease-in-out;
-					-ms-transition: all 2s ease-in-out;
-					transition: all 2s ease-in-out;
-					-webkit-transform: scale(0.7,0.7);
-					-moz-transform: scale(0.7,0.7);
-				    -o-transform: scale(0.7,0.7);
-				    -ms-transform: scale(0.7,0.7);
-				    transform: scale(0.7,0.7);
 				}
 				#issues li h1 {
 					color: #ffcc00;
@@ -119,9 +80,7 @@ h1,h2,h4,h5,h6 {
 					margin-right: 70px;
 					font-weight: normal;
 					line-height: 22px;
-					text-shadow: #000 1px 1px 2px;
 				}
-
 		#next,
 		#prev {
 			position: absolute;
@@ -135,19 +94,21 @@ h1,h2,h4,h5,h6 {
 			text-indent: -9999px;
 			overflow: hidden;
 		}
-			#next:hover,
-			#prev:hover {
-				background-position: 0 -76px;
-			}
-			#next {
-				right: 0;
-				background-image: url('/planski/libraries/timeline/images/next.png');
-			}
-			#prev {
-				left: 0;
-				background-image: url('/planski/libraries/timeline/images/prev.png');
-			}
-				#next.disabled,
-				#prev.disabled {
-					opacity: 0.2;
-				}
+
+		#next:hover,
+		#prev:hover {
+			background-position: 0 -76px;
+		}
+		#next {
+			right: 0;
+			background-image: url('/planski/libraries/timeline/images/next.png');
+		}
+		#prev {
+			left: 0;
+			background-image: url('/planski/libraries/timeline/images/prev.png');
+		}
+
+		#next.disabled,
+		#prev.disabled {
+			opacity: 0.2;
+		}

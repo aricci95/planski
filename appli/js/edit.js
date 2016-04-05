@@ -11,8 +11,8 @@ $(document).ready(function() {
             var value = $(e.target).attr('data-value');
 
             $('input[name="' + name + '"][value="' + value + '"]').prop( "checked", true);
-            $('.selected[data-name="' + name + '"]').removeClass('selected');
-            $(e.target).addClass('selected');
+            $('.choosen[data-name="' + name + '"]').removeClass('choosen');
+            $(e.target).addClass('choosen');
 
             $.post("profile/change", { name : name, value : value}, function(data) {
                 $.gritter.add({
@@ -31,7 +31,7 @@ $(document).ready(function() {
             var value = $(e.target).attr('data-value');
 
             $('input[name="' + name + '"][value="' + value + '"]').prop( "checked", true);
-            $('.selected[data-name="' + name + '"]').removeClass('selected');
+            $('.choosen[data-name="' + name + '"]').removeClass('choosen');
             $('img[data-name="' + $(e.target).attr('data-name') + '"]:lt(' + ($(e.target).attr('data-value')) + ')').removeClass('opacity');
             $('img[data-name="' + $(e.target).attr('data-name') + '"]:gt(' + ($(e.target).attr('data-value') - 1) + ')').addClass('opacity');
             $(e.target).removeClass('opacity');
