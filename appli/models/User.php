@@ -31,7 +31,7 @@ class User extends Model
             'user_hygiene',
             'user_fun',
             'user_cash',
-            '(SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = ' . Vote::TYPE_USER . ') AS user_rate',
+            '(SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = 1) AS user_rate',
         ),
         'auth' => array(
             'role_id',
@@ -133,7 +133,7 @@ class User extends Model
 
         $queryBuilder->limit($offset * NB_SEARCH_RESULTS, NB_SEARCH_RESULTS);
 
-        $fields = array_merge(self::$attributes['primary'], self::$attributes['details'], City::$attributes['primary']);
+        $fields = array_merge(self::$attributes['primary'], self::$attributes['profile'], self::$attributes['details'], City::$attributes['primary']);
 
         return $queryBuilder->select($fields);
     }

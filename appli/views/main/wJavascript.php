@@ -37,7 +37,7 @@ if($this->isJSActivated(JS_CREW)) : ?>
     <script type="text/javascript" src="planski/appli/js/crew.js"></script>
 <?php endif;
 if($this->isJSActivated(JS_FEED)) : ?>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="planski/libraries/timeline/js/jquery.timelinr-0.9.6.js"></script>
     <script type="text/javascript" src="planski/libraries/jquery-comments/js/jquery-comments.js"></script>
     <script>
         $(document).ready(function() {
