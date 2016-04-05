@@ -1,8 +1,8 @@
 <div id="timeline">
-    <ul id="dates" style="width: 1000px; margin-left: 350px;">
+    <ul id="dates" style="width: 1000px; margin-left: 350px;padding: 0;">
         <?php foreach($this->steps as $step) : ?>
-            <li style="background:url(/planski/images/steps/<?php echo  $step['step_id']; ?>.png) center no-repeat;background-size: 50px 50px;">
-                <a href="#<?php echo $step['step_id']; ?>" <?php echo ( $step['step_id'] == $this->step) ? 'class="selected"' : ''; ?>>
+            <li style="background:url(/planski/images/steps/<?php echo  $step['step_id']; ?>.png) center no-repeat;background-size: 50px 50px;<?php echo ($this->current_step < $step['step_id']) ? 'opacity:0.5' : ''; ?>">
+                <a href="#<?php echo $step['step_id']; ?>">
                     <?php echo ucfirst($step['step_title']); ?>
                 </a>
             </li>

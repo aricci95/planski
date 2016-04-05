@@ -4,12 +4,13 @@
           orientation: 'horizontal',
           containerDiv: '#timeline',
           datesDiv: '#dates',
-          autoPlayPause: 2000
+          autoPlayPause: 2000,
+          startAt: <?php echo $this->current_step; ?>,
        });
     });
 </script>
 <div style="margin: 0 auto;width: 942px;">
-    <?php $this->render('plan/wTimeline', array('steps' => $this->steps, 'step' => 1)); ?>
+    <?php $this->render('plan/wTimeline', array('steps' => $this->steps, 'current_step' => $this->current_step)); ?>
     <!-- FEED -->
     <div id="comments-container" style="text-align: left;"></div>
 

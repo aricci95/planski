@@ -24,6 +24,8 @@ class PlanController extends SearchController
 
         $this->view->plan = $this->model->plan->getById($this->context->getParam('value'));
 
+        $this->view->current_step = 3;
+
         $this->view->steps = $this->model->query('step')->select();
 
         $this->view->setTitle($this->view->plan['crew_name']);
