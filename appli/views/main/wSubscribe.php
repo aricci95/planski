@@ -1,5 +1,5 @@
 <form action="subscribe/save" method="post">
-    <div style="margin: 0 auto;width: 942px;">
+    <div style="margin: 0 auto;width: 942px;min-height:600px;">
         <div style="float:left">
             <img src="planski/images/structure/planskilike.png" />
             <h1>Bienvenue !</h1>
