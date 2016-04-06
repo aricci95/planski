@@ -24,6 +24,7 @@ class User extends Model
             'user_level',
         ),
         'details' => array(
+            'user_smoke',
             'user_description',
             'user_profession',
             'user_cuisine',
@@ -48,7 +49,6 @@ class User extends Model
     );
 
     public static $evals = array(
-        'avis' => 'rate',
         'fun' => 'fun',
         'cuisine' => 'cuisine',
         'hygiène' => 'hygiene',

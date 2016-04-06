@@ -11,14 +11,13 @@
 </script>
 <div style="margin: 0 auto;width: 942px;">
     <?php $this->render('plan/wTimeline', array('steps' => $this->steps, 'current_step' => $this->current_step)); ?>
+    <div style="display:inline-block;margin-top: -10px;margin-bottom: 10px;">
+        <?php foreach ($this->plan['users'] as $user) : ?>
+            <?php $this->render('user/wSmall', array('user' => $user)); ?>
+        <?php endforeach; ?>
+    </div>
     <!-- FEED -->
     <div id="comments-container" style="text-align: left;"></div>
-
-        <div style="display:inline-block;margin-top: -38px;">
-            <?php foreach ($this->plan['users'] as $user) : ?>
-                <?php $this->render('user/wSmall', array('user' => $user)); ?>
-            <?php endforeach; ?>
-        </div>
     <?php if (!empty($this->plan['apparts'][0]['photos'])) : ?>
         <script>
             $(function() {

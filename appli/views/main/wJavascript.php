@@ -41,6 +41,7 @@ if($this->isJSActivated(JS_FEED)) : ?>
     <script type="text/javascript" src="planski/libraries/jquery-comments/js/jquery-comments.js"></script>
     <script>
         $(document).ready(function() {
+            /*
             $('#comments-container').comments({
                 profilePictureURL: 'planski/photos/profile/<?php echo $this->context->get('user_photo_url'); ?>',
                 postCommentOnEnter: true,
@@ -55,6 +56,113 @@ if($this->isJSActivated(JS_FEED)) : ?>
                         user_has_upvoted: false
                     }];
                     success(commentsArray);
+                }
+            });*/
+
+            $('#comments-container').comments({
+                profilePictureURL: 'planski/photos/profile/<?php echo $this->context->get('user_photo_url'); ?>',
+                postCommentOnEnter: true,
+                enableAttachments: true,
+                getComments: function(success, error) {
+                    $.ajax({
+                        type: 'get',
+                        url: '/plan/getComments/<?php echo $this->plan['plan_id']; ?>',
+                        success: function(commentsArray) {
+                            var arr = $.parseJSON(commentsArray);
+
+                            success(arr)
+                        },
+                        error: error
+                    });
+                }
+            });
+
+            $('#comments-container').comments({
+                postComment: function(commentJSON, success, error) {
+                    console.log(commentJSON);
+                    $.ajax({
+                        type: 'post',
+                        url: '/plan/postComment',
+                        data: {
+                            id : commentJSON.id,
+                            content : commentJSON.content,
+                            created : commentJSON.created,
+                            parent : commentJSON.parent,
+                            upvote_count : commentJSON.upvote_count,
+                            user_has_upvoted : commentJSON.user_has_upvoted,
+                            plan_id : <?php echo $this->plan['plan_id']; ?>,
+                            user_id : <?php echo $this->context->get('user_id'); ?>
+                        },
+                        success: function(comment) {
+                            success(commentJSON);
+                            $.gritter.add({
+                                text:  'Commentaire ajouté.',
+                                class_name : 'gritter-ok'
+                            });
+                        },
+                        error: error
+                    });
+                }
+            });
+
+            $('#comments-container').comments({
+                deleteComment: function(commentJSON, success, error) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/plan/deleteComment',
+                        data : {
+                            id : commentJSON.id
+                        },
+                        success: function() {
+                            success();
+                            $.gritter.add({
+                                text:  'Commentaire supprimé.',
+                                class_name : 'gritter-ok'
+                            });
+                        },
+                        error: error
+                    });
+                }
+            });
+
+            $('#comments-container').comments({
+                putComment: function(commentJSON, success, error) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/plan/postComment',
+                        data: {
+                            id : commentJSON.id,
+                            content : commentJSON.content,
+                            modified : 1
+                        },
+                        success: function(comment) {
+                            success(commentJSON);
+                            $.gritter.add({
+                                text:  'Commentaire edité.',
+                                class_name : 'gritter-ok'
+                            });
+                        },
+                        error: error
+                    });
+                }
+            });
+
+            $('#comments-container').comments({
+                upvoteComment: function(commentJSON, success, error) {
+                    console.log(commentJSON);
+                    $.ajax({
+                        type: 'post',
+                        url: '/plan/like',
+                        data: {
+                            id: commentJSON.id,
+                            user_has_upvoted : commentJSON.user_has_upvoted,
+                            upvote_count : commentJSON.upvote_count
+                        },
+                        success: function() {
+                            success(commentJSON)
+                        },
+                        error: error
+                    });
                 }
             });
         });

@@ -32,7 +32,7 @@
                 </a>
                 <ul class="cbp-tm-submenu">
                     <li><a href="profile/edit" class="cbp-tm-icon-cog">Editer le profil</a></li>
-                    <li><a href="plan/feed/1" class="cbp-tm-icon-users">Mes plans</a></li>
+                    <li><a href="plan/feed/1" class="cbp-tm-icon-users">Mes paiements</a></li>
                     <li><a href="auth/disconnect" class="cbp-tm-icon-contract">Déconnexion</a></li>
                 </ul>
             </li>

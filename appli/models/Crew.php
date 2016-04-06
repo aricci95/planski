@@ -7,12 +7,24 @@ class Crew extends Model
         $crews = $this->query()
                       ->orderBy(array('crew_creation DESC'))
                       ->limit($offset * NB_SEARCH_RESULTS, NB_SEARCH_RESULTS)
-                      ->select(array('crew.crew_id', 'crew_name'));
+                      ->select(array(
+                            'crew.crew_id',
+                            'crew_name',
+                        ));
 
         foreach ($crews as $key => $crew) {
+            $fields = array(
+                'rate',
+                'level',
+                'fun',
+                'cuisine',
+                'hygiene',
+                'cash',
+            );
+
             $totals = array(
                 'rate' => 0,
-                // 'level' => 0,
+                'level' => 0,
                 'fun' => 0,
                 'cuisine' => 0,
                 'hygiene' => 0,
@@ -26,7 +38,7 @@ class Crew extends Model
             }
 
             foreach($users as $user) {
-                foreach (User::$evals as $value) {
+                foreach ($fields as $value) {
                     $totals[$value] += $user['user_' . $value];
                 }
             }

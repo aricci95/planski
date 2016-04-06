@@ -21,15 +21,20 @@
                 <td><?php echo ucfirst($this->user['user_profession']); ?></td>
             </tr>
         <?php endif; ?>
-
-        <?php if (!empty($this->user['user_vehicule'])) : ?>
-            <tr style="height:35px;">
-                <td>
-                    <b>Véhicule :</b>
-                </td>
-                <td><?php echo ucfirst($this->user['user_vehicule']); ?> places</td>
-            </tr>
-        <?php endif; ?>
+        <tr style="height:40px;">
+            <td>
+                <b>Avis :</b>
+            </td>
+            <td style="position: absolute;">
+                <?php for ($i= 1 ; $i <= 4; $i++) : ?>
+                    <?php if (!empty($this->user['user_rate']) && $this->user['user_rate'] >= $i) : ?>
+                        <img src="/planski/images/icones/star.png" />
+                    <?php else : ?>
+                        <img src="/planski/images/icones/star_off.png"/>
+                    <?php endif; ?>
+                <?php endfor; ?>
+            </td>
+        </tr>
         <?php
             foreach (User::$evals as $key => $value) {
                 $this->render('modules/wEval', array(
@@ -39,5 +44,14 @@
                 ));
             }
         ?>
+
+        <?php if (!empty($this->user['user_vehicule'])) : ?>
+            <tr style="height:35px;">
+                <td>
+                    <b>Véhicule :</b>
+                </td>
+                <td><?php echo ucfirst($this->user['user_vehicule']); ?> places</td>
+            </tr>
+        <?php endif; ?>
     </table>
 </div>

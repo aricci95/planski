@@ -59,21 +59,21 @@
 
             // Strings to be formatted (for example localization)
             textareaPlaceholderText: 'Ajouter un commentaire',
-            newestText: 'Newest',
-            oldestText: 'Oldest',
-            popularText: 'Popular',
+            newestText: 'Récent',
+            oldestText: 'Ancien',
+            popularText: 'Populaire',
             attachmentsText: 'Fichiers joints',
             sendText: 'Envoyer',
             replyText: 'Répondre',
             editText: 'Editer',
-            editedText: 'Edité',
+            editedText: 'Edité le',
             youText: 'Vous',
             saveText: 'Sauvegarder',
             deleteText: 'Supprimer',
             viewAllRepliesText: 'View all __replyCount__ replies',
             hideRepliesText: 'Cacher les réponses',
-            noCommentsText: 'Aucun comments',
-            noAttachmentsText: 'No fichiers',
+            noCommentsText: 'Aucun commentaure',
+            noAttachmentsText: 'Aucun fichier',
             attachmentDropText: 'Glissez des fichiers ici',
             textFormatter: function(text) {
                 return text;

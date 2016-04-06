@@ -29,6 +29,30 @@
             <?php endif; ?>
             <td>
                 <table style="text-align: left;">
+                    <tr style="height:40px;">
+                        <td>
+                            <b>Avis :</b>
+                        </td>
+                        <td style="position: absolute;">
+                            <?php for ($i= 1 ; $i <= 4; $i++) : ?>
+                                <?php if (!empty($this->crew['crew_rate']) && $this->crew['crew_rate'] >= $i) : ?>
+                                    <img src="/planski/images/icones/star.png" />
+                                <?php else : ?>
+                                    <img src="/planski/images/icones/star_off.png"/>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                        </td>
+                    </tr>
+                    <?php if (!empty($this->crew['crew_level'])) : ?>
+                        <tr style="height:60px;">
+                            <td>
+                                <b>Niveau :</b>
+                            </td>
+                            <td style="position: absolute;">
+                                 <img src="/planski/images/medals/<?php echo round($this->crew['crew_level']); ?>.png" />
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                     <?php
                         foreach (User::$evals as $key => $value) {
                             $this->render('modules/wEval', array(

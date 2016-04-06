@@ -48,6 +48,61 @@ class QueryBuilder
         return $this;
     }
 
+    private function _addWhereClause()
+    {
+        if (!empty($this->where)) {
+            $this->sql .= ' WHERE TRUE ';
+
+            foreach ($this->where as $key => $value) {
+                if (strpos($key, '.')) {
+                    $explode = explode('.', $key);
+                    $index = $explode[1];
+                } else {
+                    $index = $key;
+                }
+
+                if (strpos($index, '!') === 0) {
+                    $key = str_replace('!', '', $key);
+                    $index = str_replace('!', '', $index);
+
+                    $this->sql .= " AND $key != :$index
+                    ";
+                } else if (strpos($index, '%') === 0) {
+                    $key = str_replace('%', '', $key);
+                    $index = str_replace('%', '', $index);
+
+                    $this->sql .= " AND $key LIKE :$index
+                    ";
+                } else {
+                    $this->sql .= " AND $key = :$index
+                    ";
+                }
+            }
+        }
+    }
+
+    private function _bindWhereValues()
+    {
+        if (!empty($this->where)) {
+            foreach ($this->where as $key => $value) {
+                if (strpos($key, '.')) {
+                    $explode = explode('.', $key);
+                    $index = $explode[1];
+                } else {
+                    $index = $key;
+                }
+
+                if (strpos($index, '%') === 0) {
+                    $this->stmt->bindValue(str_replace('%', '', $index), '%' . $value . '%');
+                } else if (strpos($index, '!') === 0) {
+                    $this->stmt->bindValue(str_replace('!', '', $index), $value);
+                } else {
+                    $this->stmt->bindValue($index, $value);
+                }
+            }
+        }
+    }
+
     public function select(array $attributes = array())
     {
         $attributes_string = empty($attributes) ? '*' : implode(',
@@ -109,35 +164,7 @@ class QueryBuilder
             }
         }
 
-        if (!empty($this->where)) {
-            $this->sql .= ' WHERE TRUE ';
-
-            foreach ($this->where as $key => $value) {
-                if (strpos($key, '.')) {
-                    $explode = explode('.', $key);
-                    $index = $explode[1];
-                } else {
-                    $index = $key;
-                }
-
-                if (strpos($index, '!') === 0) {
-                    $key = str_replace('!', '', $key);
-                    $index = str_replace('!', '', $index);
-
-                    $this->sql .= " AND $key != :$index
-                    ";
-                } else if (strpos($index, '%') === 0) {
-                    $key = str_replace('%', '', $key);
-                    $index = str_replace('%', '', $index);
-
-                    $this->sql .= " AND $key LIKE :$index
-                    ";
-                } else {
-                    $this->sql .= " AND $key = :$index
-                    ";
-                }
-            }
-        }
+        $this->_addWhereClause();
 
         if (!empty($this->between)) {
             foreach ($this->between as $key => $value) {
@@ -163,22 +190,7 @@ class QueryBuilder
 
         $this->stmt = $this->db->prepare($this->sql);
 
-        if (!empty($this->where)) {
-            foreach ($this->where as $key => $value) {
-                if (strpos($key, '.')) {
-                    $explode = explode('.', $key);
-                    $index = $explode[1];
-                } else {
-                    $index = $key;
-                }
-
-                if (strpos($index, '%') === 0) {
-                    $this->stmt->bindValue(str_replace('%', '', $index), '%' . $value . '%');
-                } else {
-                    $this->stmt->bindValue(str_replace('!', '', $index), $value);
-                }
-            }
-        }
+        $this->_bindWhereValues();
 
         if (!empty($this->lowerThan)) {
             foreach ($this->lowerThan as $key => $value) {
@@ -208,19 +220,48 @@ class QueryBuilder
         return $this->single()->where(array($this->table . '.' . $this->table . '_id' => $id))->select($attributes);
     }
 
+    public function update(array $attributes = array())
+    {
+        $this->sql = 'UPDATE ' . $this->table . ' SET ';
+
+        foreach ($attributes as $key => $value) {
+            if (!is_int($key)) {
+                $update[] = $key . ' = ' . ':' . $key;
+            }
+        }
+
+        $this->sql .= implode($update, ', ');
+
+        $this->_addWhereClause();
+
+        $this->stmt = $this->db->prepare($this->sql);
+
+        foreach ($attributes as $key => $value) {
+            if (!is_int($key)) {
+                $this->stmt->bindValue(':' . $key, $value);
+            }
+        }
+
+        $this->_bindWhereValues();
+
+        $this->sql = str_replace(', WHERE', ' WHERE', $this->sql);
+
+        return $this->db->executeStmt($this->stmt);
+    }
+
     public function updateById($id, array $attributes = array())
     {
         $this->sql = 'UPDATE ' . $this->table . ' SET ';
 
         foreach ($attributes as $key => $value) {
             if (!is_int($key)) {
-                $this->sql .= $key . ' = ' . ':' . $key . ', ';
+                $update[] = $key . ' = ' . ':' . $key;
             }
         }
 
-        $this->sql .= 'WHERE ' . $this->table . '_id = :id;';
+        $this->sql .= implode($update, ', ');
 
-        $this->sql = str_replace(', WHERE', ' WHERE', $this->sql);
+        $this->sql .= ' WHERE ' . $this->table . '_id = :id;';
 
         $this->stmt = $this->db->prepare($this->sql);
 
@@ -251,6 +292,8 @@ class QueryBuilder
         foreach ($values as $key => $value) {
             if (is_int($value)) {
                 $this->stmt->bindValue($key, $value, PDO::PARAM_INT);
+            } else if ($value == '') {
+                $this->stmt->bindValue($key, null);
             } else {
                 $this->stmt->bindValue($key, $value);
             }
@@ -261,9 +304,21 @@ class QueryBuilder
         return $this->db->lastInsertId();
     }
 
-    public function delete(array $values = array())
+    public function delete()
     {
+        if (empty($this->where)) {
+            throw new Exception('Delete query must have a where clause.', 1);
+        }
 
+        $this->sql = 'DELETE FROM ' . $this->table . ' ';
+
+        $this->_addWhereClause();
+
+        $this->stmt = $this->db->prepare($this->sql);
+
+        $this->_bindWhereValues();
+
+        return $this->db->executeStmt($this->stmt);
     }
 
     public function where(array $params = array())
