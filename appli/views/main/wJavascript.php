@@ -1,10 +1,11 @@
 <script src="planski/libraries/jquery-2.0.0.min.js"></script>
 <script src="planski/libraries/tooltipmenu/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="planski/libraries/chat/js/chat.js"></script>
-<!--<script type="text/javascript" src="http://www.google.com/jsapi"></script>-->
 <script type="text/javascript" src="planski/libraries/growler/js/gritter.js"></script>
 <script type="text/javascript" src="planski/libraries/modal/js/jquery.magnific-popup.js"></script>
 <script type="text/javascript" src="planski/appli/js/modal.js"></script>
+<script src="planski/libraries/tooltipmenu/js/cbpTooltipMenu.min.js"></script>
+
 <script>
     $.extend($.gritter.options, {
         position: 'bottom-right'

@@ -33,6 +33,8 @@ abstract class AppController extends Controller
 
         $this->context->set('new_messages', $this->model->message->countNewMessages($this->context->get('user_id')));
 
+        $this->context->set('notification', $this->model->query('notification')->select());
+
         if ($oldMessagesCount < $this->context->get('new_messages')) {
             $this->view->growler('Nouveau message !', GROWLER_INFO);
         }
