@@ -274,7 +274,6 @@
                     return self.createCommentModel(commentsJSON)
                 });
 
-
                 // Sort comments by date (oldest first so that they can be appended to the data model
                 // without caring dependencies)
                 self.sortComments(commentModels, 'oldest');
@@ -637,12 +636,6 @@
                     var idA = commentA.id.replace('c', '');
                     var idB = commentB.id.replace('c', '');
 
-
-                    console.log(idA);
-                    /*
-                        console.log(new Date("2015-01-01").getTime());
-                    var createdA = new Date(commentA.created).getTime();
-                    var createdB = new Date(commentB.created).getTime();*/
                     if(sortKey == 'oldest') {
                         return idA - idB;
                     } else {
