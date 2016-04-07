@@ -24,7 +24,7 @@
         <img  class="connectedPhoto" src="planski/photos/profile/<?php echo $photo; ?>" />
     </li>
     <li>
-        <ul id="cbp-tm-menu" class="cbp-tm-menu" style="position:relative;margin-top:-48px;margin-left:90px;">
+        <ul id="cbp-tm-menu" class="cbp-tm-menu">
             <li>
                 <a href="#" style="font-size: 25px;">
                     <?php echo $this->context->get('user_prenom'); ?>

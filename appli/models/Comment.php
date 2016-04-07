@@ -7,16 +7,15 @@ class Comment extends Model
         $comments = $this->query('comment')
                          ->join(array('user' => 'user_id'))
                          ->where(array('plan_id' => $planId))
-                         ->orderBy(array('created DESC'))
                          ->select(array(
                             'id',
-                            'created',
+                            'LEFT(created, 10) as created',
+                            'LEFT(modified, 10) as modified',
                             'content',
                             'CONCAT(user_prenom, " ", user_nom) as fullname',
                             'CONCAT("planski/photos/profile/", user_photo_url) as profile_picture_url',
                             '(comment.user_id = ' . $this->context->get('user_id') .') as created_by_current_user',
                             'upvote_count',
-                            'modified',
                             'user_has_upvoted',
                             'parent',
                             'file_url',

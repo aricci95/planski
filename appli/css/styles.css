@@ -10,6 +10,18 @@
     src: url(/planski/libraries/fonts/winter.ttf), url(/planski/libraries/fonts/winter.eot);
 }
 
+.cbp-tm-menu {
+    position:relative;
+    margin-top:-48px;
+    margin-left:90px;
+}
+
+@-moz-document url-prefix() {
+    .cbp-tm-menu {
+        margin-top:-65px;
+    }
+}
+
 .submitButton {
     font-size: 19px;
     font-family: 'Freight Sans Bold', helvetica, arial, sans-serif !important;
