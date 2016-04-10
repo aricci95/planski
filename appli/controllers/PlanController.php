@@ -63,6 +63,8 @@ class PlanController extends SearchController
             $comment['created'] = $date;
 
             if ($this->model->query('comment')->insert($comment)) {
+                $this->get('notification')->notify(Notification::ACTION_COMMENT, $comment['plan_id']);
+
                 echo JSON_OK;
             } else {
                 echo JSON_ERR;

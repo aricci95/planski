@@ -13,12 +13,14 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <img style="margin-right: 10px;" width="50" src="planski/photos/profile/<?php echo $notification['notification_photo_url']; ?>" />
+                                                <img style="margin-right: 10px;" height="55" src="planski/photos/profile/<?php echo $notification['notification_photo_url']; ?>" />
                                             </td>
                                             <td>
                                                 <?php echo $notification['notification_content']; ?>
                                                 <br/>
-                                                <span style="font-size: 12px;">Il y a 10 minutes.</span>
+                                                <span style="font-size: 12px;">
+                                                    <?php echo Tools::timeConvert($notification['notification_date']); ?>
+                                                </span>
                                             </td>
                                         </tr>
                                     </table>

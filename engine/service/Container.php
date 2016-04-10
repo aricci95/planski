@@ -8,6 +8,7 @@ class Service_Container
 
     private $_dependencies = array(
         'Auth'     => array('Mailer', 'Geoloc'),
+        'Notification' => array('Mailer'),
         'Link'     => array('Mailer'),
         'Message'  => array('Mailer'),
         'User'     => array('Photo'),
