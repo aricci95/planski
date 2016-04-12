@@ -8,24 +8,7 @@
                 <ul class="cbp-tm-submenu" style="z-index: 2000; width:430px;margin-left:-216px;">
                     <?php if (!empty($this->context->get('notification'))) : ?>
                         <?php foreach ($this->context->get('notification') as $notification) : ?>
-                            <li style="height:70px;">
-                                <a href="<?php echo $notification['notification_link']; ?>" class="<?php echo $notification['notification_link']; ?>">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <img style="margin-right: 10px;" height="55" src="planski/photos/profile/<?php echo $notification['notification_photo_url']; ?>" />
-                                            </td>
-                                            <td>
-                                                <?php echo $notification['notification_content']; ?>
-                                                <br/>
-                                                <span style="font-size: 12px;">
-                                                    <?php echo Tools::timeConvert($notification['notification_date']); ?>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </a>
-                            </li>
+                            <?php $this->render('main/wNotification', array('notification' => $notification)); ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <li>Aucune notification.</a></li>
@@ -61,9 +44,9 @@
                     <i class="caret" aria-hidden="true"></i>
                 </a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="profile/edit" class="cbp-tm-icon-cog">Editer le profil</a></li>
-                    <li><a href="plan/feed/1" class="cbp-tm-icon-users">Mes paiements</a></li>
-                    <li><a href="auth/disconnect" class="cbp-tm-icon-contract">Déconnexion</a></li>
+                    <li><a style="border: 4px solid #fff;" href="profile/edit" class="cbp-tm-icon-cog">Editer le profil</a></li>
+                    <li><a style="border: 4px solid #fff;" href="plan/feed/1" class="cbp-tm-icon-users">Mes paiements</a></li>
+                    <li><a style="border: 4px solid #fff;" href="auth/disconnect" class="cbp-tm-icon-contract">Déconnexion</a></li>
                 </ul>
             </li>
         </ul>

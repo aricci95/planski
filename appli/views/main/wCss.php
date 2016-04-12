@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" type="text/css" href="planski/libraries/modal/css/magnific-popup.css" />
 <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/chat.css" />
 <link type="text/css" rel="stylesheet" media="all" href="planski/libraries/chat/css/screen.css" />

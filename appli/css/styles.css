@@ -684,3 +684,11 @@ div.debug {
     margin-top:20px;
     margin-bottom:20px;
 }
+
+.notification {
+}
+
+
+.unread {
+    background-color:#EDEFF5;
+}
