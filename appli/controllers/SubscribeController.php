@@ -3,7 +3,7 @@
 class SubscribeController extends AppController
 {
 
-    protected $_authLevel = AUTH_LEVEL_NONE;
+    protected $_authLevel = array();
 
     public function __construct()
     {
@@ -32,18 +32,19 @@ class SubscribeController extends AppController
 
     private function _isValid()
     {
-        // Agreements
-        if (empty($this->context->params['agreements']) || $this->context->params['agreements'] != 'on') {
-            $this->view->growler("Vous devez accepter les mentions légales de PlanSki.");
-            return false;
-        }
         // Champs vides
-        $inputs = array('user_prenom', 'user_nom', 'user_pwd', 'verif_pwd', 'user_mail', 'agreements');
+        $inputs = array('user_prenom', 'user_nom', 'user_pwd', 'verif_pwd', 'user_mail', 'role_id');
+
         foreach ($inputs as $input) {
             if (empty($this->context->params[$input])) {
                 $this->view->growler('Tous les champs sont obligatoires.');
                 return false;
             }
+        }
+
+        if ($this->context->getParam('role_id') > Auth::ROLE_OWNER) {
+            $this->view->growler('Une erreur c\'est produite.');
+            return false;
         }
 
         $this->context->params['user_prenom'] = trim($this->context->params['user_prenom']);
@@ -92,11 +93,14 @@ class SubscribeController extends AppController
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($contextUserId)) {
             if ($this->_isValid()) {
-                $newUser['user_prenom']  = $this->context->params['user_prenom'];
-                $newUser['user_nom']  = $this->context->params['user_nom'];
+                $newUser['user_prenom'] = $this->context->params['user_prenom'];
+                $newUser['user_nom']    = $this->context->params['user_nom'];
                 $newUser['user_pwd']    = md5($this->context->params['user_pwd']);
                 $newUser['user_mail']   = $this->context->params['user_mail'];
                 $newUser['user_gender'] = $this->context->params['user_gender'];
+                $newUser['user_type']   = $this->context->params['user_type'];
+                $newUser['role_id']   = $this->context->getParam('role_id');
+
                 $validationId = $this->model->User->createUser($newUser);
 
                 if (!empty($validationId)) {
@@ -108,7 +112,7 @@ class SubscribeController extends AppController
                             <u>Mot de passe :</u> ' . $this->context->params['user_pwd'] . '<br><br>
                             Si vous rencontrez des problèmes, n\'hésitez pas à nous envoyer un message en répondant directement à celui-ci, nous vous répondrons dans les plus bref délais.';
                     if ($this->get('mailer')->send($newUser['user_mail'], 'Bienvenue sur PlanSki ' . $newUser['user_prenom'] . ' !', $message)) {
-                        $this->redirect('user', array('msg' => MSG_VALIDATION_SENT));
+                        $this->redirect('subscribe', array('msg' => MSG_VALIDATION_SENT));
                     } else {
                         $this->view->growlerError();
                     }
@@ -126,12 +130,12 @@ class SubscribeController extends AppController
     {
         if (!empty($this->context->params['value'])) {
             if ($this->model->User->setValid($this->context->params['value'])) {
-                $this->redirect('user', array('msg' => MSG_VALIDATION_SUCCESS));
+                $this->redirect('subscribe', array('msg' => MSG_VALIDATION_SUCCESS));
             } else {
-                $this->redirect('user', array('msg' => ERR_VALIDATION_FAILURE));
+                $this->redirect('subscribe', array('msg' => ERR_VALIDATION_FAILURE));
             }
         } else {
-            $this->redirect('user', array('msg' => ERR_VALIDATION_FAILURE));
+            $this->redirect('subscribe', array('msg' => ERR_VALIDATION_FAILURE));
         }
     }
 

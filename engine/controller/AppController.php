@@ -2,7 +2,11 @@
 abstract class AppController extends Controller
 {
 
-    protected $_authLevel = AUTH_LEVEL_USER;
+    protected $_authLevel = array(
+        Auth::ROLE_SKI,
+        Auth::ROLE_OWNER,
+        Auth::ROLE_ADMIN,
+    );
 
     public function __construct()
     {
@@ -13,7 +17,7 @@ abstract class AppController extends Controller
         if (!$this->isAjax()) {
             $role_id = $this->context->get('role_id');
 
-            if ($role_id >= AUTH_LEVEL_USER) {
+            if ($role_id >= Auth::ROLE_SKI) {
                 try {
                     $this->_getNotifications();
                     $this->_refreshLastConnexion();
@@ -61,8 +65,6 @@ abstract class AppController extends Controller
     // Vérifie la conformité de la session
     protected function _checkSession()
     {
-        $roleLimit = $this->_authLevel;
-
         $socialAppsData = $this->context->get('userprofile');
 
         if (!empty($socialAppsData['email']) && $socialAppsData['verified']) {
@@ -75,7 +77,7 @@ abstract class AppController extends Controller
         // Cas user en session
         if ($this->context->get('user_valid') && $this->context->get('user_id') && $this->context->get('user_mail')) {
             if ($this->context->get('user_valid') == 1) {
-                if ($this->context->get('role_id') >= $roleLimit) {
+                if ($this->context->get('role_id') == Auth::ROLE_SUPER_ADMIN || empty($this->_authLevel) || in_array($this->context->get('role_id'), $this->_authLevel)) {
                     return true;
                 } else {
                     // Utilisateur valide mais droits insuffisants
@@ -97,10 +99,12 @@ abstract class AppController extends Controller
 
             return $logResult;
         } // Cas page accès sans autorisation
-        elseif ($roleLimit != AUTH_LEVEL_NONE) {
+        elseif (empty($this->_authLevel)) {
+            return true;
+        } else {
+            // Utilisateur valide mais droits insuffisants
             $this->redirect('subscribe', array('msg' => ERR_AUTH));
+            die;
         }
-
-        return false;
     }
 }

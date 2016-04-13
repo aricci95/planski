@@ -3,7 +3,9 @@
 class AdminController extends AppController
 {
 
-    protected $_authLevel = AUTH_LEVEL_SUPERADMIN;
+    protected $_authLevel = array(
+        Auth::ROLE_ADMIN,
+    );
 
     public function render()
     {

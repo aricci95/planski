@@ -19,7 +19,7 @@ class ProfileController extends AppController
         $this->view->addJS(JS_EDIT);
         $this->view->addJS(JS_AUTOCOMPLETE);
 
-        $this->view->user = $this->model->User->getUserByIdDetails($this->context->get('user_id'));
+        $this->view->user = $this->model->User->getUserByIdDetails($this->context->get('user_id'), $this->context->get('user_type'));
 
         $this->view->setTitle('Informations');
         $this->view->setViewName('user/wEdit');
@@ -64,8 +64,8 @@ class ProfileController extends AppController
                 }
             }
 
-            $this->context->params['user_description'] = htmlspecialchars($this->context->params['user_description'], ENT_QUOTES, 'utf-8');
-            $this->context->params['user_profession']  = htmlspecialchars($this->context->params['user_profession'], ENT_QUOTES, 'utf-8');
+            $this->context->params['user_description'] = htmlspecialchars($this->context->getParam('user_description'), ENT_QUOTES, 'utf-8');
+            $this->context->params['user_profession']  = htmlspecialchars($this->context->getParam('user_profession'), ENT_QUOTES, 'utf-8');
 
             // On vérifie si le mdp est ok
             if ($this->context->params['user_pwd'] != $this->context->params['verif_pwd']) {

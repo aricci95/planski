@@ -9,7 +9,7 @@
         <a class="menuLien" <?php echo ($this->page == 'crew') ? 'style="color:white;"' : ''; ?> href="crew">Crews</a>
         <a class="menuLien" <?php echo ($this->page == 'appart') ? 'style="color:white;"' : ''; ?> href="appart">Apparts</a>
         <a class="menuLien" <?php echo ($this->page == 'plans') ? 'style="color:white;"' : ''; ?> href="plan/feed/1">Plans</a>
-        <?php if(false && $this->context->get('role_id') == AUTH_LEVEL_SUPERADMIN) : ?>
+        <?php if(false && $this->context->get('role_id') == Auth::ROLE_SUPER_ADMIN) : ?>
             <a class="menuLien" <?php echo ($this->page == 'admin') ? 'style="color:white;"' : ''; ?> href="admin">Admin</a></td>
         <?php endif; ?>
     <?php endif; ?>

@@ -2,7 +2,7 @@
 class AuthController extends AppController
 {
 
-    protected $_authLevel = AUTH_LEVEL_NONE;
+    protected $_authLevel = array();
 
     public function renderLogin()
     {

@@ -8,7 +8,19 @@
         <div style="float:right;text-align: left;">
             <h1>S'inscrire !</h1>
             <h2>Et en plus c'est gratos.</h2>
-            <table class="subscribeForm">
+            <table class="subscribeForm" style="margin-top:30px;">
+                <tr>
+                    <td>
+                        <label for="role_1">
+                            <input style="border:none;" id="role_1" type="radio" name="role_id" value="<?php echo Auth::ROLE_SKI; ?>" checked="checked" />
+                            Skieur
+                        </label>
+                        <label for="role_2">
+                            <input style="border:none;" id="role_2" type="radio" name="role_id" value="<?php echo Auth::ROLE_OWNER; ?>"/>
+                            Propriétaire
+                        </label>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <input class="roundedInput" style="width:194px;" name="user_prenom" value="<?php echo $this->context->getParam('user_prenom'); ?>" placeholder="Prénom" />

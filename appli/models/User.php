@@ -5,6 +5,9 @@ class User extends Model
     const RIDE_SKI       = 1;
     const RIDE_SNOWBOARD = 2;
 
+    const TYPE_SKI   = 1;
+    const TYPE_OWNER = 2;
+
     public static $rides = array(
         self::RIDE_SKI       => 'ski',
         self::RIDE_SNOWBOARD => 'snowboard',
@@ -14,6 +17,7 @@ class User extends Model
         'primary' => array(
             'user.user_id',
             'user_prenom',
+            'role_id',
             'user_mail',
             'FLOOR((DATEDIFF( CURDATE(), (user_birth))/365)) AS age',
             'UNIX_TIMESTAMP(user_last_connexion) as user_last_connexion',
@@ -35,7 +39,6 @@ class User extends Model
             '(SELECT LEFT(SUM(rate) / count(*), 1) FROM vote WHERE vote.key_id = user.user_id AND type_id = 1) AS user_rate',
         ),
         'auth' => array(
-            'role_id',
             'user_valid',
         ),
         'optional' => array(
@@ -138,20 +141,27 @@ class User extends Model
         return $queryBuilder->select($fields);
     }
 
-    public function getUserByIdDetails($userId)
+    public function getUserByIdDetails($userId, $type = User::TYPE_SKI)
     {
-        return $this->query('user_data')
+        if ($type == User::TYPE_SKI) {
+            return $this->query('user_data')
+                        ->single()
+                        ->join(array('user' => 'user_id'))
+                        ->leftJoin(array('city' => 'ville_id'))
+                        ->where(array('user.user_id' => $userId))
+                        ->select(array_merge(
+                            self::$attributes['primary'],
+                            self::$attributes['profile'],
+                            self::$attributes['details'],
+                            self::$attributes['optional']
+                        ));
+        } else {
+            return $this->query('user')
                     ->single()
-                    ->join(array('user' => 'user_id'))
                     ->leftJoin(array('city' => 'ville_id'))
                     ->where(array('user.user_id' => $userId))
-                    ->select(array_merge(
-                        self::$attributes['primary'],
-                        self::$attributes['profile'],
-                        self::$attributes['details'],
-                        self::$attributes['optional'],
-                        City::$attributes['primary']
-                    ));
+                    ->select();
+        }
     }
 
     public function deleteById($id)
@@ -200,11 +210,10 @@ class User extends Model
     {
         $items['user_valid'] = uniqid();
         $items['user_subscribe_date'] = 'NOW()';
-        $items['role_id'] = AUTH_LEVEL_USER;
 
         $userId = $this->query()->insert($items);
 
-        if ($userId) {
+        if ($userId && $items['role_id'] == User::TYPE_SKI) {
             $this->query('user_data')->insert(array('user_id' => $userId));
         }
 
@@ -214,7 +223,7 @@ class User extends Model
     public function findByEmailPwd($email, $pwd)
     {
         return $this->query('user')
-            ->join(array('city' => 'ville_id'))
+            ->leftJoin(array('city' => 'ville_id'))
             ->single()
             ->where(array(
                 'user_mail' => strtolower($email),

@@ -6,6 +6,10 @@
 
 class Auth extends Model
 {
+    const ROLE_SKI         = 1;
+    const ROLE_OWNER       = 2;
+    const ROLE_ADMIN       = 3;
+    const ROLE_SUPER_ADMIN = 4;
 
     // Lance une session pour OVH
     public function startSession()
