@@ -4,6 +4,10 @@ require_once ROOT_DIR . '/appli/controllers/SearchController.php';
 
 class PlanController extends SearchController
 {
+    protected $_authLevel = array(
+        Auth::ROLE_SKI,
+        Auth::ROLE_ADMIN,
+    );
 
     protected $_type = SEARCH_TYPE_PLAN;
 

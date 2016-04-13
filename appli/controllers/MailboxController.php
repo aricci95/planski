@@ -13,6 +13,7 @@ class MailboxController extends AppController
         foreach ($this->view->userMessages as $key => $value) {
             $this->view->userMessages[$key]['content'] = Tools::toSmiles($value['content']);
         }
+
         $this->view->setViewName('mailbox/wList');
         $this->view->setTitle('Messages reçus');
         $this->view->render();

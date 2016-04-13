@@ -11,7 +11,7 @@
         <div class="header">
             <div class="userMenu">
                 <div class="planski">
-                    <a href="<?php echo ($this->context->get('user_id')) ? 'crew' : 'subscribe'; ?>">
+                    <a href="<?php echo ($this->context->get('user_id')) ? 'home' : 'subscribe'; ?>">
                         Planski
                     </a>
                 </div>

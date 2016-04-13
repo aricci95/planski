@@ -1,5 +1,5 @@
 <form action="subscribe/save" method="post">
-    <div style="margin: 0 auto;width: 942px;min-height:600px;">
+    <div style="margin: 0 auto;width: 942px;min-height:650px;">
         <div style="float:left">
             <img src="planski/images/structure/planskilike.png" />
             <h1>Bienvenue !</h1>
@@ -8,7 +8,7 @@
         <div style="float:right;text-align: left;">
             <h1>S'inscrire !</h1>
             <h2>Et en plus c'est gratos.</h2>
-            <table class="subscribeForm" style="margin-top:30px;">
+            <table class="subscribeForm" style="margin-top:20px;">
                 <tr>
                     <td>
                         <label for="role_1">

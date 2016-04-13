@@ -81,7 +81,7 @@ abstract class AppController extends Controller
                     return true;
                 } else {
                     // Utilisateur valide mais droits insuffisants
-                    $this->redirect('subscribe', array('msg' => ERR_AUTH));
+                    $this->redirect('home', array('msg' => ERR_AUTH));
                     die;
                 }
             } else {
@@ -102,7 +102,6 @@ abstract class AppController extends Controller
         elseif (empty($this->_authLevel)) {
             return true;
         } else {
-            // Utilisateur valide mais droits insuffisants
             $this->redirect('subscribe', array('msg' => ERR_AUTH));
             die;
         }
