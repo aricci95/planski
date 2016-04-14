@@ -30,7 +30,7 @@ class AuthService extends Service
 
         if (!empty($user['user_mail']) && !empty($user['user_id']) && strtolower($user['user_mail']) == strtolower($email) && $email != '') {
             if ($user['user_valid'] != 1) {
-                throw new Exception("Email non validé", ERR_MAIL_NOT_VALIDATED);
+                throw new Exception("Email non validé");
             } elseif ($user['role_id'] > 0) {
                 if (empty($user['ville_id'])) {
                     $localization = $this->get('geoloc')->localize();
@@ -60,7 +60,7 @@ class AuthService extends Service
                 return $this->authenticateUser($user);
             }
         } else {
-            throw new Exception("Mauvais email / mot de passe", ERR_LOGIN);
+            throw new Exception("Mauvais email / mot de passe");
         }
 
         return false;

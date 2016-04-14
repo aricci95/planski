@@ -20,13 +20,13 @@ class AuthController extends AppController
             } catch (Exception $e) {
                 Log::err($e->getMessage());
 
-                $this->get('growler')->error($e->getMessage())->record();
+                $this->get('growler')->error($e->getMessage());
 
                 $this->redirect('subscribe');
             }
         }
 
-        $this->get('growler')->error('Mauvais email / mot de passe.')->record();
+        $this->get('growler')->error('Mauvais email / mot de passe.');
 
         $this->redirect('subscribe');
     }

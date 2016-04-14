@@ -124,7 +124,7 @@ class ProfileController extends AppController
             session_destroy();
 
             // redirection
-            $this->get('growler')->send('Votre compte a été supprimé.')->record();
+            $this->get('growler')->send('Votre compte a été supprimé.');
 
             $this->redirect('subscribe');
         } else {

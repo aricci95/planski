@@ -69,6 +69,10 @@ abstract class Controller
 
     public function redirect($page = 'user', $params = null, $action = '')
     {
+        if (!empty($this->get('growler')->hasMessage())) {
+            $this->get('growler')->record();
+        }
+
         $url = "/$page";
         if (!empty($action)) {
             $url .= '/'.$action;

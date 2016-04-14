@@ -46,7 +46,7 @@ class AdminController extends AppController
                                   ->set('user_gender', $user['user_gender'])
                                   ->set('forum_notification', $user['forum_notification']);
 
-                    $this->get('growler')->send('Vous avez changé votre utilisateur courant.')->record();
+                    $this->get('growler')->send('Vous avez changé votre utilisateur courant.');
 
                     $this->redirect('user');
                 }

@@ -35,9 +35,9 @@ class LostpwdController extends AppController
     {
         if (!empty($this->context->params['user_mail'])) {
             if ($this->get('auth')->sendPwd($this->context->params['user_mail'])) {
-                $this->get('growler')->send('Vos identifiants ont étés envoyés par mail.')->record();
+                $this->get('growler')->send('Vos identifiants ont étés envoyés par mail.');
 
-                $this->redirect('user');
+                $this->redirect('subscribe');
             } else {
                 $this->get('growler')->error('Email introuvable.');
                 $this->render();
@@ -59,9 +59,9 @@ class LostpwdController extends AppController
             $this->renderNew();
         } else {
             if ($this->model->auth->updatePwd($this->context->params['user_pwd'], $this->context->params['pwd_valid'])) {
-                $this->get('growler')->send('Votre mot de passe a été modifié.')->record();
+                $this->get('growler')->send('Votre mot de passe a été modifié.');
 
-                $this->redirect('user');
+                $this->redirect('subscribe');
             } else {
                 $this->get('growler')->error();
 

@@ -112,7 +112,7 @@ class SubscribeController extends AppController
                             <u>Mot de passe :</u> ' . $this->context->params['user_pwd'] . '<br><br>
                             Si vous rencontrez des problèmes, n\'hésitez pas à nous envoyer un message en répondant directement à celui-ci, nous vous répondrons dans les plus bref délais.';
                     if ($this->get('mailer')->send($newUser['user_mail'], 'Bienvenue sur PlanSki ' . $newUser['user_prenom'] . ' !', $message)) {
-                        $this->get('growler')->send('Un mail vous a été envoyé pour modifier votre mot de passe.')->record();
+                        $this->get('growler')->send('Un mail vous a été envoyé pour modifier votre mot de passe.');
 
                         $this->redirect('subscribe');
                     } else {
@@ -132,12 +132,12 @@ class SubscribeController extends AppController
     {
         if (!empty($this->context->params['value'])) {
             if ($this->model->User->setValid($this->context->params['value'])) {
-                $this->get('growler')->send('Votre compte a été validé, vous pouvez à présent vous connecter.')->record();
+                $this->get('growler')->send('Votre compte a été validé, vous pouvez à présent vous connecter.');
             } else {
-                $this->get('growler')->error('La validation a échouée, merci de réessayer plus tard.')->record();
+                $this->get('growler')->error('La validation a échouée, merci de réessayer plus tard.');
             }
         } else {
-            $this->get('growler')->error('La validation a échouée, merci de réessayer plus tard.')->record();
+            $this->get('growler')->error('La validation a échouée, merci de réessayer plus tard.');
         }
 
         $this->redirect('subscribe');

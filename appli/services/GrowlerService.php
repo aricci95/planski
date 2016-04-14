@@ -13,6 +13,11 @@ class GrowlerService extends Service
         $this->context->set('messages', array());
     }
 
+    public function hasMessage()
+    {
+        return (count($this->messages) > 0);
+    }
+
     public function record()
     {
         $this->context->set('messages', $this->messages);
@@ -42,6 +47,10 @@ class GrowlerService extends Service
 
     public function getMessages()
     {
+        if (!is_array($this->messages)) {
+            return false;
+        }
+
         $generatedMessages = array();
 
         foreach ($this->messages as $message) {

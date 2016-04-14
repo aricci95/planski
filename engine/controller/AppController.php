@@ -81,7 +81,7 @@ abstract class AppController extends Controller
                     return true;
                 } else {
                     // Utilisateur valide mais droits insuffisants
-                    $this->get('growler')->error('Authentification requise.')->record();
+                    $this->get('growler')->error('Authentification requise.');
 
                     $this->redirect('home');
                     die;
@@ -90,7 +90,7 @@ abstract class AppController extends Controller
                 // Message non validé
                 session_destroy();
 
-                $this->get('growler')->error('Votre email n\'a pas été validé, vous devez cliquer sur le lien qui vous a été envoyé par email.')->record();
+                $this->get('growler')->error('Votre email n\'a pas été validé, vous devez cliquer sur le lien qui vous a été envoyé par email.');
 
                 $this->redirect('subscribe');
             }
@@ -99,7 +99,7 @@ abstract class AppController extends Controller
             try {
                 $logResult = $this->get('auth')->checkLogin($_COOKIE['planskiEmail'], $_COOKIE['planskiPwd']);
             } catch (Exception $e) {
-                $this->get('growler')->error($e->getMessage())->record();
+                $this->get('growler')->error($e->getMessage());
 
                 $this->redirect('subscribe');
             }
@@ -109,7 +109,7 @@ abstract class AppController extends Controller
         elseif (empty($this->_authLevel)) {
             return true;
         } else {
-            $this->get('growler')->error('Authentification requise.')->record();
+            $this->get('growler')->error('Authentification requise.');
 
             $this->redirect('subscribe');
             die;

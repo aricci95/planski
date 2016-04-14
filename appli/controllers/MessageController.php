@@ -59,7 +59,7 @@ class MessageController extends AppController
         $this->view->addJS(JS_SCROLL_REFRESH);
 
         if (empty($this->context->params['value'])) {
-            $this->get('growler')->error('Message introuvable')->record();
+            $this->get('growler')->error('Message introuvable');
 
             $this->redirect('mailbox');
         }
@@ -77,7 +77,7 @@ class MessageController extends AppController
             $this->view->setViewName('message/wMain');
             $this->view->render();
         } else {
-            $this->get('growler')->error('Message introuvable')->record();
+            $this->get('growler')->error('Message introuvable');
 
             $this->redirect('mailbox');
         }
@@ -92,7 +92,7 @@ class MessageController extends AppController
 
         if (empty($this->context->params['destinataire_id'])) {
             Log::err('destinataire vide');
-            $this->get('growler')->error()->record();
+            $this->get('growler')->error();
 
             $this->redirect('mailbox');
         }
@@ -111,12 +111,12 @@ class MessageController extends AppController
         if ($this->get('message')->send($from, $to, $this->context->params['content'])) {
             $message = $this->context->get('user_prenom') . ' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
 
-            $this->get('growler')->send('Message envoyé.')->record();
+            $this->get('growler')->send('Message envoyé.');
 
             $this->redirect('message', array($this->context->params['value']));
         } else {
             Log::err('impossible d\'enregistrer le message.');
-            $this->get('growler')->error('Le message n\'a pas pu être envoyé, merci de réessayer.')->record();
+            $this->get('growler')->error('Le message n\'a pas pu être envoyé, merci de réessayer.');
 
             $this->redirect('mailbox');
         }
