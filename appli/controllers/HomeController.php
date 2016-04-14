@@ -3,8 +3,6 @@
 
 class HomeController extends AppController
 {
-    protected $_type = SEARCH_TYPE_APPART;
-
     public function render()
     {
         $this->view->setViewName('home/wHome');

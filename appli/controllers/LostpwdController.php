@@ -21,7 +21,7 @@ class LostpwdController extends AppController
     public function renderNew()
     {
         if (empty($this->context->params['value']) && empty($this->context->params['pwd_valid'])) {
-            $this->view->growlerError();
+            $this->get('growler')->error('Le champs est vide');
             $this->render();
         } else {
             $this->view->setViewName('lostPwd/wNewPwd');
@@ -35,20 +35,15 @@ class LostpwdController extends AppController
     {
         if (!empty($this->context->params['user_mail'])) {
             if ($this->get('auth')->sendPwd($this->context->params['user_mail'])) {
-                $this->redirect('user', array('msg' => MSG_PWD_SENT));
+                $this->get('growler')->send('Vos identifiants ont étés envoyés par mail.')->record();
+
+                $this->redirect('user');
             } else {
-                $this->view->growler('Email introuvable.', GROWLER_ERR);
-                $this->render();
-            }
-        } elseif (!empty($this->context->params['user_mail'])) {
-            if ($this->get('auth')->sendPwd(null, $this->context->params['user_mail'])) {
-                $this->redirect('user', array('msg' => MSG_PWD_SENT));
-            } else {
-                $this->view->growler('Email introuvable.', GROWLER_ERR);
+                $this->get('growler')->error('Email introuvable.');
                 $this->render();
             }
         } else {
-            $this->view->growler('Email introuvable.', GROWLER_ERR);
+            $this->get('growler')->error('Le champs est vide');
             $this->render();
         }
     }
@@ -59,13 +54,17 @@ class LostpwdController extends AppController
          || empty($this->context->params['user_pwd'])
          || empty($this->context->params['pwd_confirm'])
          || $this->context->params['user_pwd'] != $this->context->params['pwd_confirm']) {
-            $this->view->growler('Les deux champs doivent être identiques.', GROWLER_ERR);
+            $this->get('growler')->error('Les deux champs doivent être identiques.');
+
             $this->renderNew();
         } else {
             if ($this->model->auth->updatePwd($this->context->params['user_pwd'], $this->context->params['pwd_valid'])) {
-                $this->redirect('user', array('msg' => MSG_VALIDATION_PWD));
+                $this->get('growler')->send('Votre mot de passe a été modifié.')->record();
+
+                $this->redirect('user');
             } else {
-                $this->view->growlerError();
+                $this->get('growler')->error();
+
                 $this->render();
             }
         }

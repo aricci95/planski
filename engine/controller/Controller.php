@@ -16,7 +16,7 @@ abstract class Controller
         $this->model     = Model_Manager::getInstance();
         $this->container = Service_Container::getInstance();
 
-        $this->view      = new AppView();
+        $this->view      = new AppView($this->container, $this->context);
 
         $this->view->page   = (!empty($_GET['page'])) ? strtolower($_GET['page']) : 'user';
         $this->view->action = (!empty($_GET['action'])) ? strtolower($_GET['page']) : 'index';
@@ -26,10 +26,6 @@ abstract class Controller
         }
 
         $this->context->buildParams();
-
-        if (!empty($_GET['msg'])) {
-            $this->showMessage();
-        }
     }
 
     private function _setContext()
@@ -71,21 +67,6 @@ abstract class Controller
         }
     }
 
-    public function showMessage()
-    {
-        if (!empty($this->context->params['msg'])) {
-            $msg = constant('MESSAGE_'.$this->context->params['msg']);
-            if ($this->context->params['msg'] >= 400) {
-                $type = GROWLER_ERR;
-            } elseif ($this->context->params['msg'] >= 200 && $this->context->params['msg'] < 300) {
-                $type = GROWLER_OK;
-            } else {
-                $type = GROWLER_INFO;
-            }
-            $this->view->growler($msg, $type);
-        }
-    }
-
     public function redirect($page = 'user', $params = null, $action = '')
     {
         $url = "/$page";
@@ -94,11 +75,7 @@ abstract class Controller
         }
         if (is_array($params) && count($params > 0)) {
             foreach ($params as $key => $val) {
-                if ($key === 'msg') {
-                    $url .= '/'.$key.'/'.$val;
-                } else {
-                    $url .= '/'.$val;
-                }
+                $url .= '/'.$val;
             }
         }
         header("Location: $url");

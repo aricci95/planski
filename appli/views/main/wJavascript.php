@@ -37,6 +37,31 @@ if($this->isJSActivated(JS_SEARCH)) : ?>
 if($this->isJSActivated(JS_CREW)) : ?>
     <script type="text/javascript" src="planski/appli/js/crew.js"></script>
 <?php endif;
+if($this->isJSActivated(JS_AGENDA)) : ?>
+    <link rel='stylesheet' href='planski/libraries/agenda/fullcalendar.css' />
+    <script src='planski/libraries/agenda/lib/moment.min.js'></script>
+    <script src='planski/libraries/agenda/fullcalendar.js'></script>
+    <script src='planski/libraries/agenda/lang-all.js'></script>
+    <script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            lang: 'fr',
+            defaultDate: '<?php echo $this->default_date; ?>',
+            editable: true,
+            eventLimit: true,
+            dayClick: function() {
+                alert('a day has been clicked!');
+            },
+            events: 'agenda/getEvents'
+        })
+    });
+    </script>
+<?php endif;
 if($this->isJSActivated(JS_FEED)) : ?>
     <script src="planski/libraries/timeline/js/jquery.timelinr-0.9.6.js"></script>
     <script type="text/javascript" src="planski/libraries/jquery-comments/js/jquery-comments.js"></script>

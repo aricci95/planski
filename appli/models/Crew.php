@@ -48,7 +48,8 @@ class Crew extends Model
             }
 
             $apparts = $this->query('plan')
-                        ->join(array('plan_appart' => 'plan_id', 'appart' => 'appart_id'))
+                        ->join(array('plan_appart' => 'plan_id'))
+                        ->join(array('appart' => 'appart_id'))
                         ->where(array('crew_id' => $crew['crew_id']))
                         ->select();
 
@@ -63,10 +64,9 @@ class Crew extends Model
     public function getMembers($crewId, $criterias = array())
     {
         $queryBuilder = $this->query('crew')
-                             ->join(array(
-                                'user_crew' => 'crew_id',
-                                'user_data' => 'user_id',
-                                'user' => 'user_id'))
+                             ->join(array('user_crew' => 'crew_id'))
+                             ->join(array('user_data' => 'user_id'))
+                             ->join(array('user' => 'user_id'))
                              ->leftJoin(array('city' => 'ville_id'))
                              ->where(array('crew.crew_id' => $crewId));
 

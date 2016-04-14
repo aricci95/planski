@@ -11,15 +11,24 @@ class AuthController extends AppController
                 $authentResult = $this->get('auth')->login($this->context->params['user_mail'], $this->context->params['user_pwd']);
 
                 if ($authentResult) {
-                    $this->redirect('crew');
+                    if ($this->context->get('role_id') == User::TYPE_OWNER) {
+                        $this->redirect('location');
+                    } else {
+                        $this->redirect('crew');
+                    }
                 }
             } catch (Exception $e) {
                 Log::err($e->getMessage());
-                $this->redirect('subscribe', array('msg' => $e->getCode()));
+
+                $this->get('growler')->error($e->getMessage())->record();
+
+                $this->redirect('subscribe');
             }
         }
 
-        $this->redirect('subscribe', array('msg' => ERR_LOGIN));
+        $this->get('growler')->error('Mauvais email / mot de passe.')->record();
+
+        $this->redirect('subscribe');
     }
 
     public function renderDisconnect()
@@ -27,7 +36,7 @@ class AuthController extends AppController
         if ($this->get('auth')->disconnect()) {
             $this->redirect('subscribe');
         } else {
-            $this->view->growlerError();
+             $this->get('growler')->error();
         }
     }
 }

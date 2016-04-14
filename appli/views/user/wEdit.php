@@ -110,11 +110,11 @@
                 <th style="width: 128px;">Ski / Snowboard :</th>
                 <td>
                     <a class="radio_img" href="#">
-                        <img <?php echo ($this->user['user_ride'] == User::RIDE_SKI) ? 'class="choosen"' : ''; ?> data-name="user_ride" data-value="1" src="/planski/images/icones/ski.png" />
+                        <img width="50" <?php echo ($this->user['user_ride'] == User::RIDE_SKI) ? 'class="choosen"' : ''; ?> data-name="user_ride" data-value="1" src="/planski/images/icones/ski.png" />
                         <input style="display:none" type="radio" name="user_ride" value="1" <?php echo ($this->user['user_ride'] == User::RIDE_SKI) ? 'checked' : '' ; ?>>
                     </a>
                     <a class="radio_img" href="#">
-                        <img <?php echo ($this->user['user_ride'] == User::RIDE_SNOWBOARD) ? 'class="choosen"' : ''; ?> data-name="user_ride" data-value="2" src="/planski/images/icones/snowboard.png" />
+                        <img width="50" <?php echo ($this->user['user_ride'] == User::RIDE_SNOWBOARD) ? 'class="choosen"' : ''; ?> data-name="user_ride" data-value="2" src="/planski/images/icones/snowboard.png" />
                         <input style="display:none" type="radio" name="user_ride" value="2" <?php echo ($this->user['user_ride'] == User::RIDE_SNOWBOARD) ? 'checked' : '' ; ?>>
                     </a>
                 </td>
@@ -122,14 +122,14 @@
             <tr style="height:100px;">
                 <th style="width: 128px;">Niveau :</th>
                 <td>
-                    <?php for ($i = 0; $i <= 3; $i++) : ?>
+                    <?php for ($i = 1; $i <= 4; $i++) : ?>
                         <a class="radio_img" href="#">
-                            <img <?php echo ($this->user['user_level'] == $i) ? 'class="choosen"' : ''; ?> data-name="user_level" data-value="<?php echo $i; ?>" src="/planski/images/medals/<?php echo $i; ?>.png" />
+                            <img <?php echo ($this->user['user_level'] == $i) ? 'class="choosen"' : ''; ?> data-name="user_level" data-value="<?php echo $i; ?>" src="/planski/images/medals/<?php echo $i; ?>.png" style="margin-right:2px;" />
                             <input style="display:none" type="radio" name="user_level" value="<?php echo $i; ?>" <?php echo ($this->user['user_level'] == $i) ? 'checked' : '' ; ?>>
                         </a>
                     <?php endfor; ?>
                     <br/>
-                    <?php for ($i = 5; $i <= 7; $i++) : ?>
+                    <?php for ($i = 5; $i <= 8; $i++) : ?>
                         <a class="radio_img" href="#">
                             <img <?php echo ($this->user['user_level'] == $i) ? 'class="choosen"' : ''; ?> data-name="user_level" data-value="<?php echo $i; ?>" src="/planski/images/medals/<?php echo $i; ?>.png" />
                             <input style="display:none" type="radio" name="user_level" value="<?php echo $i; ?>" <?php echo ($this->user['user_level'] == $i) ? 'checked' : '' ; ?>>

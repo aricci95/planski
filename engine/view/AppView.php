@@ -8,14 +8,16 @@ class AppView
 
     protected $_html;
     protected $_JSLibraries     = array();
-    protected $_growlerMessages = array();
+    protected $_growlerMessages = true;
 
-    public $userStatuses = array();
     public $context;
+    public $container;
 
-    public function __construct()
+
+    public function __construct(Service_Container $container, Context $context)
     {
-        $this->context = Context::getInstance();
+        $this->container = $container;
+        $this->context = $context;
         $this->_helper = new ViewHelper();
 
         $date  = date('m');
@@ -84,11 +86,16 @@ class AppView
 
     public function render($view = null, $datas = array())
     {
+        if ($this->_growlerMessages == true) {
+            $this->_growlerMessages = $this->container->get('growler')->getMessages();
+        }
+
         if (count($datas) > 0) {
             foreach ($datas as $key => $data) {
                 $this->$key = $data;
             }
         }
+
         echo trim($this->runView($view));
     }
 
@@ -117,46 +124,5 @@ class AppView
     public function getJSONResponse($view)
     {
         echo trim($this->runView($view));
-    }
-
-    public function growler($message = MESSAGE_400, $type = GROWLER_ERR, $title = null)
-    {
-        if (!$this->isJSActivated(JS_GROWLER)) {
-            $this->addJS(JS_GROWLER);
-        }
-
-        $script_message = "<script>
-            $(function(){
-                $.gritter.add({
-            ";
-
-        if (!empty($title)) {
-            $script_message .= "title: '$title',";
-        }
-
-        $script_message .= "
-                    text:  '$message',
-                    class_name : 'gritter-".$type."'
-                });
-            });
-            </script>";
-
-        $this->_growlerMessages[] = $script_message;
-    }
-
-    public function growlerError()
-    {
-        if (!$this->isJSActivated(JS_GROWLER)) {
-            $this->addJS(JS_GROWLER);
-        }
-
-        $this->_growlerMessages[] = "<script>
-            $(function(){
-                $.gritter.add({
-                    text:  '".MESSAGE_400."',
-                    class_name : 'gritter-err'
-                });
-            });
-            </script>";
     }
 }

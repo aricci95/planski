@@ -10,7 +10,7 @@ class SubscribeController extends AppController
         parent::__construct();
 
         if ($this->context->get('user_id')) {
-            $this->redirect('user');
+            $this->redirect('home');
         }
     }
 
@@ -37,48 +37,48 @@ class SubscribeController extends AppController
 
         foreach ($inputs as $input) {
             if (empty($this->context->params[$input])) {
-                $this->view->growler('Tous les champs sont obligatoires.');
+                $this->get('growler')->send('Tous les champs sont obligatoires.');
                 return false;
             }
         }
 
         if ($this->context->getParam('role_id') > Auth::ROLE_OWNER) {
-            $this->view->growler('Une erreur c\'est produite.');
+            $this->get('growler')->send('Une erreur c\'est produite.');
             return false;
         }
 
         $this->context->params['user_prenom'] = trim($this->context->params['user_prenom']);
 
         if (strlen($this->context->params['user_prenom']) > 20) {
-            $this->view->growler('Le prénom doit faire moins de 20 caractères.');
+            $this->get('growler')->send('Le prénom doit faire moins de 20 caractères.');
             return false;
         }
 
         if (strlen($this->context->params['user_nom']) > 20) {
-            $this->view->growler('Le nom doit faire moins de 20 caractères.');
+            $this->get('growler')->send('Le nom doit faire moins de 20 caractères.');
             return false;
         }
 
         // Message
         $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
         if (!preg_match($Syntaxe, $this->context->params['user_mail'])) {
-            $this->view->growler('Adresse e-message invalide.');
+            $this->get('growler')->send('Adresse e-message invalide.');
             return false;
         }
 
         if ($this->model->User->isUsedEmail($this->context->params['user_mail'])) {
-            $this->view->growler('Adresse e-message déjà utilisée.');
+            $this->get('growler')->send('Adresse e-message déjà utilisée.');
             return false;
         }
 
         // Password
         if (strlen($this->context->params['user_pwd']) < 8) {
-            $this->view->growler('Le mot de passe doit comporter au moins 8 caractères.');
+            $this->get('growler')->send('Le mot de passe doit comporter au moins 8 caractères.');
             return false;
         }
 
         if ($this->context->params['user_pwd'] != $this->context->params['verif_pwd']) {
-            $this->view->growler('La vérification du mot de passe est érronnée.');
+            $this->get('growler')->send('La vérification du mot de passe est érronnée.');
             return false;
         }
 
@@ -112,13 +112,15 @@ class SubscribeController extends AppController
                             <u>Mot de passe :</u> ' . $this->context->params['user_pwd'] . '<br><br>
                             Si vous rencontrez des problèmes, n\'hésitez pas à nous envoyer un message en répondant directement à celui-ci, nous vous répondrons dans les plus bref délais.';
                     if ($this->get('mailer')->send($newUser['user_mail'], 'Bienvenue sur PlanSki ' . $newUser['user_prenom'] . ' !', $message)) {
-                        $this->redirect('subscribe', array('msg' => MSG_VALIDATION_SENT));
+                        $this->get('growler')->send('Un mail vous a été envoyé pour modifier votre mot de passe.')->record();
+
+                        $this->redirect('subscribe');
                     } else {
-                        $this->view->growlerError();
+                        $this->get('growler')->error();
                     }
                     return;
                 } else {
-                    $this->view->growlerError();
+                    $this->get('growler')->error();
                 }
             }
         }
@@ -130,13 +132,15 @@ class SubscribeController extends AppController
     {
         if (!empty($this->context->params['value'])) {
             if ($this->model->User->setValid($this->context->params['value'])) {
-                $this->redirect('subscribe', array('msg' => MSG_VALIDATION_SUCCESS));
+                $this->get('growler')->send('Votre compte a été validé, vous pouvez à présent vous connecter.')->record();
             } else {
-                $this->redirect('subscribe', array('msg' => ERR_VALIDATION_FAILURE));
+                $this->get('growler')->error('La validation a échouée, merci de réessayer plus tard.')->record();
             }
         } else {
-            $this->redirect('subscribe', array('msg' => ERR_VALIDATION_FAILURE));
+            $this->get('growler')->error('La validation a échouée, merci de réessayer plus tard.')->record();
         }
+
+        $this->redirect('subscribe');
     }
 
     public function renderTerms()

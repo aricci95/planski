@@ -8,7 +8,7 @@
         <?php if($this->context->get('role_id') == Auth::ROLE_OWNER) : ?>
             <a class="menuLien" href="location">Locations</a>
             <a class="menuLien" href="virement">Virements</a>
-            <a class="menuLien" href="virement">Agenda</a>
+            <a class="menuLien" href="agenda">Agenda</a>
         <?php else : ?>
             <a class="menuLien" href="user">Membres</a>
             <a class="menuLien" href="crew">Crews</a>

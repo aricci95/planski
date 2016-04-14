@@ -35,7 +35,7 @@ class AdminController extends AppController
 
             if (!empty($user)) {
                 if ($user['user_valid'] != 1) {
-                    $this->view->growler('Utilistateur non validé.', GROWLER_ERR);
+                    $this->get('growler')->send('Utilistateur non validé.', GROWLER_ERR);
                 } else {
                     $this->context->set('user_id', $user['user_id'])
                                   ->set('user_prenom', $user['user_prenom'])
@@ -46,11 +46,13 @@ class AdminController extends AppController
                                   ->set('user_gender', $user['user_gender'])
                                   ->set('forum_notification', $user['forum_notification']);
 
-                    $this->redirect('user', array('msg' => MSG_ADM_SWITCH));
+                    $this->get('growler')->send('Vous avez changé votre utilisateur courant.')->record();
+
+                    $this->redirect('user');
                 }
             }
         } else {
-            $this->view->growlerError();
+            $this->get('growler')->error();
         }
         $this->render();
     }
@@ -71,9 +73,9 @@ class AdminController extends AppController
     public function renderRemoveUser()
     {
         if (!empty($this->context->params['user_id']) && $this->get('user')->delete($this->context->params['user_id'])) {
-            $this->view->growler('Utilisateur supprimé.', GROWLER_OK);
+            $this->get('growler')->send('Utilisateur supprimé.');
         } else {
-            $this->view->growlerError();
+            $this->get('growler')->error();
         }
 
         $this->render();
@@ -102,9 +104,9 @@ class AdminController extends AppController
             }
 
             if ($sentMessages > 0) {
-                $this->view->growler($sentMessages.' Emails envoyés.', GROWLER_OK);
+                $this->get('growler')->send($sentMessages.' Emails envoyés.', GROWLER_OK);
             } else {
-                $this->view->growlerError();
+                $this->get('growler')->error();
             }
         } else {
             $this->view->growlerError('Le message vide.');

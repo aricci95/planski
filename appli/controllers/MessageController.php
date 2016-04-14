@@ -59,8 +59,9 @@ class MessageController extends AppController
         $this->view->addJS(JS_SCROLL_REFRESH);
 
         if (empty($this->context->params['value'])) {
-            $this->view->growler('Message introuvable', GROWLER_ERR);
-            $this->redirect('mailbox', array('msg' => ERR_CONTENT));
+            $this->get('growler')->error('Message introuvable')->record();
+
+            $this->redirect('mailbox');
         }
 
         $userId = $this->context->params['value'];
@@ -76,7 +77,9 @@ class MessageController extends AppController
             $this->view->setViewName('message/wMain');
             $this->view->render();
         } else {
-            $this->redirect('mailbox', array('msg' => ERR_CONTENT));
+            $this->get('growler')->error('Message introuvable')->record();
+
+            $this->redirect('mailbox');
         }
     }
 
@@ -89,25 +92,33 @@ class MessageController extends AppController
 
         if (empty($this->context->params['destinataire_id'])) {
             Log::err('destinataire vide');
-            $this->redirect('mailbox', array('msg' => ERR_DEFAULT));
+            $this->get('growler')->error()->record();
+
+            $this->redirect('mailbox');
         }
 
         $from = $this->context->get('user_id');
         $to   = $this->context->params['destinataire_id'];
 
         if (empty($this->context->params['content'])) {
-            $this->view->growler('Message vide.', GROWLER_INFO);
+            $this->get('growler')->send('Message vide.', GROWLER_INFO);
             $this->render();
+
             return;
         }
 
 
         if ($this->get('message')->send($from, $to, $this->context->params['content'])) {
             $message = $this->context->get('user_prenom') . ' vous a envoyé un nouveau message ! <a href="http://planski.fr/message/' . $this->context->get('user_id') . '">Cliquez ici</a> pour le lire.';
-            $this->redirect('message', array($this->context->params['value'], 'msg' => MSG_SENT_OK));
+
+            $this->get('growler')->send('Message envoyé.')->record();
+
+            $this->redirect('message', array($this->context->params['value']));
         } else {
             Log::err('impossible d\'enregistrer le message.');
-            $this->redirect('mailbox', array('msg' => ERR_MAIL));
+            $this->get('growler')->error('Le message n\'a pas pu être envoyé, merci de réessayer.')->record();
+
+            $this->redirect('mailbox');
         }
 
         return;

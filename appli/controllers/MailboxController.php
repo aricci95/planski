@@ -42,7 +42,7 @@ class MailboxController extends AppController
     {
         if (!empty($this->context->params['value'])) {
             $this->model->mailbox->deleteConversation($this->context->params['value']);
-            $this->view->growler('Conversation supprimée.', GROWLER_OK);
+            $this->get('growler')->send('Conversation supprimée.', GROWLER_OK);
         }
         $this->render();
     }

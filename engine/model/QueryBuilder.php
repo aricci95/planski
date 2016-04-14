@@ -118,12 +118,12 @@ class QueryBuilder
         if (!empty($this->join)) {
             $index = 0;
 
-            foreach ($this->join as $key => $value) {
+            foreach (array_reverse($this->join) as $key => $value) {
                 if (is_int($key)) {
                     $this->sql .= ' JOIN ' . $value . ' ON (' . $this->table . '.' . $this->table . '_id = ' . $value . '.' . $value . '_id)
                     ';
                 } else {
-                    $arrayKeys = array_keys($this->join);
+                    $arrayKeys = array_reverse(array_keys($this->join));
 
                     $prevTable = empty($arrayKeys[$index - 1]) ? $this->table : $arrayKeys[$index - 1];
 
@@ -138,7 +138,7 @@ class QueryBuilder
         if (!empty($this->leftJoin)) {
             $index = 0;
 
-            foreach ($this->leftJoin as $key => $value) {
+            foreach (array_reverse($this->leftJoin) as $key => $value) {
                 if (is_int($key)) {
                     $this->sql .= ' LEFT JOIN ' . $value . ' ON (' . $this->table . '.' . $this->table . '_id = ' . $value . '.' . $value . '_id)
                     ';
@@ -149,7 +149,7 @@ class QueryBuilder
                         if (empty($this->join)) {
                             $prevTable = $this->table;
                         } else {
-                            $keys = array_reverse(array_keys($this->join));
+                            $keys = array_keys($this->join); // @TODO PEUT ETRE ENLEVER LE REVERSE
                             $prevTable = $keys[0];
                         }
                     } else {

@@ -143,7 +143,13 @@ class User extends Model
 
     public function getUserByIdDetails($userId, $type = User::TYPE_SKI)
     {
-        if ($type == User::TYPE_SKI) {
+        if ($type == User::TYPE_OWNER) {
+            return $this->query('user')
+                    ->single()
+                    ->leftJoin(array('city' => 'ville_id'))
+                    ->where(array('user.user_id' => $userId))
+                    ->select();
+        } else {
             return $this->query('user_data')
                         ->single()
                         ->join(array('user' => 'user_id'))
@@ -155,12 +161,6 @@ class User extends Model
                             self::$attributes['details'],
                             self::$attributes['optional']
                         ));
-        } else {
-            return $this->query('user')
-                    ->single()
-                    ->leftJoin(array('city' => 'ville_id'))
-                    ->where(array('user.user_id' => $userId))
-                    ->select();
         }
     }
 

@@ -40,9 +40,9 @@ class PhotoController extends AppController
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['new_photo']) && !empty($_FILES['new_photo']['tmp_name'])) {
             try {
                 $this->get('photo')->uploadImage($_FILES['new_photo']['name'], $_FILES['new_photo']['tmp_name'], $this->_typeId, $this->_keyId);
-                $this->view->growler('Photo ajoutée', GROWLER_OK);
+                $this->get('growler')->send('Photo ajoutée', GROWLER_OK);
             } catch (Exception $e) {
-                $this->view->growler($e->getMessage(), GROWLER_ERR);
+                $this->get('growler')->send($e->getMessage(), GROWLER_ERR);
             }
         }
 

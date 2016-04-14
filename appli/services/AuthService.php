@@ -82,18 +82,11 @@ class AuthService extends Service
         return true;
     }
 
-    public function sendPwd($login = null, $email = null)
+    public function sendPwd($email)
     {
-        if (empty($login) && empty($email)) {
-            return false;
-        }
-
-        $param = empty($login) ? 'user_mail' : 'user_prenom';
-        $value = empty($login) ? $email : $login;
-
         $user = $this->query('user')
                      ->single()
-                     ->where(array($param => $value))
+                     ->where(array('user_mail' => $email))
                      ->select(array('user_id', 'user_prenom', 'user_mail'));
 
         if (!empty($user['user_prenom'])) {

@@ -33,9 +33,9 @@ class ProfileController extends AppController
         );
 
         if($this->model->user->updateUserData($data)) {
-            $this->view->growler("Modification enregistrée.", GROWLER_OK);
+            $this->get('growler')->send("Modification enregistrée.", GROWLER_OK);
         } else {
-            $this->view->growlerError();
+            $this->get('growler')->error();
         }
 
         $this->view->setViewName('user/wEdit');
@@ -48,7 +48,7 @@ class ProfileController extends AppController
             try {
                 $this->get('photo')->uploadImage($this->context->getParam('filename'), $this->context->getParam('filename'), PHOTO_TYPE_USER, $this->context->get('user_id'));
             } catch (Exception $e) {
-                $this->view->growler($e->getMessage(), GROWLER_ERR);
+                $this->get('growler')->send($e->getMessage(), GROWLER_ERR);
             }
         }
     }
@@ -60,7 +60,7 @@ class ProfileController extends AppController
                 try {
                     $this->get('photo')->uploadImage($_FILES['user_photo']['name'], $_FILES['user_photo']['tmp_name'], PHOTO_TYPE_USER, $this->context->get('user_id'));
                 } catch (Exception $e) {
-                    $this->view->growler($e->getMessage(), GROWLER_ERR);
+                    $this->get('growler')->send($e->getMessage(), GROWLER_ERR);
                 }
             }
 
@@ -69,7 +69,7 @@ class ProfileController extends AppController
 
             // On vérifie si le mdp est ok
             if ($this->context->params['user_pwd'] != $this->context->params['verif_pwd']) {
-                $this->view->growler("les deux mots de passes ne sont pas identiques.", GROWLER_ERR);
+                $this->get('growler')->send("les deux mots de passes ne sont pas identiques.", GROWLER_ERR);
             } else {
                 foreach ($this->context->params as $key => $param) {
                     if (empty($param)) {
@@ -103,9 +103,9 @@ class ProfileController extends AppController
                         $this->context->set('ville_latitude_deg', $ville['ville_latitude_deg']);
                     }
 
-                    $this->view->growler('Modifications enregistrées', GROWLER_OK);
+                    $this->get('growler')->send('Modifications enregistrées', GROWLER_OK);
                 } else {
-                    $this->view->growlerError();
+                    $this->get('growler')->error();
                 }
             }
         }
@@ -124,7 +124,9 @@ class ProfileController extends AppController
             session_destroy();
 
             // redirection
-            $this->redirect('user', array('msg' => MSG_ACCOUNT_DELETED));
+            $this->get('growler')->send('Votre compte a été supprimé.')->record();
+
+            $this->redirect('subscribe');
         } else {
             $this->_view->growlerError();
             $this->render();

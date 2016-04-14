@@ -22,7 +22,7 @@ abstract class AppController extends Controller
                     $this->_getNotifications();
                     $this->_refreshLastConnexion();
                 } catch (Exception $e) {
-                    $this->view->growlerError();
+                    $this->get('growler')->error();
 
                     $this->get('mailer')->sendError($e);
                 }
@@ -40,7 +40,7 @@ abstract class AppController extends Controller
         $this->context->set('notification', $this->model->query('notification')->orderBy('notification_date DESC')->select());
 
         if ($oldMessagesCount < $this->context->get('new_messages')) {
-            $this->view->growler('Nouveau message !', GROWLER_INFO);
+            $this->get('growler')->send('Nouveau message !', GROWLER_INFO);
         }
     }
 
@@ -81,20 +81,27 @@ abstract class AppController extends Controller
                     return true;
                 } else {
                     // Utilisateur valide mais droits insuffisants
-                    $this->redirect('home', array('msg' => ERR_AUTH));
+                    $this->get('growler')->error('Authentification requise.')->record();
+
+                    $this->redirect('home');
                     die;
                 }
             } else {
                 // Message non validé
                 session_destroy();
-                $this->redirect('subscribe', array('msg' => ERR_NOT_VALIDATED));
+
+                $this->get('growler')->error('Votre email n\'a pas été validé, vous devez cliquer sur le lien qui vous a été envoyé par email.')->record();
+
+                $this->redirect('subscribe');
             }
         } // Cas pas d'user en session, vérification des cookies
         elseif (!empty($_COOKIE['planskiEmail']) && !empty($_COOKIE['planskiPwd'])) {
             try {
                 $logResult = $this->get('auth')->checkLogin($_COOKIE['planskiEmail'], $_COOKIE['planskiPwd']);
             } catch (Exception $e) {
-                $this->redirect('subscribe', array('msg' => $e->getCode()));
+                $this->get('growler')->error($e->getMessage())->record();
+
+                $this->redirect('subscribe');
             }
 
             return $logResult;
@@ -102,7 +109,9 @@ abstract class AppController extends Controller
         elseif (empty($this->_authLevel)) {
             return true;
         } else {
-            $this->redirect('subscribe', array('msg' => ERR_AUTH));
+            $this->get('growler')->error('Authentification requise.')->record();
+
+            $this->redirect('subscribe');
             die;
         }
     }
