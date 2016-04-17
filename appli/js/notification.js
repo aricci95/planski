@@ -5,7 +5,7 @@ $(document).ready(function() {
         var notification = $(e.target).closest('.notification');
 
         $.post("notification/read", { notificationId : notification.attr('data-id') }, function(data) {
-            $(e.target).click();
+            window.location.href = $(e.target).attr('url'); // mettre l'host ici
         });
     });
 });
