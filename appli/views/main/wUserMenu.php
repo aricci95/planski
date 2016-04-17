@@ -27,7 +27,7 @@
             <img src="planski/images/icones/message.png" />
         </a>
     </li>
-    <?php if (true || !empty($this->context->get('new_messages'))) : ?>
+    <?php if (!empty($this->context->get('new_messages'))) : ?>
         <li class="counter" style="margin-bottom: 30px;margin-left: -10px;">
             <?php echo $this->context->get('new_messages'); ?>
         </li>

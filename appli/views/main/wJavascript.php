@@ -4,6 +4,7 @@
 <script type="text/javascript" src="planski/libraries/growler/js/gritter.js"></script>
 <script type="text/javascript" src="planski/libraries/modal/js/jquery.magnific-popup.js"></script>
 <script type="text/javascript" src="planski/appli/js/modal.js"></script>
+<script type="text/javascript" src="planski/appli/js/notification.js"></script>
 <script src="planski/libraries/tooltipmenu/js/cbpTooltipMenu.min.js"></script>
 
 <script>
@@ -97,7 +98,7 @@ if($this->isJSActivated(JS_FEED)) : ?>
                             created : commentJSON.created,
                             parent : commentJSON.parent,
                             upvote_count : commentJSON.upvote_count,
-                            user_has_upvoted : commentJSON.user_has_upvoted,
+                            user_has_upvoted : commentJSON.user_has_upvoted ? 1 : 0,
                             plan_id : <?php echo $this->plan['plan_id']; ?>,
                             user_id : <?php echo $this->context->get('user_id'); ?>
                         },

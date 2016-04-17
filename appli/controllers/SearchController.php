@@ -16,7 +16,7 @@ abstract class SearchController extends AppController
 
     public function render()
     {
-        $this->view->addJS(JS_SCROLL_REFRESH);
+    //    $this->view->addJS(JS_SCROLL_REFRESH);
         $this->view->addJS(JS_SEARCH);
         $this->view->addJS(JS_MODAL);
 

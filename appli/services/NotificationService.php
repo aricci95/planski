@@ -23,4 +23,13 @@ class NotificationService extends Service
 
         return $this->model->query('notification')->insert($notification);
     }
+
+    public function read($notificationId)
+    {
+        return $this->query('notification')
+             ->where(array('notification_id' => $notificationId))
+             ->update(array(
+                'notification_read' => 1
+            ));
+    }
 }
