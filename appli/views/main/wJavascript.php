@@ -12,7 +12,7 @@
         position: 'bottom-right'
     });
 </script>
-<?php if(count($this->_growlerMessages) > 0) :
+<?php if (is_array($this->_growlerMessages) && count($this->_growlerMessages) > 0) :
     foreach($this->_growlerMessages as $message) :
         echo $message;
     endforeach;
