@@ -148,7 +148,10 @@ class User extends Model
                     ->single()
                     ->leftJoin(array('city' => 'ville_id'))
                     ->where(array('user.user_id' => $userId))
-                    ->select();
+                    ->select(array_merge(
+                            self::$attributes['primary'],
+                            self::$attributes['optional']
+                        ));
         } else {
             return $this->query('user_data')
                         ->single()
