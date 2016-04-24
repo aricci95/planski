@@ -44,4 +44,12 @@ $(document).ready(function() {
             });
         }
     });
+
+    $(".grid button").click(function (e) {
+        $(e.target).closest('div.grid').find('button').removeClass('selected');
+
+        $('input[name="' + $(e.target).attr('data-name') + '"]').val($(e.target).attr('data-value'));
+
+        $(e.target).addClass('selected');
+    });
 });
