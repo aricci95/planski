@@ -711,7 +711,8 @@ div.debug {
     transition: all .25s ease;
     position: relative;
     border: 1px solid #cdcdcd;
-    margin-left: -1px;
+    margin-left: -5px;
+    margin-bottom: -1px;
     color: #555;
     font-size: 14px;
 }
@@ -720,7 +721,7 @@ div.debug {
     border: 1px solid #2574a9;
     color: #2574a9;
     background: #e0eef7;
-
+    z-index: 3000;
 }
 
 .grid button:hover {

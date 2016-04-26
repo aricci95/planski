@@ -46,10 +46,19 @@ $(document).ready(function() {
     });
 
     $(".grid button").click(function (e) {
-        $(e.target).closest('div.grid').find('button').removeClass('selected');
+        var button = $(e.target);
+        var grid   = button.closest('div.grid');
 
-        $('input[name="' + $(e.target).attr('data-name') + '"]').val($(e.target).attr('data-value'));
+        if (!grid.hasClass('multiple')) {
+            grid.find('button').removeClass('selected');
+        } else {
+            if (buton.hasClass('selected')) {
+                button.removeClass('selected');
+            }
 
-        $(e.target).addClass('selected');
+            $('input[name="' + button.attr('data-name') + '"]').val(button.attr('data-value'));
+        }
+
+        button.addClass('selected');
     });
 });
